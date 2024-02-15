@@ -89,7 +89,7 @@ markdown_extensions:
 
 
 nav:
-  - Home: home.md
+  - Home: index.md
   - Guia de Usuario:
     - Primeros pasos: user-guide/getting-started.md
     - Herramientas: user-guide/tools.md
