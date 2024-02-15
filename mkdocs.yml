@@ -1,5 +1,5 @@
 ---
-site_name: SwimChrono
+site_name: SwimChrono Wiki
 site_url: https://dfr99.github.io/SwimChrono/
 # site_dir: .
 
@@ -86,3 +86,11 @@ markdown_extensions:
   - pymdownx.tasklist:
       custom_checkbox: true
   - pymdownx.tilde
+
+
+nav:
+  - Home: home.md
+  - Guia de Usuario:
+    - Primeros pasos: user-guide/getting-started.md
+    - Herramientas: user-guide/tools.md
+  - MkDocs: mkdocs.md
