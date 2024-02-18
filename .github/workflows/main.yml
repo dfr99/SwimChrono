@@ -1,29 +1,58 @@
-name: pages-build-deployment 
+---
+name: pages-build-deployment
+
 on:
   push:
     branches:
-      - master 
       - main
+    paths:
+      - docs/**
+
 permissions:
+  id-token: write
   contents: write
+
+env:
+  GH_EMAIL: ${{ secrets.GH_EMAIL }}
+  GH_USER: ${{ secrets.GH_USER }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Configure Git Credentials
+      - name: Checkout code ⏬
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Configure Git Credentials ⚙️
+        id: git-config
         run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-      - uses: actions/setup-python@v5
+          git config user.name ${{ env.GH_USER }}
+          git config user.email ${{ env.GH_EMAIL }}
+
+      - name: Configure Python ⚙️
+        id: python-install
+        uses: actions/setup-python@v5
         with:
           python-version: 3.x
-      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV 
-      - uses: actions/cache@v4
+
+      - name: Create cache identifier ⚙️
+        id: cache-id
+        run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
+
+      - name: Configure cache ⚙️
+        id: cache
+        uses: actions/cache@v4
         with:
           key: mkdocs-material-${{ env.cache_id }}
           path: .cache
           restore-keys: |
             mkdocs-material-
-      - run: pip install mkdocs-material 
-      - run: mkdocs gh-deploy --force
+
+      - name: Install pip libraries 📦
+        id: pip-install
+        run: pip install -r requirements.txt
+
+      - name: Deploy documentation 🗒️
+        id: mkdocs-gh-deploy
+        run: mkdocs gh-deploy --force
