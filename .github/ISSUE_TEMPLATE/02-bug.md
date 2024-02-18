@@ -1,17 +1,14 @@
 ---
-name: Bug Report
-about: Use this template to report a bug in the project
-title: ''
-labels: kind/bug
+name: Informe de error
+about: Utilice esta plantilla para informar de un error en el proyect
+labels: bug
 assignees: ''
-
 ---
 
-### Detailed description
+### Descripción detallada
 
-A clear and concise description of what the problem is.
+Una descripción clara y concisa del problema.
 
-### Expected behaviour
+### Comportamiento esperado
 
-Expected behaviour one the problem is fixed.
-
+Comportamiento esperado una vez solucionado el problema.

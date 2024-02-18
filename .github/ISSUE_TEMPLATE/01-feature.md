@@ -1,17 +1,15 @@
 ---
-name: Feature request
-about: Use this template to add a new feature or enhancement to the project
+name: Petición de funcionalidad
+about: Utilice esta plantilla para añadir una nueva función o mejora al proyecto
 title: ''
-labels: kind/feature
+labels: enhancement
 assignees: ''
-
 ---
 
-### Motivation
+### Motivacion
 
-Describe here the motivation of the request.
+Describa aquí la motivación de la petición.
 
 ### Acceptance criteria
 
-- [ ] A check list of tasks to be done to assume the issue addressed
-
+- [ ] Una lista de las tareas que deben realizarse para asumir el problema abordado.
