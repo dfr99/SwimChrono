@@ -6,10 +6,10 @@ labels: enhancement
 assignees: ''
 ---
 
-### Motivacion
+### Motivación
 
 Describa aquí la motivación de la petición.
 
-### Acceptance criteria
+### Criterios de aceptación
 
 - [ ] Una lista de las tareas que deben realizarse para asumir el problema abordado.
