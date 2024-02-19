@@ -28,11 +28,11 @@ theme:
     - search.share
     - announce.dismiss
     - git-revision-date:
-        enabled_if_env: CI
+      enabled_if_env: CI
     - git-revision-date-localized:
-        type: date
-        fallback_to_build_date: true
-        enable_creation_date: true
+      type: date
+      fallback_to_build_date: true
+      enable_creation_date: true
   icon:
     repo: fontawesome/brands/github
   plugins:
@@ -89,8 +89,8 @@ markdown_extensions:
 
 
 nav:
-  - Home: index.md
+  - Inicio: index.md
+  - Contribuciones: contributing/index.md
   - Guia de Usuario:
     - Primeros pasos: user-guide/getting-started.md
     - Herramientas: user-guide/tools.md
-  - MkDocs: mkdocs.md
