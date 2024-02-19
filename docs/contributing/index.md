@@ -7,8 +7,8 @@
 3) [Commits](#commits)
 4) [Pull Requests](#pull-requests)
 5) [Flujo de trabajo](#flujo-de-trabajo)
-6) [Formato del código](#formato-de-codigo)
-7) [Enlaces de interés](#enlaces-de-interes)
+6) [Formato del código](#formato-de-código)
+7) [Enlaces de interés](#enlaces-de-interés)
 
 ## Issues
 
