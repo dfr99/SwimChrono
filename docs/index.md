@@ -22,6 +22,10 @@ NFC y Bluetooth para una mayor comodidad y eficiencia en el registro de tiempos.
 
 ## Funcionalidades
 
+- **Herramienta de cronometraje:** Permite la toma de tiempos de las diferentes 
+pruebas dentro de las competiciones de manera automática. Es la funcionalidad 
+principal de la aplicación.
+
 - **Gestión de entidades:** Permite crear y administrar piscinas, ligas,
 torneos, clubes, nadadores y entrenadores, facilitando la organización de
 competiciones de natación.
