@@ -90,6 +90,7 @@ markdown_extensions:
 
 nav:
   - Inicio: index.md
+  - Estudio de mercado: market-study.md
   - Guia de Usuario:
     - Primeros pasos: user-guide/getting-started.md
     - Herramientas: user-guide/tools.md
