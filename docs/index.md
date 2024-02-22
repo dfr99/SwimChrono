@@ -53,22 +53,27 @@ seguidores de la natación.
 
 ## Contribución *"Grupo 11"*
 
-- Alejandro Rodríguez Vaquero 
-
-    * Rol: CEO - Director ejecutivo 
-    * Email: <a.vaquero@udc.es>
-
-- Pedro Mauricio Echeverry Rey 
-  
-    * Rol: CTO - Responsable de tecnologías no-Android (CEO sustituto) 
-    * Email: <pedro.echeverry@udc.es> 
-
-- David Fraga Rodríguez 
-  
-    * Rol: COO - Responsable de operaciones
-    * Email: <david.fraga.rodriguez@udc.es> 
-
-- Adrián García Vázquez 
-  
-    * Rol: CXO - Responsable de experiencia de usuario
-    * Email: <adrian.gvazquez@udc.es> 
+- CEO ([Alejandro Rodríguez Vaquero](mailto:a.vaquero@udc.es))
+	- Director ejecutivo
+    - Coordinación y representación de grupo (Entregas por email semanales)
+    - Gestión de ciclo de vida
+    - Testing
+    - Documentación
+    - Arquitectura general e integración de submódulos
+    
+- COO ([David Fraga Rodríguez](mailto:david.fraga.rodriguez@udc.es))
+	- Responsable de operaciones
+    - Arquitectura
+    - Validación funcional
+    
+- CTO ([Pedro Mauricio Echeverry](mailto:pedro.echeverry@udc.es))
+    - Responsable de tecnologías no-Android
+    - Uso de sensores y hardware embebido
+    - Geolocalización y posicionamiento
+    - Papel de CEO en caso
+    
+- CXO ([Adrián García Vázquez](mailto:adrian.gvazquez@udc.es))
+	- Responsable de experiencia de usuario
+    - Usabilidad
+    - Experiencia de usuario
+    - Funcionalidades sociales

@@ -45,15 +45,17 @@ Teniendo esto en cuenta, a continuación, se listan algunas directrices a la
 hora de crear, revisar y mergear _pull requests_:
 
 * Definir correctamente los campos de la PR:
-  - La rama destino **SIEMPRE**  debe de ser la rama `main`.
-  - Titulo descriptivo, siendo válido utilizar el mismo que el de la _issue_
+  * La rama destino **SIEMPRE**  debe de ser la rama `main`.
+  * Titulo descriptivo, siendo válido utilizar el mismo que el de la _issue_
   siempre y cuando la PR cierre esa issue.
-  - Añadir `Closes #<numero_de_issue>` en la descripción para cerrar la _issue_
+  * Añadir `Closes #<numero_de_issue>` en la descripción para cerrar la _issue_
     automáticamente tras cerrar la PR.
-  - Asignarse a uno mismo la PR, y añadir un revisor.
-  - Añadir las etiquetas adecuadas a la PR
-  - **NO** enlacer la PR a un proyecto, se enlace únicamente la _issue_.
-* Utilizaremos el [_squash merge_](https://graphite.dev/guides/git-merge-squash)
+  * Asignar la PR al usuario que vaya a realizar los cambios. Añadir un revisor,
+    que debe ser el encargado de la sección a la que pertenece la _issue_
+    asociada.
+  * Añadir las etiquetas adecuadas a la PR
+  * **NO** enlazar la PR a un proyecto, se enlaza únicamente la _issue_.
+* Utilizar el [_squash merge_](https://graphite.dev/guides/git-merge-squash)
 para no ensuciar la rama `main` con excesivos commits.
 * Aquella persona asignada a la PR es quien debe mergear los cambios.
 * Antes de mergear los cambios, el revisor tiene que cerrar todos los hilos de

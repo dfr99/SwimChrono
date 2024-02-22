@@ -60,10 +60,12 @@ hora de crear, revisar y mergear _pull requests_:
   siempre y cuando la PR cierre esa issue.
   * Añadir `Closes #<numero_de_issue>` en la descripción para cerrar la _issue_
     automáticamente tras cerrar la PR.
-  * Asignarse a uno mismo la PR, y añadir un revisor.
+  * Asignar la PR al usuario que vaya a realizar los cambios. Añadir un revisor,
+    que debe ser el encargado de la sección a la que pertenece la _issue_
+    asociada.
   * Añadir las etiquetas adecuadas a la PR
-  * **NO** enlacer la PR a un proyecto, se enlace únicamente la _issue_.
-* Utilizaremos el [_squash merge_](https://graphite.dev/guides/git-merge-squash)
+  * **NO** enlazar la PR a un proyecto, se enlaza únicamente la _issue_.
+* Utilizar el [_squash merge_](https://graphite.dev/guides/git-merge-squash)
 para no ensuciar la rama `main` con excesivos commits.
 * Aquella persona asignada a la PR es quien debe mergear los cambios.
 * Antes de mergear los cambios, el revisor tiene que cerrar todos los hilos de
