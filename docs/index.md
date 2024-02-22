@@ -53,7 +53,22 @@ seguidores de la natación.
 
 ## Contribución *"Grupo 11"*
 
-- Alejandro Rodríguez Vaquero <a.vaquero@udc.es>
-- Pedro Mauricio Echeverry Rey <pedro.echeverry@udc.es>
-- David Fraga Rodríguez <david.fraga.rodriguez@udc.es>
-- Adrián García Vázquez <adrian.gvazquez@udc.es>
+- Alejandro Rodríguez Vaquero 
+
+    * Rol: CEO - Director ejecutivo 
+    * Email: <a.vaquero@udc.es>
+
+- Pedro Mauricio Echeverry Rey 
+  
+    * Rol: CTO - Responsable de tecnologías no-Android (CEO sustituto) 
+    * Email: <pedro.echeverry@udc.es> 
+
+- David Fraga Rodríguez 
+  
+    * Rol: COO - Responsable de operaciones
+    * Email: <david.fraga.rodriguez@udc.es> 
+
+- Adrián García Vázquez 
+  
+    * Rol: CXO - Responsable de experiencia de usuario
+    * Email: <adrian.gvazquez@udc.es> 
