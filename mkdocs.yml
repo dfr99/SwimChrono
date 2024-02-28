@@ -96,5 +96,6 @@ nav:
     - Primeros pasos: user-guide/getting-started.md
     - Herramientas: user-guide/tools.md
   - Documentación técnica:
+    - Actores: development/actors.md
     - Arquitectura: development/architecture.md
   - Contribuciones: contributing/index.md
