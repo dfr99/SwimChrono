@@ -98,6 +98,6 @@ nav:
   - Documentación técnica:
     - Actores: development/actors.md
     - Arquitectura: development/architecture.md
-  - Integraciones:
-    - Bluetooth: integrations/bluetooth.md
+    - Integraciones:
+      - Bluetooth: integrations/bluetooth.md
   - Contribuciones: contributing/index.md
