@@ -98,4 +98,5 @@ nav:
   - Documentación técnica:
     - Actores: development/actors.md
     - Arquitectura: development/architecture.md
+    - Wireframes: development/wireframes.md
   - Contribuciones: contributing/index.md
