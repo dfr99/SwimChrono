@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTextStyle">
+        <item name="android:fontFamily">@font/font_family</item>
+    </style>
+
+    <style name="AppTextStyle.Bold">
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+</resources>

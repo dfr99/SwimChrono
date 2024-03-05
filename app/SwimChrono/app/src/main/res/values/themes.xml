@@ -1,16 +1,34 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
-    <style name="Theme.SwimChrono" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.SwimChrono" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimary">@color/forest_blue_200</item>
+        <item name="colorPrimaryVariant">@color/forest_blue_700</item>
+        <item name="colorOnPrimary">@color/chrono_white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorSecondary">@color/turquoise_200</item>
+        <item name="colorSecondaryVariant">@color/turquoise_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">?attr/colorSecondaryVariant</item>
         <!-- Customize your theme here. -->
+
+        <!--Make the style globally-->
+        <item name="bottomNavigationStyle">@style/BottomNavigationStyle</item>
+
     </style>
+
+
+    <!-- Style for BottomNavigationView -->
+    <style name="BottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <!-- Set background color -->
+        <item name="android:background">?attr/colorSecondaryVariant</item>
+        <!-- Set icon tint to white -->
+        <item name="itemIconTint">?attr/colorOnPrimary</item>
+        <!-- Set item text color to white -->
+        <item name="itemTextColor">?attr/colorOnPrimary</item>
+        <item name="android:state_checked">@color/chrono_red</item>
+    </style>
+
+
 </resources>
