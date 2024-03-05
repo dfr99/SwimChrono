@@ -100,4 +100,5 @@ nav:
     - Arquitectura: development/architecture.md
     - Integraciones:
       - Bluetooth: integrations/bluetooth.md
+    - Wireframes: development/wireframes.md
   - Contribuciones: contributing/index.md
