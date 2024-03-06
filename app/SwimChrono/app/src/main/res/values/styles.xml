@@ -10,4 +10,12 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="BottomNavigationStyle">
+        <item name="android:background">@color/turquoise_700</item>
+        <item name="itemIconTint">@color/chrono_white</item>
+        <item name="itemTextColor">@color/chrono_white</item>
+        <item name="labelVisibilityMode">labeled</item>
+    </style>
+
+
 </resources>
