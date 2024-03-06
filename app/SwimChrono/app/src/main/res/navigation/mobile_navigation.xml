@@ -3,13 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_dashboard">
 
-    <fragment
-        android:id="@+id/navigation_home"
-        android:name="es.udc.apm.swimchrono.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -18,14 +14,20 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="es.udc.apm.swimchrono.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_club"
+        android:name="es.udc.apm.swimchrono.ui.club.ClubFragment"
+        android:label="@string/title_club"
+        tools:layout="@layout/fragment_club" />
+
+    <fragment
+        android:id="@+id/navigation_tournaments"
+        android:name="es.udc.apm.swimchrono.ui.tournaments.TournamentsFragment"
+        android:label="@string/title_tournaments"
+        tools:layout="@layout/fragment_tournaments" />
 
     <fragment
         android:id="@+id/navigation_profile"
         android:name="es.udc.apm.swimchrono.ui.profile.ProfileFragment"
-        android:label="Profile"
+        android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import es.udc.apm.swimchrono.databinding.FragmentHomeBinding
 import es.udc.apm.swimchrono.databinding.FragmentProfileBinding
-import es.udc.apm.swimchrono.ui.home.HomeViewModel
 
 class ProfileFragment : Fragment() {
 
