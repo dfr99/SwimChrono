@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Linearlayout-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/tvPersonalInfoTitle"
+        style="@style/AppTextStyle.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:gravity="center"
+        android:text="Personal Info"
+        android:textSize="24sp" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <TableRow
+            android:layout_width="263dp"
+            android:layout_height="43dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvNameTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/celdas_profile_info"
+                android:text="Nombre"
+                style="@style/AppTextStyle.Bold"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/celdas_profile_info"
+                android:gravity="center"
+                android:text="Alejandro"
+
+                android:textSize="16sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/celdas_profile_info">
+
+            <TextView
+                android:id="@+id/tvSurnameTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/celdas_profile_info"
+                android:text="Apellidos"
+                style="@style/AppTextStyle.Bold"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvSurname"
+                android:layout_width="184dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/celdas_profile_info"
+                android:gravity="center"
+                android:text="Rodríguez Vaquero"
+                android:textSize="16sp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/celdas_profile_info">
+
+            <TextView
+                android:id="@+id/tvNumberTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/celdas_profile_info"
+                android:text="Nº teléfono"
+                style="@style/AppTextStyle.Bold"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tvNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/celdas_profile_info"
+                android:gravity="center"
+                android:text="627111111"
+                android:textSize="16sp" />
+
+        </TableRow>
+
+    </TableLayout>
+</LinearLayout>

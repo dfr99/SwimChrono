@@ -1,24 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".ui.profile.ProfileFragment">
+
 
     <TextView
         android:id="@+id/text_profile"
         style="@style/AppTextStyle.Bold"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="61dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:textAlignment="center"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="Profile Fragment"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Personal info"
+        android:textSize="16sp"
+        android:textAlignment="textStart"
+        android:drawableLeft="@drawable/icon_personal_info"/>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="My QR"
+        android:textSize="16sp"
+        android:textAlignment="textStart"
+        android:drawableLeft="@drawable/icon_qr"/>
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Notifications"
+        android:textSize="16sp"
+        android:textAlignment="textStart"
+        android:drawableLeft="@drawable/icon_notifications"/>
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textSize="16sp"
+        android:textAlignment="textStart"
+        android:drawableLeft="@drawable/icon_settings"/>
+
+
+</LinearLayout>
