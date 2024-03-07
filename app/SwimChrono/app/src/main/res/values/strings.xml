@@ -9,4 +9,8 @@
     <string name="image_of_a_swimmingpool">Image of a swimmingpool</string>
     <string name="tournament_info">Tournament info</string>
     <string name="all_races">All races</string>
+    <string name="postion">Position</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="time">Time</string>
 </resources>
