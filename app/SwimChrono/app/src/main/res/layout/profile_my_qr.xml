@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tvInfoActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/tvMyQRTitle"
+        style="@style/AppTextStyle.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="My QR"
+        android:textSize="30sp" />
+
+    <ImageView
+        android:id="@+id/qrImage"
+        android:layout_width="229dp"
+        android:layout_height="248dp"
+        app:srcCompat="@drawable/ejemplo_qr" />
+
+    <TextView
+        android:id="@+id/tvNameQR"
+        style="@style/AppTextStyle.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="43dp"
+        android:gravity="center"
+        android:text="Alejandro R.V."
+        android:textSize="20sp" />
+
+</LinearLayout>
