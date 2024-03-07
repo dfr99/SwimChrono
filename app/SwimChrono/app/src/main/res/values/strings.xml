@@ -4,6 +4,8 @@
     <string name="title_tournaments">Tournaments</string>
     <string name="title_club">Club</string>
     <string name="title_profile">Profile</string>
+    <string name="title_chronometer">Chronometer</string>
+    <string name="title_chronometer_race">Race Chronometer</string>
     <string name="tournaments_today">Tournaments today</string>
     <string name="incoming_tournaments">Incoming Tournaments</string>
     <string name="image_of_a_swimmingpool">Image of a swimmingpool</string>
