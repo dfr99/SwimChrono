@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/tournament_photo"
+            android:layout_width="75dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:contentDescription="@string/image_of_a_swimmingpool"
+            android:src="@drawable/swimmingpool" />
+
+        <TextView
+            android:id="@+id/tournament_tag"
+            style="@style/AppTextStyle.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@+id/tournament_photo"
+            android:background="@drawable/rounded_border"
+            android:padding="3dp"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tournament_name"
+            style="@style/AppTextStyle.Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tournament_tag"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@+id/tournament_photo"
+            android:textColor="@color/chrono_white"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tournament_date"
+            style="@style/AppTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tournament_name"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@+id/tournament_photo"
+            android:textColor="@color/chrono_white"
+            app:drawableLeftCompat="@drawable/baseline_calendar_month_24"
+            app:drawableTint="@color/chrono_white" />
+
+        <TextView
+            android:id="@+id/tournament_people"
+            style="@style/AppTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tournament_name"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@+id/tournament_date"
+            android:textColor="@color/chrono_white"
+            app:drawableLeftCompat="@drawable/icon_club"
+            app:drawableTint="@color/chrono_white" />
+
+        <TextView
+            android:id="@+id/tournament_location"
+            style="@style/AppTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tournament_name"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@+id/tournament_people"
+            android:textColor="@color/chrono_white"
+            app:drawableLeftCompat="@drawable/baseline_map_24"
+            app:drawableTint="@color/chrono_white" />
+
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
