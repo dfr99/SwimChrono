@@ -7,4 +7,6 @@
     <string name="tournaments_today">Tournaments today</string>
     <string name="incoming_tournaments">Incoming Tournaments</string>
     <string name="image_of_a_swimmingpool">Image of a swimmingpool</string>
+    <string name="tournament_info">Tournament info</string>
+    <string name="all_races">All races</string>
 </resources>

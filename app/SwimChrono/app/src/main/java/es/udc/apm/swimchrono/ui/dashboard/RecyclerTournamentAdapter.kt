@@ -8,16 +8,25 @@ import androidx.recyclerview.widget.RecyclerView
 import es.udc.apm.swimchrono.R
 
 
-class TodayTournamentAdapter(private val dataSet: Array<Array<String>>) :
-    RecyclerView.Adapter<TodayTournamentAdapter.ViewHolder>() {
+class RecyclerTournamentAdapter(
+    private val dataSet: Array<Array<String>>
+) :
+    RecyclerView.Adapter<RecyclerTournamentAdapter.ViewHolder>() {
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    class ViewHolder(
+        view: View
+    ) : RecyclerView.ViewHolder(view) {
+
+
         val tournamentNameTextView: TextView = view.findViewById(R.id.tournament_name)
         val tournamentTagTextView: TextView = view.findViewById(R.id.tournament_tag)
         val tournamentDateTextView: TextView = view.findViewById(R.id.tournament_date)
         val tournamentPeopleTextView: TextView = view.findViewById(R.id.tournament_people)
         val tournamentLocationTextView: TextView = view.findViewById(R.id.tournament_location)
+
+
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -33,6 +42,7 @@ class TodayTournamentAdapter(private val dataSet: Array<Array<String>>) :
         holder.tournamentPeopleTextView.text = tournament[3]
         holder.tournamentLocationTextView.text = tournament[4]
     }
+
 
     override fun getItemCount() = dataSet.size
 }

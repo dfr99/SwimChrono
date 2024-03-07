@@ -20,6 +20,7 @@ class DashboardFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -39,10 +40,12 @@ class DashboardFragment : Fragment() {
         )
 
 
-        val todayTournamentAdapter = TodayTournamentAdapter(todayTournaments)
+        val todayTournamentAdapter =
+            RecyclerTournamentAdapter(todayTournaments)
 
         val todayRecyclerView: RecyclerView =
             root.findViewById(R.id.tournaments_today_recycler_list)
+
         todayRecyclerView.layoutManager =
             LinearLayoutManager(requireContext())
         todayRecyclerView.adapter = todayTournamentAdapter
@@ -56,7 +59,7 @@ class DashboardFragment : Fragment() {
             arrayOf("National Tournament", "Tournament F", "25 May 2024", "200", "Madrid")
         )
 
-        val incomingTournamentAdapter = IncomingTournamentAdapter(incomingTournaments)
+        val incomingTournamentAdapter = RecyclerTournamentAdapter(incomingTournaments)
 
         val incomingRecyclerView: RecyclerView =
             root.findViewById(R.id.tournaments_incoming_recycler_list)
@@ -75,4 +78,5 @@ class DashboardFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+    
 }
