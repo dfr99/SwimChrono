@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C4DDE2"
+    android:background="@color/chrono_white"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -15,8 +15,7 @@
         android:ellipsize="none"
         android:foregroundGravity="fill"
         android:gravity="end"
-        android:marginBottom="24dp"
-        android:text="Race Chromo"
+        android:text="@string/title_chronometer_race"
         android:textAlignment="textStart"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -129,7 +128,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:backgroundTint="#098797"
-        android:marginTop="24dp"
         android:text="Begin Chromo"
         android:textColor="#000000" />
 

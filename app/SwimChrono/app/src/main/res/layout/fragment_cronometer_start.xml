@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C4DDE2"
+    android:background="@color/chrono_white"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -14,9 +14,9 @@
         android:ellipsize="none"
         android:foregroundGravity="fill"
         android:gravity="end"
-        android:marginBottom="24dp"
-        android:textAlignment="textStart"
-        android:textSize="24sp"
+        android:text="@string/title_chronometer"
+        android:textAlignment="center"
+        android:textSize="34sp"
         android:textStyle="bold" />
 
     <LinearLayout
@@ -36,7 +36,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/textViewLap1"
                     android:layout_width="140dp"
                     android:layout_height="49dp"
                     android:layout_weight="1"
@@ -78,7 +78,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/textViewTime"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -88,7 +88,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/textViewTimeValue"
                         android:layout_width="match_parent"
                         android:layout_height="49dp"
                         android:layout_weight="1"
@@ -114,7 +114,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/textViewLap3"
                     android:layout_width="140dp"
                     android:layout_height="49dp"
                     android:layout_weight="1"
@@ -129,7 +129,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView3"
+                    android:id="@+id/textViewLap2"
                     android:layout_width="140dp"
                     android:layout_height="49dp"
                     android:layout_weight="1"
@@ -149,22 +149,20 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/beginButton"
+            android:id="@+id/addLapButton"
             android:layout_width="268dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:backgroundTint="#098797"
-            android:marginTop="24dp"
-            android:text="Begin Cromo"
+            android:text="Add Lap"
             android:textColor="#000000" />
 
         <Button
-            android:id="@+id/beginButton"
+            android:id="@+id/stopButton"
             android:layout_width="278dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:backgroundTint="#F44336"
-            android:marginTop="24dp"
             android:text="Stop Chromo"
             android:textColor="#000000" />
 
@@ -176,7 +174,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:backgroundTint="#000000"
-        android:marginTop="24dp"
         android:text="Begin Cromo"
         android:textColor="#FFFFFF" />
 
