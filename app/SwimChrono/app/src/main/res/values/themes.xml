@@ -17,6 +17,7 @@
 
         <!--Make the style globally-->
         <item name="bottomNavigationStyle">@style/BottomNavigationStyle</item>
+        <item name="materialCardViewStyle">@style/CardViewStyle</item>
     </style>
 
 
