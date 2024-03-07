@@ -18,16 +18,4 @@
 
     </style>
 
-
-    <!-- Style for BottomNavigationView -->
-    <style name="BottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
-        <!-- Set background color -->
-        <item name="android:background">?attr/colorSecondaryVariant</item>
-        <!-- Set icon tint to white -->
-        <item name="itemIconTint">?attr/colorOnPrimary</item>
-        <!-- Set item text color to white -->
-        <item name="itemTextColor">?attr/colorOnPrimary</item>
-        <item name="android:state_checked">@color/chrono_red</item>
-    </style>
-
 </resources>

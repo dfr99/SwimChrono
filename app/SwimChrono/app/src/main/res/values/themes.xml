@@ -9,25 +9,14 @@
         <item name="colorSecondary">@color/turquoise_200</item>
         <item name="colorSecondaryVariant">@color/turquoise_700</item>
         <item name="colorOnSecondary">@color/black</item>
+
+        <item name="colorOnSurface">@color/chrono_white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorSecondaryVariant</item>
         <!-- Customize your theme here. -->
 
         <!--Make the style globally-->
         <item name="bottomNavigationStyle">@style/BottomNavigationStyle</item>
-
-    </style>
-
-
-    <!-- Style for BottomNavigationView -->
-    <style name="BottomNavigationStyle" parent="Widget.MaterialComponents.BottomNavigationView">
-        <!-- Set background color -->
-        <item name="android:background">?attr/colorSecondaryVariant</item>
-        <!-- Set icon tint to white -->
-        <item name="itemIconTint">?attr/colorOnPrimary</item>
-        <!-- Set item text color to white -->
-        <item name="itemTextColor">?attr/colorOnPrimary</item>
-        <item name="android:state_checked">@color/chrono_red</item>
     </style>
 
 

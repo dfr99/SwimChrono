@@ -1,10 +1,10 @@
-package es.udc.apm.swimchrono.ui.notifications
+package es.udc.apm.swimchrono.ui.tournaments
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NotificationsViewModel : ViewModel() {
+class TournamentsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
         value = "This is notifications Fragment"
