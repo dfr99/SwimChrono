@@ -28,7 +28,7 @@ class ClubFragment : Fragment() {
         _binding = FragmentClubBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textClub
+        val textView: TextView = binding.textClubInfo
         clubViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
