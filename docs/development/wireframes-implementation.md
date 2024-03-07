@@ -9,13 +9,16 @@ A continuación, se presentan las primeras implementaciones de los casos de uso 
 ![Dashboard](../images/wireframes-implementation/wireframe-dashboard.jpg)
 ![Info torneo](../images/wireframes-implementation/wireframe-tournament-info.jpg)
 
-### 3. Mi Club
+### 2. Mi Club
 
 ![Mi Club](../images/wireframes-implementation/wireframe-club-info.jpg)
 
-### 4. Cronometrador Oficial
+### 3. Cronometrador Oficial
 
-### 5. Mi Perfil
+![Árbitro cronómetro](../images/wireframes-implementation/wireframe-referee-chrono.jpg)
+![Información árbitro carrera](../images/wireframes-implementation/wireframe-referee-race-info.jpg)
+
+### 4. Mi Perfil
 
 ![Mi Perfil](../images/wireframes-implementation/fragment_profile.png)
 ![Mi Qr](../images/wireframes-implementation/profile_my_qr.png)
