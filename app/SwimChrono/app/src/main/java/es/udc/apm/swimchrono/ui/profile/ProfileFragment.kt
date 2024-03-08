@@ -49,8 +49,8 @@ class ProfileFragment : Fragment() {
 
         binding.buttonPerosnalInfo.setOnClickListener {
             Toast.makeText(requireContext(), "INFO", Toast.LENGTH_SHORT).show()
-            //val intent = Intent(requireContext(), activityyy::class.java)
-            //startActivity(intent)
+            val intent = Intent(requireContext(), ProfileInfoActivity::class.java)
+            startActivity(intent)
         }
         binding.buttonMyQr.setOnClickListener {
             Toast.makeText(requireContext(), "My QR", Toast.LENGTH_SHORT).show()
