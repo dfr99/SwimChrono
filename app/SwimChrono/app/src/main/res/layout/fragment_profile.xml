@@ -24,7 +24,7 @@
 
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/button_perosnal_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Personal info"
@@ -33,7 +33,7 @@
         android:drawableLeft="@drawable/icon_personal_info"/>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_my_qr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="My QR"
@@ -42,7 +42,7 @@
         android:drawableLeft="@drawable/icon_qr"/>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button_notifications"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Notifications"
@@ -51,7 +51,7 @@
         android:drawableLeft="@drawable/icon_notifications"/>
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/button_profile_settings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Settings"
