@@ -49,17 +49,23 @@ class ProfileFragment : Fragment() {
 
         binding.buttonPerosnalInfo.setOnClickListener {
             Toast.makeText(requireContext(), "INFO", Toast.LENGTH_SHORT).show()
-            val intent = Intent(requireContext(), ProfileInfoActivity::class.java)
-            startActivity(intent)
+            val intentPersonalInfo = Intent(requireContext(), ProfileInfoActivity::class.java)
+            startActivity(intentPersonalInfo)
         }
         binding.buttonMyQr.setOnClickListener {
             Toast.makeText(requireContext(), "My QR", Toast.LENGTH_SHORT).show()
+            val intentMyQR = Intent(requireContext(), ProfileMyQRActivity::class.java)
+            startActivity(intentMyQR)
         }
         binding.buttonNotifications.setOnClickListener {
-            Toast.makeText(requireContext(), "Notification", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Notifications", Toast.LENGTH_SHORT).show()
+            val intentNotifications = Intent(requireContext(), ProfileNotificationsActivity::class.java)
+            startActivity(intentNotifications)
         }
         binding.buttonProfileSettings.setOnClickListener {
             Toast.makeText(requireContext(), "Profile Settings", Toast.LENGTH_SHORT).show()
+            val intentSettings = Intent(requireContext(), ProfileSettingsActivity::class.java)
+            startActivity(intentSettings)
         }
 
     }
