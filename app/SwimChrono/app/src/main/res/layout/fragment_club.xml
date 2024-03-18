@@ -75,7 +75,7 @@
         app:layout_constraintVertical_bias="0.514" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/tournaments_today_recycler_list"
+        android:id="@+id/club_member_list"
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:padding="5dp"
