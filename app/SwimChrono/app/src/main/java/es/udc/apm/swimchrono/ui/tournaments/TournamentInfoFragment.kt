@@ -10,16 +10,16 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.udc.apm.swimchrono.R
-import es.udc.apm.swimchrono.databinding.FragmentTournamentsBinding
+import es.udc.apm.swimchrono.databinding.FragmentTournamentInfoBinding
 import es.udc.apm.swimchrono.ui.dashboard.RecyclerTournamentAdapter
 
-class TournamentsFragment : Fragment() {
+class TournamentInfoFragment : Fragment() {
 
     companion object {
         private const val ARG_TOURNAMENT_NAME = "tournamentName"
 
-        fun newInstance(tournamentName: String): TournamentsFragment {
-            val fragment = TournamentsFragment()
+        fun newInstance(tournamentName: String): TournamentInfoFragment {
+            val fragment = TournamentInfoFragment()
             val args = Bundle().apply {
                 putString(ARG_TOURNAMENT_NAME, tournamentName)
             }
@@ -28,7 +28,7 @@ class TournamentsFragment : Fragment() {
         }
     }
 
-    private var _binding: FragmentTournamentsBinding? = null
+    private var _binding: FragmentTournamentInfoBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -39,10 +39,10 @@ class TournamentsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val tournamentsViewModel =
-            ViewModelProvider(this).get(TournamentsViewModel::class.java)
+        val tournamentInfoViewModel =
+            ViewModelProvider(this).get(TournamentInfoViewModel::class.java)
 
-        _binding = FragmentTournamentsBinding.inflate(inflater, container, false)
+        _binding = FragmentTournamentInfoBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
 
@@ -99,7 +99,7 @@ class TournamentsFragment : Fragment() {
         raceRecyclerView.adapter = raceAdapter
 
         val textView: TextView = binding.racesTittle
-        tournamentsViewModel.text.observe(viewLifecycleOwner) {
+        tournamentInfoViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

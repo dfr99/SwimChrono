@@ -5,7 +5,7 @@
     android:id="@+id/tournament_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.tournaments.TournamentsFragment">
+    tools:context=".ui.tournaments.TournamentInfoFragment">
 
     <TextView
         android:id="@+id/tournament_info_tittle"

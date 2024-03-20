@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.databinding.FragmentDashboardBinding
-import es.udc.apm.swimchrono.ui.tournaments.TournamentsFragment
+import es.udc.apm.swimchrono.ui.tournaments.TournamentInfoFragment
 import es.udc.apm.swimchrono.util.Logger
 
 class DashboardFragment : Fragment(), OnTournamentItemClickListener {
@@ -27,7 +27,7 @@ class DashboardFragment : Fragment(), OnTournamentItemClickListener {
             "Performed click with args: [tournamentName = \"$tournamentName\"]"
         )
         // Replace the fragment with tournament info fragment
-        val tournamentInfoFragment = TournamentsFragment.newInstance(tournamentName)
+        val tournamentInfoFragment = TournamentInfoFragment.newInstance(tournamentName)
         parentFragmentManager.beginTransaction()
             .replace(R.id.nav_host_fragment_activity_main, tournamentInfoFragment)
             .addToBackStack(null)
