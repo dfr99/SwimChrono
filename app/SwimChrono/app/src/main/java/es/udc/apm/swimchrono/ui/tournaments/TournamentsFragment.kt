@@ -15,6 +15,19 @@ import es.udc.apm.swimchrono.ui.dashboard.RecyclerTournamentAdapter
 
 class TournamentsFragment : Fragment() {
 
+    companion object {
+        private const val ARG_TOURNAMENT_NAME = "tournamentName"
+
+        fun newInstance(tournamentName: String): TournamentsFragment {
+            val fragment = TournamentsFragment()
+            val args = Bundle().apply {
+                putString(ARG_TOURNAMENT_NAME, tournamentName)
+            }
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
     private var _binding: FragmentTournamentsBinding? = null
 
     // This property is only valid between onCreateView and
@@ -33,9 +46,22 @@ class TournamentsFragment : Fragment() {
         val root: View = binding.root
 
 
-        val tournament = arrayOf(
-            arrayOf("Local Tournament", "Tournament 1", "5 May 2024", "100", "Lugo")
+        // Retrieve tournament name from arguments
+        val tournamentName = arguments?.getString(ARG_TOURNAMENT_NAME)
+
+        val tournamentData = arrayOf(
+            arrayOf("1", "Local Tournament", "Tournament 1", "5 May 2024", "100", "Lugo"),
+            arrayOf("2", "Regional Tournament", "Tournament 2", "5 May 2024", "150", "Coruña"),
+            arrayOf("3", "National Tournament", "Tournament 3", "5 May 2024", "200", "Madrid"),
+            arrayOf("4", "National Tournament", "Tournament 4", "5 May 2024", "200", "Madrid"),
+            arrayOf("11", "Local Tournament", "Tournament A", "7 May 2024", "100", "Lugo"),
+            arrayOf("22", "Regional Tournament", "Tournament B", "10 May 2024", "150", "Coruña"),
+            arrayOf("33", "National Tournament", "Tournament C", "15 May 2024", "200", "Madrid"),
+            arrayOf("44", "Local Tournament", "Tournament D", "20 May 2024", "100", "Lugo"),
+            arrayOf("55", "Regional Tournament", "Tournament E", "20 May 2024", "150", "Coruña"),
+            arrayOf("66", "National Tournament", "Tournament F", "25 May 2024", "200", "Madrid")
         )
+
 
         val races = arrayOf(
             arrayOf("1", "17:00 (aprox.)", "Freestyle", "4x25 (200 mts.)"),
@@ -44,7 +70,13 @@ class TournamentsFragment : Fragment() {
             arrayOf("4", "19:30 (aprox.)", "Freestyle", "4x25 (200 mts.)"),
         )
 
-        val tournamentAdapter = RecyclerTournamentAdapter(tournament)
+        // FIXME: This should search with the ID not the name
+        // Search for the tournament with the specified name
+        val tournament =
+            arrayOf(tournamentData.find { it.getOrNull(2) == tournamentName } ?: emptyArray())
+
+
+        val tournamentAdapter = RecyclerTournamentAdapter(tournament, null)
 
         val tournamentRecyclerView: RecyclerView =
             root.findViewById(R.id.tournament_info_recycler_view)
