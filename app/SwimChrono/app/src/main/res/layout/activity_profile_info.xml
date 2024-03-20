@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:gravity="center"
-        android:text="Personal Info"
+        android:text="@string/personal_info_title"
         android:textSize="24sp" />
 
     <TableLayout
@@ -34,8 +34,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/celdas_profile_info"
-                android:text="Nombre"
+                android:text="@string/profile_info_nombre"
                 style="@style/AppTextStyle.Bold"
+                android:textColor="@color/chronno_black"
                 android:textSize="16sp" />
 
             <TextView
@@ -44,8 +45,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/celdas_profile_info"
                 android:gravity="center"
-                android:text="Alejandro"
-
+                android:text="@string/name_example"
+                android:textColor="@color/chronno_black"
                 android:textSize="16sp" />
         </TableRow>
 
@@ -59,8 +60,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/celdas_profile_info"
-                android:text="Apellidos"
+                android:text="@string/profile_info_surname"
                 style="@style/AppTextStyle.Bold"
+                android:textColor="@color/chronno_black"
                 android:textSize="16sp" />
 
             <TextView
@@ -69,7 +71,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/celdas_profile_info"
                 android:gravity="center"
-                android:text="Rodríguez Vaquero"
+                android:text="@string/surname_example"
+                android:textColor="@color/chronno_black"
                 android:textSize="16sp" />
 
         </TableRow>
@@ -85,8 +88,9 @@
                 android:layout_height="wrap_content"
 
                 android:background="@drawable/celdas_profile_info"
-                android:text="Nº teléfono"
+                android:text="@string/profile_info_telephone"
                 style="@style/AppTextStyle.Bold"
+                android:textColor="@color/chronno_black"
                 android:textSize="16sp" />
 
             <TextView
@@ -95,7 +99,8 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/celdas_profile_info"
                 android:gravity="center"
-                android:text="627111111"
+                android:text="@string/telephone_example"
+                android:textColor="@color/chronno_black"
                 android:textSize="16sp" />
 
         </TableRow>

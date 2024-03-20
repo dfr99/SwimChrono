@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="My QR"
+        android:text="@string/my_qr_title"
         android:textSize="30sp" />
 
     <ImageView
@@ -30,7 +30,7 @@
         android:layout_width="match_parent"
         android:layout_height="43dp"
         android:gravity="center"
-        android:text="Alejandro R.V."
+        android:text="@string/name_surname_example"
         android:textSize="20sp" />
 
 </LinearLayout>

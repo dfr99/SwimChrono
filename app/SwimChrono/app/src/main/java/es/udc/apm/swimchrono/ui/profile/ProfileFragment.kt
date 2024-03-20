@@ -48,7 +48,7 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonPerosnalInfo.setOnClickListener {
-            Toast.makeText(requireContext(), "INFO", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Personal Information", Toast.LENGTH_SHORT).show()
             val intentPersonalInfo = Intent(requireContext(), ProfileInfoActivity::class.java)
             startActivity(intentPersonalInfo)
         }
@@ -63,7 +63,7 @@ class ProfileFragment : Fragment() {
             startActivity(intentNotifications)
         }
         binding.buttonProfileSettings.setOnClickListener {
-            Toast.makeText(requireContext(), "Profile Settings", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Settings", Toast.LENGTH_SHORT).show()
             val intentSettings = Intent(requireContext(), ProfileSettingsActivity::class.java)
             startActivity(intentSettings)
         }
