@@ -7,10 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import es.udc.apm.swimchrono.databinding.FragmentClubBinding
-import es.udc.apm.swimchrono.ui.dashboard.RecyclerTournamentAdapter
 import es.udc.apm.swimchrono.R
+import es.udc.apm.swimchrono.databinding.FragmentClubBinding
 
 class ClubFragment : Fragment() {
 
@@ -31,17 +31,6 @@ class ClubFragment : Fragment() {
         _binding = FragmentClubBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val clubInfo = mapOf<String, String>(
-            "name" to "Club Fluvial Lugo",
-            "address" to "Rúa Fermín Rivera, s/n, 27004 Lugo",
-            "phone" to "+34 673 45 34 54",
-            "members" to "100",
-            "webpage" to "https://www.clubfluviallugo.com"
-
-        )
-
-        val clubTrainer = "Jaime López Rego"
-
         val clubMembers = arrayOf<String>(
             "Si",
             "No",
@@ -49,16 +38,41 @@ class ClubFragment : Fragment() {
             "Non sei quen participa aquí"
         )
 
-        val MemberList = RecyclerTournamentAdapter(clubMembers)
+        val memberList = RecyclerClubMembersListAdapter(clubMembers)
+        val clubMemberRecyclerView: RecyclerView = root.findViewById(R.id.club_member_list)
 
-        val ClubMemberRecyclerView: RecyclerView =
-            root.findViewById(R.id.club_member_list)
+        clubMemberRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        clubMemberRecyclerView.adapter = memberList
 
-        val textView: TextView = binding.textClubInfo
-        clubViewModel.text.observe(viewLifecycleOwner) {
+         val textView: TextView = binding.textClubInfo
+         clubViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
+
+        // val clubTrainer = arrayOf<String>(
+        //    "Jaime López Rego"
+        // )
+
+        // val trainerInfo = RecyclerClubMembersListAdapter(clubTrainer)
+        // val trainerInfoRecyclerView : RecyclerView = root.findViewById(R.id.trainer)
+
+        //trainerInfoRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        // trainerInfoRecyclerView.adapter = trainerInfo
+
+        // val clubData = arrayOf<String>(
+        //     "Club Fluvial Lugo",
+        //     "Rúa Fermín Rivera, s/n, 27004 Lugo",
+        //     "+34 673 45 34 54",
+        //     "100",
+        //     "https://www.clubfluviallugo.com"
+        // )
+
+        // val ClubInfo = RecyclerClubMembersListAdapter(clubData)
+        // val ClubInfoRecyclerView : ItemUserCardBinding = root.findViewById(R.id.text_club_info)
+
+        //  ClubInfoRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        //  ClubInfoRecyclerView.adapter = trainerInfo
     }
 
     override fun onDestroyView() {

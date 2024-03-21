@@ -54,7 +54,6 @@
             android:layout_marginTop="35dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/club_fluvial_lugo"
             android:textColor="@color/chrono_white" />
 
         <TextView
@@ -66,7 +65,6 @@
             android:layout_marginTop="125dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/members_100"
             android:textColor="@color/chrono_white" />
 
         <TextView
@@ -92,7 +90,6 @@
             android:layout_marginTop="125dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/phone_34_673_45_34_54"
             android:textColor="@color/chrono_white" />
 
         <TextView
@@ -104,7 +101,6 @@
             android:layout_marginTop="100dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/address_r_a_ferm_n_rivera_s_n_27004_lugo"
             android:textColor="@color/chrono_white" />
 
         <TextView
@@ -116,7 +112,6 @@
             android:layout_marginTop="150dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/p_gina_web_https_www_clubfluviallugo_com"
             android:textColor="@color/chrono_white" />
 
     </RelativeLayout>

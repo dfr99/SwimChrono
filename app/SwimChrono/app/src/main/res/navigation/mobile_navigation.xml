@@ -19,9 +19,9 @@
 
     <fragment
         android:id="@+id/navigation_tournaments"
-        android:name="es.udc.apm.swimchrono.ui.tournaments.TournamentInfoFragment"
+        android:name="es.udc.apm.swimchrono.ui.dashboard.DashboardFragment"
         android:label="@string/title_tournaments"
-        tools:layout="@layout/fragment_tournament_info" />
+        tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_profile"

@@ -15,22 +15,18 @@ class RecyclerClubMembersListAdapter(
     class ViewHolder(
         view: View
     ) : RecyclerView.ViewHolder(view) {
-
-
-        val clubMemberName: TextView = view.findViewById(R.id.club_member_list)
-
+        val name: TextView = view.findViewById(R.id.member)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        TODO("Not yet implemented")
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_user_card, parent, false)
+        return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val clubMember = dataSet[position]
-        holder.clubMemberName.text = clubMember[0]
-        TODO("Not yet implemented")
+        holder.name.text = clubMember
     }
 
     override fun getItemCount() = dataSet.size
