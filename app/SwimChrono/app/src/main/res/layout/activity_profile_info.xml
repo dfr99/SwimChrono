@@ -49,6 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/celdas_profile_info"
+                    android:gravity="center"
                     android:text="@string/profile_info_nombre"
                     style="@style/AppTextStyle.Bold"
                     android:textColor="@color/chronno_black"
@@ -76,6 +77,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/celdas_profile_info"
                     android:text="@string/profile_info_surname"
+                    android:gravity="center"
                     style="@style/AppTextStyle.Bold"
                     android:textColor="@color/chronno_black"
                     android:textSize="16sp" />
@@ -99,12 +101,12 @@
 
                 <TextView
                     android:id="@+id/tvNumberTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-
-                    android:background="@drawable/celdas_profile_info"
-                    android:text="@string/profile_info_telephone"
                     style="@style/AppTextStyle.Bold"
+                    android:layout_width="116dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/celdas_profile_info"
+                    android:gravity="center"
+                    android:text="@string/profile_info_telephone"
                     android:textColor="@color/chronno_black"
                     android:textSize="16sp" />
 

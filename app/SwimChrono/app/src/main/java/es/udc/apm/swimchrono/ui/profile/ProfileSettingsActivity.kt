@@ -18,7 +18,7 @@ class ProfileSettingsActivity : AppCompatActivity() {
         val buttonExit = findViewById<ImageView>(R.id.ivBackButton)
 
         buttonExit.setOnClickListener {
-            Toast.makeText(this, "SALIR", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "exit", Toast.LENGTH_SHORT).show()
             finish()
         }
 
