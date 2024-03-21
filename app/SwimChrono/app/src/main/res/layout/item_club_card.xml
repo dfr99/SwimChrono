@@ -45,28 +45,17 @@
             android:text="@string/local_league" />
 
         <TextView
+            android:id="@+id/nombre_club"
             style="@style/AppTextStyle.Bold"
             android:layout_width="200dp"
             android:layout_height="30dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="150dp"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="45dp"
             android:layout_marginEnd="30dp"
-            android:layout_marginBottom="10dp"
             android:text="@string/club_fluvial_lugo"
-            android:textColor="@color/chrono_white" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="206dp"
-            android:layout_marginTop="125dp"
-            android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/members_100"
             android:textColor="@color/chrono_white" />
 
         <TextView
@@ -75,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="160dp"
+            android:layout_marginStart="150dp"
             android:layout_marginTop="70dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
@@ -84,18 +73,7 @@
             android:textColor="@color/chrono_white" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="125dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="10dp"
-            android:text="@string/phone_34_673_45_34_54"
-            android:textColor="@color/chrono_white" />
-
-        <TextView
+            android:id="@+id/direccion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -104,10 +82,25 @@
             android:layout_marginTop="100dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/address_r_a_ferm_n_rivera_s_n_27004_lugo"
-            android:textColor="@color/chrono_white" />
+            android:textColor="@color/chrono_white"
+            android:text="@string/direccion"/>
 
         <TextView
+            android:id="@+id/pagina_web"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="125dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/chrono_white"
+            android:text="@string/url"
+            android:autoLink="web" />
+
+        <TextView
+            android:id="@+id/telefono"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -116,8 +109,21 @@
             android:layout_marginTop="150dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/p_gina_web_https_www_clubfluviallugo_com"
-            android:textColor="@color/chrono_white" />
+            android:textColor="@color/chrono_white"
+            android:text="@string/phone" />
+
+        <TextView
+            android:id="@+id/miembros"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="206dp"
+            android:layout_marginTop="150dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="10dp"
+            android:textColor="@color/chrono_white"
+            android:text="@string/members_number" />
 
     </RelativeLayout>
 

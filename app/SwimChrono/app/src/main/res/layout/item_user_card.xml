@@ -11,12 +11,12 @@
     android:padding="20dp">
 
     <TextView
+        android:id="@+id/member"
         style="@style/AppTextStyle.Bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:padding="3dp"
-        android:text="@string/john_doe"
         android:textAlignment="center"
         android:textColor="@color/chrono_white"
         android:textSize="12sp"
