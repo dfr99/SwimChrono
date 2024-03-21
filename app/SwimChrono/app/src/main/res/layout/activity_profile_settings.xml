@@ -12,7 +12,7 @@
         android:id="@+id/ivBackButton"
         android:layout_width="72dp"
         android:layout_height="60dp"
-        android:contentDescription="DESCRIPCION ACCESIBILIDAD"
+        android:contentDescription="@string/contentDescription_back"
         android:clickable="true"
         android:focusable="true"
         android:padding="8dp"
