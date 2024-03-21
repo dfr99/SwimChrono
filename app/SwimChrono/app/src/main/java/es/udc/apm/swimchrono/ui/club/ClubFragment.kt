@@ -46,33 +46,35 @@ class ClubFragment : Fragment() {
 
          val textView: TextView = binding.textClubInfo
          clubViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+             textView.text = it
+         }
+
+        val clubTrainer = arrayOf<String>(
+            "Jaime López Rego",
+            "David Fraga Rodríguez",
+        )
+
+        val trainerInfo = RecyclerItemTrainerAdapter(clubTrainer)
+        val trainerInfoRecyclerView : RecyclerView = root.findViewById(R.id.trainer)
+
+        trainerInfoRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        trainerInfoRecyclerView.adapter = trainerInfo
+
+        val clubData = arrayOf<String>(
+             "Club Fluvial Lugo",
+             "Rúa Fermín Rivera, s/n, 27004 Lugo",
+             "+34 673 45 34 54",
+             "100",
+             "https://www.clubfluviallugo.com"
+        )
+
+        // val ClubInfo = ClubDataAdapter(clubData)
+        // val ClubInfoRecyclerView :  = root.findViewById(R.id.item_club_card)
+
+        // ClubInfoRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        // ClubInfoRecyclerView.adapter = trainerInfo
+
         return root
-
-        // val clubTrainer = arrayOf<String>(
-        //    "Jaime López Rego"
-        // )
-
-        // val trainerInfo = RecyclerClubMembersListAdapter(clubTrainer)
-        // val trainerInfoRecyclerView : RecyclerView = root.findViewById(R.id.trainer)
-
-        //trainerInfoRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        // trainerInfoRecyclerView.adapter = trainerInfo
-
-        // val clubData = arrayOf<String>(
-        //     "Club Fluvial Lugo",
-        //     "Rúa Fermín Rivera, s/n, 27004 Lugo",
-        //     "+34 673 45 34 54",
-        //     "100",
-        //     "https://www.clubfluviallugo.com"
-        // )
-
-        // val ClubInfo = RecyclerClubMembersListAdapter(clubData)
-        // val ClubInfoRecyclerView : ItemUserCardBinding = root.findViewById(R.id.text_club_info)
-
-        //  ClubInfoRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        //  ClubInfoRecyclerView.adapter = trainerInfo
     }
 
     override fun onDestroyView() {

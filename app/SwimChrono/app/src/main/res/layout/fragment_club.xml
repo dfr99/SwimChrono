@@ -11,23 +11,21 @@
         style="@style/AppTextStyle.Bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
         android:text="@string/club_info"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.012" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <include
+        android:id="@+id/item_club_card"
         layout="@layout/item_club_card"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginStart="5dp"
         app:layout_constraintTop_toBottomOf="@+id/text_club_info"
         tools:layout_editor_absoluteX="16dp" />
 
@@ -36,27 +34,23 @@
         style="@style/AppTextStyle.Bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
         android:text="@string/trainer"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39" />
+        app:layout_constraintTop_toBottomOf="@+id/item_club_card"
+     />
 
-    <include
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/trainer"
-        layout="@layout/item_user_card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:padding="5dp"
+        android:scrollbars="vertical"
         app:layout_constraintTop_toBottomOf="@+id/text_trainer"
-        tools:layout_editor_absoluteX="32dp" />
+        tools:listitem="@layout/item_user_card" />
 
     <TextView
         android:id="@+id/text_members"
@@ -68,20 +62,18 @@
         android:layout_marginEnd="8dp"
         android:text="@string/members"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.552" />
+        app:layout_constraintTop_toBottomOf="@+id/trainer" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/club_member_list"
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:padding="5dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_members"
+        app:layout_constraintVertical_bias="0.137"
+        tools:layout_editor_absoluteX="0dp"
         tools:listitem="@layout/item_user_card" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
