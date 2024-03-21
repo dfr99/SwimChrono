@@ -3,61 +3,69 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp"
+    android:gravity="center"
     tools:context=".ui.profile.ProfileFragment">
 
 
     <TextView
         android:id="@+id/text_profile"
         style="@style/AppTextStyle.Bold"
-        android:layout_width="match_parent"
-        android:layout_height="61dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:text="@string/profile_fragment_title"
         android:textAlignment="center"
-        android:textSize="20sp"
-        android:text="Profile Fragment"/>
+        android:textSize="20sp" />
 
-
-
-    <Button
-        android:id="@+id/button1"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Personal info"
-        android:textSize="16sp"
-        android:textAlignment="textStart"
-        android:drawableLeft="@drawable/icon_personal_info"/>
+        android:layout_height="300dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="My QR"
-        android:textSize="16sp"
-        android:textAlignment="textStart"
-        android:drawableLeft="@drawable/icon_qr"/>
+        <Button
+            android:id="@+id/button_perosnal_info"
+            android:layout_width="214dp"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/icon_personal_info"
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Notifications"
-        android:textSize="16sp"
-        android:textAlignment="textStart"
-        android:drawableLeft="@drawable/icon_notifications"/>
+            android:text="@string/personal_info_title"
+            android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/button4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Settings"
-        android:textSize="16sp"
-        android:textAlignment="textStart"
-        android:drawableLeft="@drawable/icon_settings"/>
+        <Button
+            android:id="@+id/button_my_qr"
+            android:layout_width="214dp"
+            android:layout_height="60dp"
+            android:drawableLeft="@drawable/icon_qr"
+            android:gravity="center"
+            android:paddingRight="8dp"
+            android:text="@string/my_qr_title"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/button_notifications"
+            android:layout_width="214dp"
+            android:layout_height="60dp"
+            android:drawableLeft="@drawable/icon_notifications"
+            android:gravity="center"
+            android:text="@string/notifications_title"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/button_profile_settings"
+            android:layout_width="214dp"
+            android:layout_height="60dp"
+            android:drawableLeft="@drawable/icon_settings"
+            android:gravity="center"
+
+            android:text="@string/settings_title"
+            android:textSize="16sp" />
+    </LinearLayout>
 
 
 </LinearLayout>
