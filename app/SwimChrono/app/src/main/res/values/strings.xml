@@ -42,4 +42,5 @@
     <string name="name_surname_example">Alejandro R.V.</string>
     <string name="notifications_title">Notifications</string>
     <string name="settings_title">Settings</string>
+    <string name="contentDescription_back">Volver</string>
 </resources>
