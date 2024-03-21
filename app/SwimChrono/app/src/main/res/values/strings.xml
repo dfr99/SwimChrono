@@ -11,7 +11,7 @@
     <string name="image_of_a_swimmingpool">Image of a swimmingpool</string>
     <string name="tournament_info">Tournament info</string>
     <string name="all_races">All races</string>
-    <string name="postion">Position</string>
+    <string name="postion">Position</string> <!--Posibilidad de corregir este string-->
     <string name="name">Name</string>
     <string name="surname">Surname</string>
     <string name="time">Time</string>
@@ -26,4 +26,21 @@
     <string name="phone">Teléfono: +34 673 45 34 54</string>
     <string name="url">URL: https://www.clubfluviallugo.com</string>
     <string name="direccion">"Rúa Fermín Rivera, s/n, 27004 Lugo"</string>
+    <string name="phone_34_673_45_34_54">Phone: +34 673 45 34 54</string>
+    <string name="john_doe">John Doe</string>
+    <string name="profile_fragment_title">Profile Fragment</string>
+    <!--string name="personal_info_button">Personal info</string-->
+    <!--string name="notifications_button">Notifications</string-->
+    <!--string name="settings_button">Settings</string-->
+    <string name="my_qr_title">My QR</string>
+    <string name="telephone_example">627111111</string>
+    <string name="personal_info_title">Personal Information</string>
+    <string name="profile_info_nombre">Nombre</string>
+    <string name="name_example">Alejandro</string>
+    <string name="profile_info_surname">Apellidos</string>
+    <string name="surname_example">Rodríguez Vaquero</string>
+    <string name="profile_info_telephone">Nº teléfono</string>
+    <string name="name_surname_example">Alejandro R.V.</string>
+    <string name="notifications_title">Notifications</string>
+    <string name="settings_title">Settings</string>
 </resources>
