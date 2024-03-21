@@ -96,7 +96,8 @@
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
             android:textColor="@color/chrono_white"
-            android:text="@string/url"/>
+            android:text="@string/url"
+            android:autoLink="web" />
 
         <TextView
             android:id="@+id/telefono"
