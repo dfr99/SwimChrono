@@ -27,3 +27,6 @@ replay_pid*
 site
 
 .vscode
+
+# InteliiJ IDEA
+.idea
