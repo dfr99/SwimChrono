@@ -22,8 +22,8 @@ NFC y Bluetooth para una mayor comodidad y eficiencia en el registro de tiempos.
 
 ## Funcionalidades
 
-- **Herramienta de cronometraje:** Permite la toma de tiempos de las diferentes 
-pruebas dentro de las competiciones de manera automática. Es la funcionalidad 
+- **Herramienta de cronometraje:** Permite la toma de tiempos de las diferentes
+pruebas dentro de las competiciones de manera automática. Es la funcionalidad
 principal de la aplicación.
 
 - **Gestión de entidades:** Permite crear y administrar piscinas, ligas,
@@ -60,18 +60,18 @@ seguidores de la natación.
     - Testing
     - Documentación
     - Arquitectura general e integración de submódulos
-    
+
 - COO ([David Fraga Rodríguez](mailto:david.fraga.rodriguez@udc.es))
 	- Responsable de operaciones
     - Arquitectura
     - Validación funcional
-    
+
 - CTO ([Pedro Mauricio Echeverry](mailto:pedro.echeverry@udc.es))
     - Responsable de tecnologías no-Android
     - Uso de sensores y hardware embebido
     - Geolocalización y posicionamiento
     - Papel de CEO en caso
-    
+
 - CXO ([Adrián García Vázquez](mailto:adrian.gvazquez@udc.es))
 	- Responsable de experiencia de usuario
     - Usabilidad

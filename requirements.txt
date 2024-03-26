@@ -6,3 +6,7 @@ mkdocs-git-revision-date-localized-plugin>=1.0.1
 # Add your custom theme if not inside a theme_dir
 # (https://github.com/mkdocs/mkdocs/wiki/MkDocs-Themes)
 mkdocs-material>=8.2.13
+
+fastapi>=0.70.0
+sqlalchemy>=1.4.32
+uvicorn>=0.15.0
