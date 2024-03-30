@@ -103,3 +103,4 @@ nav:
                 - Diseño: development/wireframes.md
                 - Implementación: development/wireframes-implementation.md
     - Contribuciones: contributing/index.md
+    - Componentes: components/index.md
