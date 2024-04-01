@@ -19,18 +19,36 @@ A continuación, se presentan las primeras implementaciones de los casos de uso 
 ![Información árbitro carrera](../images/wireframes-implementation/wireframe-referee-race-info.jpg)
 
 ### 4. Mi Perfil
+
+#### Fragment
 Antes:
+
 ![Mi Perfil V1](../images/wireframes-implementation/fragment_profile_V1.png)
+
 Ahora:
+
 ![Mi Perfil V2](../images/wireframes-implementation/fragment_profile_V2.png)
-Antes
+
+#### Información personal
+Antes:
+
 ![Mi informacion personal V1](../images/wireframes-implementation/profile_personalinfo_V1.png)
-Ahora
+
+Ahora:
+
 ![Mi informacion personal V2](../images/wireframes-implementation/profile_personalinfo_V2.png)
 
-Antes
+#### Mi QR
+Antes:
+
 ![Mi Qr V1](../images/wireframes-implementation/profile_my_qr_V1.png)
-Ahora
+
+Ahora:
+
 ![Mi Qr V2](../images/wireframes-implementation/profile_my_qr_V2.png)
+
+#### Notificaciones
 ![Mis notifications V2](../images/wireframes-implementation/profile_notifications_V2.png)
+
+#### Configuración
 ![Mis settings V2](../images/wireframes-implementation/profile_settings_V2.png)
