@@ -15,7 +15,7 @@
         android:id="@+id/navigation_club"
         android:name="es.udc.apm.swimchrono.ui.club.ClubFragment"
         android:label="@string/title_club"
-        tools:layout="@layout/fragment_club" />
+        tools:layout="@layout/fragment_club_vertical" />
 
     <fragment
         android:id="@+id/navigation_tournaments"
