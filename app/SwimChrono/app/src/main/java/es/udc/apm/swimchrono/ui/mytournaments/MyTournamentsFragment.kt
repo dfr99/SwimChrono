@@ -11,11 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.databinding.FragmentDashboardBinding
-import es.udc.apm.swimchrono.ui.tournaments.TournamentInfoFragment
 import es.udc.apm.swimchrono.ui.dashboard.RecyclerTournamentAdapter
+import es.udc.apm.swimchrono.ui.tournaments.TournamentInfoFragment
 import es.udc.apm.swimchrono.util.Logger
 
-class MyTournamentsFragment : Fragment(), es.udc.apm.swimchrono.ui.dashboard.OnTournamentItemClickListener {
+class MyTournamentsFragment : Fragment(),
+    es.udc.apm.swimchrono.ui.dashboard.OnTournamentItemClickListener {
 
     private var _binding: FragmentDashboardBinding? = null
 
