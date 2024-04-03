@@ -14,7 +14,13 @@ A continuación, se presentan los bocetos de las diferentes pantallas de la apli
 
 En esta sección, los **usuarios no logeados** podrán ver una visión general de los torneos actuales y próximos. También podrán acceder a más detalles sobre cada torneo.
 
+#### Disposición en vertical
+
 ![Dashboard / Torneos](../images/wireframes/Tournaments.png)
+
+#### Disposición en horizontal
+
+![Dashboard / Torneos](../images/wireframes/Tournaments-landscape.png)
 
 ### 2. Mis Torneos
 
