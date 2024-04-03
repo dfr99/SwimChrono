@@ -22,12 +22,6 @@
             android:name=".ui.profile.ProfileNotificationsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profile.NotificationsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.profile.MyQRActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.profile.ProfileInfoActivity"
             android:exported="false" />
         <activity
