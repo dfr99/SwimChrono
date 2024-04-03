@@ -44,6 +44,80 @@ que las actividades son independientes y tienen sus propio ciclo de vida.
 ## Servicios
 
 <!-- Acceso a API como servicio-->
+Para la comunicación con la API que ofrece el backend donde se guardan los datos de los nadadores, entrenadores, clubes y competiciones, se ha optado por implementar un servicio en la aplicación SwimChrono. Este servicio se encargará de realizar las llamadas a la API y manejar los datos devueltos.
+
+### Implementación del Servicio
+
+El servicio ApiService se implementará como un componente de la aplicación que manejará las operaciones de red relacionadas con la gestión de nadadores. Este servicio se encargará de enviar y recibir datos desde la API de nadadores y manejará la lógica relacionada con las llamadas HTTP.
+
+### Funcionalidades del Servicio
+
+El servicio ApiService incluirá los siguientes métodos para interactuar con la API de nadadores:
+
+- GET /torneos: Este método realizará una solicitud GET a la API para obtener la lista de torneos con la información detallada de las pruebas que se realizarán. También se obtendrá la información de los nadadores asignados a dichas carreras.
+- GET /nadadores/\<id>: Este método realizará una solicitud GET a la API para obtener los datos relevantes de dicho nadador. También se obtendrán los datos de los torneos próximos que tiene asignados.
+- GET /clubes: Este método realizará una solicitud GET a la API para obtener la lista de clubes. Contará con la información de los nadadores y los entrenadores que se encuentran asociados a dicho club.
+- PUT /prueba/\<id>: Este método realizará una solicitud PUT a la API la cual actualizará los tiempos de las pruebas realizadas a través de la aplicación.
+
+Cabe destacar que estos métodos no son definitivos pues será necesario definir y desplegar una API RESTful para simular el funcionamiento correcto de la aplicación.
+
+### Uso del servicio
+
+El servicio ApiService será lanzado desde diversos puntos de la aplicación, según sea necesario. Por ejemplo, cuando un fragmento requiera datos de la lista de nadadores, puede iniciar el servicio para realizar una llamada GET a la API. De manera similar, cuando se agregue un nuevo tiempo desde la vista del cronómetro se hará una llamada PUT a la API que actualizará el tiempo cronometrado.
+
+### Uso de los Datos Recibidos
+
+Una vez que el servicio ApiService reciba los datos de la API de nadadores, los procesará según sea necesario. Por ejemplo, si se recibe una lista de nadadores en respuesta a una solicitud GET, el servicio puede procesar estos datos y enviarlos de vuelta al fragmento solicitante para su visualización en la interfaz de usuario.
+
+Este enfoque permite separar las operaciones de red de la lógica de la interfaz de usuario, lo que hace que el código sea más modular y fácil de mantener.
+
+A continuación se muestra un código _boilerplate_ de la posible implementación del servicio en la aplicación. Se muestra la llamda de getNadadores() que es la encargada de obtener la lista de todos los nadadores.
+
+    class ApiService : Service() {
+
+        override fun onBind(intent: Intent?): IBinder? {
+            return null
+        }
+
+        override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+            when (intent?.action) {
+                ACTION_GET_NADADORES -> getNadadores()
+                ACTION_POST_NADADOR -> {
+                    val nadador = intent.getStringExtra(EXTRA_NADADOR)
+                    postNadador(nadador)
+                }
+                else -> Logger.error(TAG, "Acción no válida")
+            }
+            return START_NOT_STICKY
+        }
+
+        private fun getNadadores() {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val url = URL("https://swimchrono-api.url/nadadores")
+                    val connection = url.openConnection() as HttpURLConnection
+                    connection.requestMethod = "GET"
+
+                    val responseCode = connection.responseCode
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        val inputStream = connection.inputStream
+                        val response = inputStream.bufferedReader().use { it.readText() }
+                        inputStream.close()
+                        Logger.debug(TAG, "Response: $response")
+                    } else {
+                        Logger.error(TAG, "Error en la respuesta: $responseCode")
+                    }
+                } catch (e: Exception) {
+                    Logger.e(TAG, "Error al realizar la solicitud GET", e)
+                }
+            }
+        }
+
+        companion object {
+            private const val TAG = "ApiService"
+            const val ACTION_GET_NADADORES = "com.example.app.GET_NADADORES"
+        }
+    }
 
 <!-- Variables -->
 [backstack]: https://developer.android.com/reference/androidx/fragment/app/FragmentTransaction#addToBackStack(java.lang.String)
