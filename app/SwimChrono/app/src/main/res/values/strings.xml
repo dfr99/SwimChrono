@@ -44,4 +44,6 @@
     <string name="notifications_title">Notifications</string>
     <string name="settings_title">Settings</string>
     <string name="contentDescription_back">Volver</string>
+    <string name="image_of_an_user">Image of an user</string>
+    <string name="example_email">user@example.com</string>
 </resources>
