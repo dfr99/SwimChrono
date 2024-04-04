@@ -2,9 +2,29 @@
 
 ## Actividades
 
+<!--  Intro -->
+
+En nuestra aplicación _SwimChrono_ se han implementado las siguientes actividades por donde el usuario podrá navegar.
+
+
 <!--  Actividad principal -->
+
+### MainActivity
+
+En el MainActivity se ha decidido implementar una pantalla principal en nuestra aplicación para que el usuario pueda ver los fragmentos que se explicarán en el siguiente apartado. Esta actividad contiene en la parte inferior una barra de navegación (*navigation_bar*) donde poder cambiar de fragment a otro sin salir del menú principal.
+
 <!-- Cada unha das opcións de perfil -->
-<!-- Cronómetro -->
+### Actividades Profile
+
+Estas son las actividades utilizadas para configurar los datos del usuario:
+
+- Pantalla de _Información personal_
+- Pantalla de _Mi QR_
+- Pantalla de _Notificaciones_
+- Pantalla de _Configuración_
+
+
+<!-- Cronómetro... para más adelante XD-->
 
 ## Fragmentos
 
@@ -55,9 +75,9 @@ El servicio ApiService se implementará como un componente de la aplicación que
 El servicio ApiService incluirá los siguientes métodos para interactuar con la API de nadadores:
 
 - GET /torneos: Este método realizará una solicitud GET a la API para obtener la lista de torneos con la información detallada de las pruebas que se realizarán. También se obtendrá la información de los nadadores asignados a dichas carreras.
-- GET /nadadores/\<id>: Este método realizará una solicitud GET a la API para obtener los datos relevantes de dicho nadador. También se obtendrán los datos de los torneos próximos que tiene asignados.
+- GET /nadadores/{id}: Este método realizará una solicitud GET a la API para obtener los datos relevantes de dicho nadador. También se obtendrán los datos de los torneos próximos que tiene asignados.
 - GET /clubes: Este método realizará una solicitud GET a la API para obtener la lista de clubes. Contará con la información de los nadadores y los entrenadores que se encuentran asociados a dicho club.
-- PUT /prueba/\<id>: Este método realizará una solicitud PUT a la API la cual actualizará los tiempos de las pruebas realizadas a través de la aplicación.
+- PUT /prueba/{id}: Este método realizará una solicitud PUT a la API la cual actualizará los tiempos de las pruebas realizadas a través de la aplicación.
 
 Cabe destacar que estos métodos no son definitivos pues será necesario definir y desplegar una API RESTful para simular el funcionamiento correcto de la aplicación.
 
