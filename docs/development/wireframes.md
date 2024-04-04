@@ -51,4 +51,10 @@ Esta sección estará destinada a los **cronometradores oficiales** para registr
 
 Aquí, los usuarios podrán ver su perfil personal, incluyendo información de contacto, preferencias y estadísticas personales, incuyendo la visualización de un QR único.
 
+#### Disposición en vertical
+
 ![Mi Perfil](../images/wireframes/Profile%20cu.png)
+
+#### Disposición en horizontal
+
+![Mi Perfil H](../images/wireframes/Profile-landscape.png)
