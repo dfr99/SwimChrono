@@ -73,51 +73,53 @@ Este enfoque permite separar las operaciones de red de la lógica de la interfaz
 
 A continuación se muestra un código _boilerplate_ de la posible implementación del servicio en la aplicación. Se muestra la llamda de getNadadores() que es la encargada de obtener la lista de todos los nadadores.
 
-    class ApiService : Service() {
+```kotlin
+class ApiService : Service() {
 
-        override fun onBind(intent: Intent?): IBinder? {
-            return null
-        }
+    override fun onBind(intent: Intent?): IBinder? {
+        return null
+    }
 
-        override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-            when (intent?.action) {
-                ACTION_GET_NADADORES -> getNadadores()
-                ACTION_POST_NADADOR -> {
-                    val nadador = intent.getStringExtra(EXTRA_NADADOR)
-                    postNadador(nadador)
-                }
-                else -> Logger.error(TAG, "Acción no válida")
+    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        when (intent?.action) {
+            ACTION_GET_NADADORES -> getNadadores()
+            ACTION_POST_NADADOR -> {
+                val nadador = intent.getStringExtra(EXTRA_NADADOR)
+                postNadador(nadador)
             }
-            return START_NOT_STICKY
+            else -> Logger.error(TAG, "Acción no válida")
         }
+        return START_NOT_STICKY
+    }
 
-        private fun getNadadores() {
-            CoroutineScope(Dispatchers.IO).launch {
-                try {
-                    val url = URL("https://swimchrono-api.url/nadadores")
-                    val connection = url.openConnection() as HttpURLConnection
-                    connection.requestMethod = "GET"
+    private fun getNadadores() {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val url = URL("https://swimchrono-api.url/nadadores")
+                val connection = url.openConnection() as HttpURLConnection
+                connection.requestMethod = "GET"
 
-                    val responseCode = connection.responseCode
-                    if (responseCode == HttpURLConnection.HTTP_OK) {
-                        val inputStream = connection.inputStream
-                        val response = inputStream.bufferedReader().use { it.readText() }
-                        inputStream.close()
-                        Logger.debug(TAG, "Response: $response")
-                    } else {
-                        Logger.error(TAG, "Error en la respuesta: $responseCode")
-                    }
-                } catch (e: Exception) {
-                    Logger.e(TAG, "Error al realizar la solicitud GET", e)
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    val inputStream = connection.inputStream
+                    val response = inputStream.bufferedReader().use { it.readText() }
+                    inputStream.close()
+                    Logger.debug(TAG, "Response: $response")
+                } else {
+                    Logger.error(TAG, "Error en la respuesta: $responseCode")
                 }
+            } catch (e: Exception) {
+                Logger.e(TAG, "Error al realizar la solicitud GET", e)
             }
-        }
-
-        companion object {
-            private const val TAG = "ApiService"
-            const val ACTION_GET_NADADORES = "com.example.app.GET_NADADORES"
         }
     }
 
+    companion object {
+        private const val TAG = "ApiService"
+        const val ACTION_GET_NADADORES = "com.example.app.GET_NADADORES"
+    }
+}
+
+```
 <!-- Variables -->
 [backstack]: https://developer.android.com/reference/androidx/fragment/app/FragmentTransaction#addToBackStack(java.lang.String)
