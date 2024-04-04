@@ -90,7 +90,7 @@ class TournamentInfoFragment : Fragment() {
         val raceAdapter = RecyclerRaceAdapter(races)
 
         val raceRecyclerView: RecyclerView =
-            root.findViewById(R.id.tournament_races_list)
+            root.findViewById(R.id.tournament_races_recycler_view)
 
 
         raceRecyclerView.layoutManager =

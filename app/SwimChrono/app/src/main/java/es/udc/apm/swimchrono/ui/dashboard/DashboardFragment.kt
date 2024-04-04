@@ -26,8 +26,10 @@ class DashboardFragment : Fragment(), OnTournamentItemClickListener {
             this.javaClass.name,
             "Performed click with args: [tournamentName = \"$tournamentName\"]"
         )
-        // Replace the fragment with tournament info fragment
+
+        // Crear una instancia del fragmento de información del torneo
         val tournamentInfoFragment = TournamentInfoFragment.newInstance(tournamentName)
+
         parentFragmentManager.beginTransaction()
             .replace(R.id.nav_host_fragment_activity_main, tournamentInfoFragment)
             .addToBackStack(null)

@@ -10,13 +10,13 @@
     <TextView
         android:id="@+id/tournament_info_tittle"
         style="@style/AppTextStyle.Bold"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:padding="8dp"
         android:text="@string/tournament_info"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -32,11 +32,13 @@
     <TextView
         android:id="@+id/races_tittle"
         style="@style/AppTextStyle.Bold"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:text="@string/all_races"
         android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tournament_info_recycler_view" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -44,7 +46,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintTop_toBottomOf="@+id/races_tittle"
+        app:spanCount="2"
         tools:listitem="@layout/item_race_card" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
