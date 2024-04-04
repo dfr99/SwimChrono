@@ -15,7 +15,7 @@ class RecyclerClubMembersListAdapter(
     class ViewHolder(
         view: View
     ) : RecyclerView.ViewHolder(view) {
-        val name: TextView = view.findViewById(R.id.member)
+        val name: TextView = view.findViewById(R.id.text_user_name)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

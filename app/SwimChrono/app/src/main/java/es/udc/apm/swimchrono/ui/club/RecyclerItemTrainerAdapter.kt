@@ -10,11 +10,11 @@ import es.udc.apm.swimchrono.R
 class RecyclerItemTrainerAdapter(
     private val dataSet: Array<String>
 ) :
-        RecyclerView.Adapter<RecyclerItemTrainerAdapter.ViewHolder>() {
+    RecyclerView.Adapter<RecyclerItemTrainerAdapter.ViewHolder>() {
     class ViewHolder(
         view: View
     ) : RecyclerView.ViewHolder(view) {
-        val name : TextView = view.findViewById(R.id.member)
+        val name: TextView = view.findViewById(R.id.text_user_name)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -27,5 +27,6 @@ class RecyclerItemTrainerAdapter(
         val itemTrainer = dataSet[position]
         holder.name.text = itemTrainer
     }
+
     override fun getItemCount() = dataSet.size
 }

@@ -6,9 +6,10 @@ Para la creación de los siguientes wireframes se ha seguido una paleta de color
 
 ![StyleSheet](../images/wireframes/Brand%20Style%20Sheet.png)
 
-## Wireframes de los principales casos de uso
+## Wireframes de los principales casos de uso (vertical)
 
 A continuación, se presentan los bocetos de las diferentes pantallas de la aplicación.
+Se muestran tanto las pantallas
 
 ### 1. Dashboard / Torneos
 
@@ -32,7 +33,13 @@ Aquí, los **nadadores** podrán ver los torneos en los que están inscritos y a
 
 En esta pantalla, los **nadadores y entrenadores** podrán explorar información sobre su club, incluyendo miembros, eventos y estadísticas relevantes.
 
+#### Disposición en vertical
+
 ![Mi Club](../images/wireframes/Club.png)
+
+#### Disposición en horizontal
+
+![Mi Club](../images/wireframes/Club%20landscape.png)
 
 ### 4. Cronometrador Oficial
 
