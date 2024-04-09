@@ -4,12 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.databinding.FragmentTournamentInfoBinding
 import es.udc.apm.swimchrono.ui.dashboard.RecyclerTournamentAdapter
 
@@ -30,38 +29,34 @@ class TournamentInfoFragment : Fragment() {
 
     private var _binding: FragmentTournamentInfoBinding? = null
 
+    private val viewModel: TournamentInfoViewModel by viewModels()
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        val tournamentInfoViewModel =
-            ViewModelProvider(this).get(TournamentInfoViewModel::class.java)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        _binding = FragmentTournamentInfoBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        viewModel.getTournaments()
 
+        val infoRecyclerView: RecyclerView = binding.tournamentInfoRecyclerView
+        infoRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        //FIXME: Make the date work
+        viewModel.tournaments.observe(viewLifecycleOwner, Observer { tournaments ->
+
+            val tournamentName = arguments?.getString(ARG_TOURNAMENT_NAME)
+
+            val todayTournamentAdapter = RecyclerTournamentAdapter(
+                tournaments.filter { tournament -> tournament.name == tournamentName },
+                null
+            )
+            infoRecyclerView.adapter = todayTournamentAdapter
+
+        })
 
         // Retrieve tournament name from arguments
-        val tournamentName = arguments?.getString(ARG_TOURNAMENT_NAME)
-
-        val tournamentData = arrayOf(
-            arrayOf("1", "Local Tournament", "Tournament 1", "5 May 2024", "100", "Lugo"),
-            arrayOf("2", "Regional Tournament", "Tournament 2", "5 May 2024", "150", "Coruña"),
-            arrayOf("3", "National Tournament", "Tournament 3", "5 May 2024", "200", "Madrid"),
-            arrayOf("4", "National Tournament", "Tournament 4", "5 May 2024", "200", "Madrid"),
-            arrayOf("11", "Local Tournament", "Tournament A", "7 May 2024", "100", "Lugo"),
-            arrayOf("22", "Regional Tournament", "Tournament B", "10 May 2024", "150", "Coruña"),
-            arrayOf("33", "National Tournament", "Tournament C", "15 May 2024", "200", "Madrid"),
-            arrayOf("44", "Local Tournament", "Tournament D", "20 May 2024", "100", "Lugo"),
-            arrayOf("55", "Regional Tournament", "Tournament E", "20 May 2024", "150", "Coruña"),
-            arrayOf("66", "National Tournament", "Tournament F", "25 May 2024", "200", "Madrid")
-        )
-
 
         val races = arrayOf(
             arrayOf("1", "17:00 (aprox.)", "Freestyle", "4x25 (200 mts.)"),
@@ -70,39 +65,23 @@ class TournamentInfoFragment : Fragment() {
             arrayOf("4", "19:30 (aprox.)", "Freestyle", "4x25 (200 mts.)"),
         )
 
-        // FIXME: This should search with the ID not the name
-        // Search for the tournament with the specified name
-        val tournament =
-            arrayOf(tournamentData.find { it.getOrNull(2) == tournamentName } ?: emptyArray())
-
-
-        val tournamentAdapter = RecyclerTournamentAdapter(tournament, null)
-
-        val tournamentRecyclerView: RecyclerView =
-            root.findViewById(R.id.tournament_info_recycler_view)
-
-        tournamentRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext())
-
-        tournamentRecyclerView.adapter = tournamentAdapter
-
-
         val raceAdapter = RecyclerRaceAdapter(races)
 
-        val raceRecyclerView: RecyclerView =
-            root.findViewById(R.id.tournament_races_recycler_view)
-
-
-        raceRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext())
+        val raceRecyclerView: RecyclerView = binding.tournamentRacesRecyclerView
+        raceRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         raceRecyclerView.adapter = raceAdapter
+    }
 
-        val textView: TextView = binding.racesTittle
-        tournamentInfoViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentTournamentInfoBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 
     override fun onDestroyView() {
