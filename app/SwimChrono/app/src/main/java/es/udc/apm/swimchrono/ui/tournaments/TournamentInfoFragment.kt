@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.udc.apm.swimchrono.databinding.FragmentTournamentInfoBinding
@@ -43,7 +42,7 @@ class TournamentInfoFragment : Fragment() {
         val infoRecyclerView: RecyclerView = binding.tournamentInfoRecyclerView
         infoRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        viewModel.tournaments.observe(viewLifecycleOwner, Observer { tournaments ->
+        viewModel.tournaments.observe(viewLifecycleOwner) { tournaments ->
 
             val tournamentId = arguments?.getInt(ARG_TOURNAMENT_ID)
 
@@ -53,7 +52,7 @@ class TournamentInfoFragment : Fragment() {
             )
             infoRecyclerView.adapter = todayTournamentAdapter
 
-        })
+        }
 
         // Retrieve tournament name from arguments
 

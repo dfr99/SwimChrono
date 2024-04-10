@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.udc.apm.swimchrono.R
@@ -51,7 +50,7 @@ class MyTournamentsFragment : Fragment(),
         val incomingRecyclerView: RecyclerView = binding.tournamentsIncomingRecyclerList
         incomingRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        viewModel.tournaments.observe(viewLifecycleOwner, Observer { tournaments ->
+        viewModel.tournaments.observe(viewLifecycleOwner) { tournaments ->
 
             // Obtener la fecha actual en el formato "dd MMM yyyy"
             val currentDate = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH).format(Date())
@@ -65,7 +64,7 @@ class MyTournamentsFragment : Fragment(),
 
             val incomingTournamentAdapter = RecyclerTournamentAdapter(incomingTournaments, this)
             incomingRecyclerView.adapter = incomingTournamentAdapter
-        })
+        }
 
     }
 
