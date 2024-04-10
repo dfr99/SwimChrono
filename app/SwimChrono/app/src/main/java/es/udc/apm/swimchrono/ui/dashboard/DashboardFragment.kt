@@ -13,6 +13,9 @@ import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.databinding.FragmentDashboardBinding
 import es.udc.apm.swimchrono.ui.tournaments.TournamentInfoFragment
 import es.udc.apm.swimchrono.util.Logger
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class DashboardFragment : Fragment(), OnTournamentItemClickListener {
 
@@ -51,10 +54,14 @@ class DashboardFragment : Fragment(), OnTournamentItemClickListener {
         val incomingRecyclerView: RecyclerView = binding.tournamentsIncomingRecyclerList
         incomingRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        //FIXME: Make the date work
         viewModel.tournaments.observe(viewLifecycleOwner, Observer { tournaments ->
-            val todayTournaments = tournaments.filter { it.date == "05 May 2024" }
-            val incomingTournaments = tournaments.filter { it.date != "05 May 2024" }
+
+            // Obtener la fecha actual en el formato "dd MMM yyyy"
+            val currentDate = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH).format(Date())
+
+            // Filtrar los torneos para el día de hoy y los torneos futuros
+            val todayTournaments = tournaments.filter { it.date == currentDate }
+            val incomingTournaments = tournaments.filter { it.date > currentDate }
 
             val todayTournamentAdapter = RecyclerTournamentAdapter(todayTournaments, this)
             todayRecyclerView.adapter = todayTournamentAdapter

@@ -42,8 +42,7 @@ class TournamentInfoFragment : Fragment() {
 
         val infoRecyclerView: RecyclerView = binding.tournamentInfoRecyclerView
         infoRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        //FIXME: Make the date work
+        
         viewModel.tournaments.observe(viewLifecycleOwner, Observer { tournaments ->
 
             val tournamentName = arguments?.getString(ARG_TOURNAMENT_NAME)
