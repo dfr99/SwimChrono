@@ -28,14 +28,14 @@ class DashboardFragment : Fragment(), OnTournamentItemClickListener {
     private val binding get() = _binding!!
 
 
-    override fun onItemClick(tournamentName: String) {
+    override fun onItemClick(tournamentId: Int) {
         Logger.debug(
             tag,
-            "Performed click with args: [tournamentName = \"$tournamentName\"]"
+            "Performed click with args: [tournamentId = \"$tournamentId\"]"
         )
 
         // Crear una instancia del fragmento de información del torneo
-        val tournamentInfoFragment = TournamentInfoFragment.newInstance(tournamentName)
+        val tournamentInfoFragment = TournamentInfoFragment.newInstance(tournamentId)
 
         parentFragmentManager.beginTransaction()
             .replace(R.id.nav_host_fragment_activity_main, tournamentInfoFragment)

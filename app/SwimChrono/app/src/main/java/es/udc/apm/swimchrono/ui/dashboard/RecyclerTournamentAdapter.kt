@@ -10,7 +10,7 @@ import es.udc.apm.swimchrono.model.Tournament
 import es.udc.apm.swimchrono.util.Logger
 
 interface OnTournamentItemClickListener {
-    fun onItemClick(tournamentName: String)
+    fun onItemClick(tournamentId: Int)
 }
 
 class RecyclerTournamentAdapter(
@@ -36,13 +36,13 @@ class RecyclerTournamentAdapter(
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
                     // FIXME: This should be with the ID not the name
-                    val tournamentName =
-                        dataSet[position].name
+                    val tournamentId =
+                        dataSet[position].id
 
-                    listener?.onItemClick(tournamentName)
+                    listener?.onItemClick(tournamentId)
                     Logger.debug(
                         this.javaClass.name,
-                        "Listened click with args: [tournamentName = \"$tournamentName\"]"
+                        "Listened click with args: [tournamentId = \"$tournamentId\"]"
                     )
                 }
             }

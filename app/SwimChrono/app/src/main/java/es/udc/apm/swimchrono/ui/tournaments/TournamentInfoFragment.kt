@@ -15,12 +15,12 @@ import es.udc.apm.swimchrono.ui.dashboard.RecyclerTournamentAdapter
 class TournamentInfoFragment : Fragment() {
 
     companion object {
-        private const val ARG_TOURNAMENT_NAME = "tournamentName"
+        private const val ARG_TOURNAMENT_ID = "tournamentId"
 
-        fun newInstance(tournamentName: String): TournamentInfoFragment {
+        fun newInstance(tournamentId: Int): TournamentInfoFragment {
             val fragment = TournamentInfoFragment()
             val args = Bundle().apply {
-                putString(ARG_TOURNAMENT_NAME, tournamentName)
+                putInt(ARG_TOURNAMENT_ID, tournamentId)
             }
             fragment.arguments = args
             return fragment
@@ -42,13 +42,13 @@ class TournamentInfoFragment : Fragment() {
 
         val infoRecyclerView: RecyclerView = binding.tournamentInfoRecyclerView
         infoRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        
+
         viewModel.tournaments.observe(viewLifecycleOwner, Observer { tournaments ->
 
-            val tournamentName = arguments?.getString(ARG_TOURNAMENT_NAME)
+            val tournamentId = arguments?.getInt(ARG_TOURNAMENT_ID)
 
             val todayTournamentAdapter = RecyclerTournamentAdapter(
-                tournaments.filter { tournament -> tournament.name == tournamentName },
+                tournaments.filter { tournament -> tournament.id == tournamentId },
                 null
             )
             infoRecyclerView.adapter = todayTournamentAdapter
