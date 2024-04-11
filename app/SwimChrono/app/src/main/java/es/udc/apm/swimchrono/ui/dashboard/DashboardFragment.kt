@@ -4,31 +4,37 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.databinding.FragmentDashboardBinding
 import es.udc.apm.swimchrono.ui.tournaments.TournamentInfoFragment
 import es.udc.apm.swimchrono.util.Logger
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class DashboardFragment : Fragment(), OnTournamentItemClickListener {
+
+    private var tag = this.javaClass.name
+
+    private val viewModel: DashboardViewModel by viewModels()
 
     private var _binding: FragmentDashboardBinding? = null
 
     private val binding get() = _binding!!
 
 
-    override fun onItemClick(tournamentName: String) {
+    override fun onItemClick(tournamentId: Int) {
         Logger.debug(
-            this.javaClass.name,
-            "Performed click with args: [tournamentName = \"$tournamentName\"]"
+            tag,
+            "Performed click with args: [tournamentId = \"$tournamentId\"]"
         )
 
         // Crear una instancia del fragmento de información del torneo
-        val tournamentInfoFragment = TournamentInfoFragment.newInstance(tournamentName)
+        val tournamentInfoFragment = TournamentInfoFragment.newInstance(tournamentId)
 
         parentFragmentManager.beginTransaction()
             .replace(R.id.nav_host_fragment_activity_main, tournamentInfoFragment)
@@ -36,60 +42,48 @@ class DashboardFragment : Fragment(), OnTournamentItemClickListener {
             .commit()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.getTournaments()
+
+        val todayRecyclerView: RecyclerView = binding.tournamentsTodayRecyclerList
+        todayRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        val incomingRecyclerView: RecyclerView = binding.tournamentsIncomingRecyclerList
+        incomingRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        viewModel.tournaments.observe(viewLifecycleOwner) { tournaments ->
+
+
+            val currentDate = Date()
+            val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
+
+
+            // Filtrar los torneos para el día de hoy y los torneos futuros
+            val todayTournaments =
+                tournaments.filter { dateFormat.format(it.date!!) == dateFormat.format(currentDate) }
+            val incomingTournaments =
+                tournaments.filter { it.date!!.after(currentDate) }
+
+
+            val todayTournamentAdapter = RecyclerTournamentAdapter(todayTournaments, this)
+            todayRecyclerView.adapter = todayTournamentAdapter
+
+            val incomingTournamentAdapter = RecyclerTournamentAdapter(incomingTournaments, this)
+            incomingRecyclerView.adapter = incomingTournamentAdapter
+        }
+
+    }
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
-            ViewModelProvider(this).get(DashboardViewModel::class.java)
-
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-
-
-        val todayTournaments = arrayOf(
-            arrayOf("1", "Local Tournament", "Tournament 1", "5 May 2024", "100", "Lugo"),
-            arrayOf("2", "Regional Tournament", "Tournament 2", "5 May 2024", "150", "Coruña"),
-            arrayOf("3", "National Tournament", "Tournament 3", "5 May 2024", "200", "Madrid"),
-            arrayOf("4", "National Tournament", "Tournament 4", "5 May 2024", "200", "Madrid")
-        )
-
-
-        val todayTournamentAdapter =
-            RecyclerTournamentAdapter(todayTournaments, this)
-
-
-        val todayRecyclerView: RecyclerView =
-            root.findViewById(R.id.tournaments_today_recycler_list)
-
-        todayRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext())
-        todayRecyclerView.adapter = todayTournamentAdapter
-
-        val incomingTournaments = arrayOf(
-            arrayOf("11", "Local Tournament", "Tournament A", "7 May 2024", "100", "Lugo"),
-            arrayOf("22", "Regional Tournament", "Tournament B", "10 May 2024", "150", "Coruña"),
-            arrayOf("33", "National Tournament", "Tournament C", "15 May 2024", "200", "Madrid"),
-            arrayOf("44", "Local Tournament", "Tournament D", "20 May 2024", "100", "Lugo"),
-            arrayOf("55", "Regional Tournament", "Tournament E", "20 May 2024", "150", "Coruña"),
-            arrayOf("66", "National Tournament", "Tournament F", "25 May 2024", "200", "Madrid")
-        )
-
-        val incomingTournamentAdapter =
-            RecyclerTournamentAdapter(incomingTournaments, this)
-
-        val incomingRecyclerView: RecyclerView =
-            root.findViewById(R.id.tournaments_incoming_recycler_list)
-        incomingRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext())
-        incomingRecyclerView.adapter = incomingTournamentAdapter
-
-        val textView: TextView = binding.dashboardTournamentsToday
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        return binding.root
     }
 
     override fun onDestroyView() {

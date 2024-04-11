@@ -6,12 +6,11 @@
 
 En nuestra aplicación _SwimChrono_ se han implementado las siguientes actividades por donde el usuario podrá navegar.
 
-
 <!--  Actividad principal -->
 
 ### MainActivity
 
-En el MainActivity se ha decidido implementar una pantalla principal en nuestra aplicación para que el usuario pueda ver los fragmentos que se explicarán en el siguiente apartado. Esta actividad contiene en la parte inferior una barra de navegación (*navigation_bar*) donde poder cambiar de fragment a otro sin salir del menú principal.
+En el MainActivity se ha decidido implementar una pantalla principal en nuestra aplicación para que el usuario pueda ver los fragmentos que se explicarán en el siguiente apartado. Esta actividad contiene en la parte inferior una barra de navegación (_navigation_bar_) donde poder cambiar de fragment a otro sin salir del menú principal.
 
 <!-- Cada unha das opcións de perfil -->
 ### Actividades Profile
@@ -22,7 +21,6 @@ Estas son las actividades utilizadas para configurar los datos del usuario:
 - Pantalla de _Mi QR_
 - Pantalla de _Notificaciones_
 - Pantalla de _Configuración_
-
 
 <!-- Cronómetro... para más adelante XD-->
 
@@ -91,31 +89,21 @@ Una vez que el servicio ApiService reciba los datos de la API de nadadores, los 
 
 Este enfoque permite separar las operaciones de red de la lógica de la interfaz de usuario, lo que hace que el código sea más modular y fácil de mantener.
 
-A continuación se muestra un código _boilerplate_ de la posible implementación del servicio en la aplicación. Se muestra la llamda de getNadadores() que es la encargada de obtener la lista de todos los nadadores.
+A continuación se muestra la primera implementación del servicio dn la aplicación. Se muestra la llamada getTournaments() que es la encargada de obtener la lista de todos los torneos.
 
 ```kotlin
 class ApiService : Service() {
+
+    private val tag = this.javaClass.name
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
 
-    override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        when (intent?.action) {
-            ACTION_GET_NADADORES -> getNadadores()
-            ACTION_POST_NADADOR -> {
-                val nadador = intent.getStringExtra(EXTRA_NADADOR)
-                postNadador(nadador)
-            }
-            else -> Logger.error(TAG, "Acción no válida")
-        }
-        return START_NOT_STICKY
-    }
-
-    private fun getNadadores() {
+    fun getTournaments(callback: ApiServiceCallback) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val url = URL("https://swimchrono-api.url/nadadores")
+                val url = URL("https://swimcrhono-api-55mh.onrender.com/tournaments")
                 val connection = url.openConnection() as HttpURLConnection
                 connection.requestMethod = "GET"
 
@@ -124,20 +112,17 @@ class ApiService : Service() {
                     val inputStream = connection.inputStream
                     val response = inputStream.bufferedReader().use { it.readText() }
                     inputStream.close()
-                    Logger.debug(TAG, "Response: $response")
+                    callback.onTournamentsReceived(response)
+                    Logger.debug(tag, "Response: $response")
                 } else {
-                    Logger.error(TAG, "Error en la respuesta: $responseCode")
+                    Logger.error(tag, "Error en la respuesta: $responseCode")
                 }
             } catch (e: Exception) {
-                Logger.e(TAG, "Error al realizar la solicitud GET", e)
+                Logger.error(tag, "Error al realizar la solicitud GET $e")
             }
         }
     }
 
-    companion object {
-        private const val TAG = "ApiService"
-        const val ACTION_GET_NADADORES = "com.example.app.GET_NADADORES"
-    }
 }
 
 ```
