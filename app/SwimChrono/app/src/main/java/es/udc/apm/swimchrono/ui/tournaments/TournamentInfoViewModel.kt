@@ -8,6 +8,8 @@ import es.udc.apm.swimchrono.services.ApiService
 import es.udc.apm.swimchrono.services.ApiServiceCallback
 import es.udc.apm.swimchrono.util.Logger
 import org.json.JSONArray
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 class TournamentInfoViewModel : ViewModel(), ApiServiceCallback {
 
@@ -38,7 +40,8 @@ class TournamentInfoViewModel : ViewModel(), ApiServiceCallback {
             val id = jsonObject.getInt("ID")
             val type = jsonObject.getString("TIPO")
             val name = jsonObject.getString("NOMBRE")
-            val date = jsonObject.getString("FECHA")
+            val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
+            val date = dateFormat.parse(jsonObject.getString("FECHA"))
             val participants = jsonObject.getInt("NÚMERO PARTICIPANTES")
             val location = jsonObject.getString("LUGAR")
             val races = emptyList<String>() //FIXME: Crear un objeto Race

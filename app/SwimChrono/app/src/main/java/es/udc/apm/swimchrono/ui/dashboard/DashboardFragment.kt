@@ -55,12 +55,17 @@ class DashboardFragment : Fragment(), OnTournamentItemClickListener {
 
         viewModel.tournaments.observe(viewLifecycleOwner) { tournaments ->
 
-            // Obtener la fecha actual en el formato "dd MMM yyyy"
-            val currentDate = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH).format(Date())
+
+            val currentDate = Date()
+            val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
+
 
             // Filtrar los torneos para el día de hoy y los torneos futuros
-            val todayTournaments = tournaments.filter { it.date == currentDate }
-            val incomingTournaments = tournaments.filter { it.date > currentDate }
+            val todayTournaments =
+                tournaments.filter { dateFormat.format(it.date!!) == dateFormat.format(currentDate) }
+            val incomingTournaments =
+                tournaments.filter { it.date!!.after(currentDate) }
+
 
             val todayTournamentAdapter = RecyclerTournamentAdapter(todayTournaments, this)
             todayRecyclerView.adapter = todayTournamentAdapter

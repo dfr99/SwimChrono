@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.model.Tournament
 import es.udc.apm.swimchrono.util.Logger
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 interface OnTournamentItemClickListener {
     fun onItemClick(tournamentId: Int)
@@ -60,7 +62,9 @@ class RecyclerTournamentAdapter(
         val tournament = dataSet[position]
         holder.tournamentTagTextView.text = tournament.type
         holder.tournamentNameTextView.text = tournament.name
-        holder.tournamentDateTextView.text = tournament.date
+
+        val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
+        holder.tournamentDateTextView.text = dateFormat.format(tournament.date!!)
         holder.tournamentPeopleTextView.text = tournament.participants.toString()
         holder.tournamentLocationTextView.text = tournament.location
     }
