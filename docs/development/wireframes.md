@@ -45,7 +45,15 @@ En esta pantalla, los **nadadores y entrenadores** podrán explorar información
 
 Esta sección estará destinada a los **cronometradores oficiales** para registrar y gestionar los tiempos de los participantes en los eventos.
 
+#### Disposición en vertical
+
 ![Cronometrador Oficial](../images/wireframes/Referee.png)
+
+#### Disposición en horizontal
+
+![Races](../images/wireframes/races.png)
+
+![Timer](../images/wireframes/timer.png)
 
 ### 5. Mi Perfil
 
