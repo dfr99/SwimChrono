@@ -2,7 +2,6 @@ package es.udc.apm.swimchrono.ui.profile
 
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,6 @@ import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
-    private lateinit var sharedPreferences: SharedPreferences
 
     // Declaración de la variable de enlace para acceder a las vistas del diseño del fragmento
     private var _binding: FragmentProfileBinding? = null
@@ -74,7 +72,7 @@ class ProfileFragment : Fragment() {
             startActivity(intentSettings)
         }
 
-        binding.buttonProfileLogout?.setOnClickListener {
+        binding.buttonProfileLogout.setOnClickListener {
             Toast.makeText(requireContext(), "Goodbye", Toast.LENGTH_SHORT).show()
             val sharedPreferences =
                 requireContext().getSharedPreferences("user_data", Context.MODE_PRIVATE)
