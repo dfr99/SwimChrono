@@ -5,12 +5,12 @@
     android:padding="16dp">
 
     <EditText
-        android:id="@+id/username_edit_text"
+        android:id="@+id/email_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autofillHints="email"
         android:hint="@string/example_email"
-        android:inputType="text" />
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/password_edit_text"
@@ -25,5 +25,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/login" />
+
+    <TextView
+        android:id="@+id/error_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="8dp"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
+        android:paddingBottom="8dp"
+        android:textColor="@android:color/holo_red_dark"
+        android:visibility="gone" />
 
 </LinearLayout>

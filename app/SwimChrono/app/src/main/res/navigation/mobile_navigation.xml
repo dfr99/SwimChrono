@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/navigation_login"
-        android:name="es.udc.apm.swimchrono.ui.profile.LoginFragment"
+        android:name="es.udc.apm.swimchrono.ui.login.LoginFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_login">
         <action
