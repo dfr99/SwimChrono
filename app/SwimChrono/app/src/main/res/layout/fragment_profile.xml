@@ -62,9 +62,21 @@
             android:layout_height="60dp"
             android:drawableLeft="@drawable/icon_settings"
             android:gravity="center"
-
             android:text="@string/settings_title"
             android:textSize="16sp" />
+
+
+        <Button
+            android:id="@+id/button_profile_logout"
+            android:layout_width="214dp"
+            android:layout_height="60dp"
+            android:backgroundTint="@color/chrono_red"
+            android:drawableLeft="@drawable/baseline_logout_24"
+            android:gravity="center"
+            android:text="@string/logout"
+            android:textSize="16sp" />
+
+
     </LinearLayout>
 
 

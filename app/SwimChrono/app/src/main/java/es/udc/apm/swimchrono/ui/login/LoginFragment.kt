@@ -1,5 +1,7 @@
 package es.udc.apm.swimchrono.ui.login
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +28,8 @@ class LoginFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var apiService: ApiService
 
+    private lateinit var sharedPreferences: SharedPreferences
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,6 +38,7 @@ class LoginFragment : Fragment() {
     ): View {
         apiService = ApiService()
         apiService.onCreate()
+        sharedPreferences = requireContext().getSharedPreferences("user_data", Context.MODE_PRIVATE)
 
         val loginViewModel =
             ViewModelProvider(this).get(LoginViewModel::class.java)
@@ -42,7 +47,14 @@ class LoginFragment : Fragment() {
         val root: View = binding.root
 
         //FIXME: Es necesario recordar si el usuario se ha logueado correctamente.
-
+        if (sharedPreferences.getString("userId", null) != "") {
+            Toast.makeText(
+                requireContext(),
+                "Successfully logged with cache",
+                Toast.LENGTH_SHORT
+            ).show()
+            navigateToProfile()
+        }
         binding.loginButton.setOnClickListener {
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
@@ -54,6 +66,7 @@ class LoginFragment : Fragment() {
                         is ApiService.LoginResult.Success -> {
                             val userId = loginResult.userId
                             Logger.debug(tag, "userID: $userId")
+                            saveUserIdToSharedPreferences(userId)
                             Toast.makeText(
                                 requireContext(),
                                 "Successfully logged",
@@ -85,15 +98,22 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateToProfile() {
-        // Navegar al fragmento de perfil
         val navController = findNavController()
         navController.navigate(R.id.action_profile_to_profile_fragment)
+
     }
+
 
     private fun showError(errorMessage: String) {
         binding.errorTextView.text = errorMessage
         binding.errorTextView.visibility = View.VISIBLE
         Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+    }
+
+    private fun saveUserIdToSharedPreferences(userId: String) {
+        val editor = sharedPreferences.edit()
+        editor.putString("userId", userId)
+        editor.apply()
     }
 
 }
