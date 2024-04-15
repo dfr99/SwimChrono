@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import es.udc.apm.swimchrono.model.LoginResult
 import es.udc.apm.swimchrono.util.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -65,13 +66,6 @@ class ApiService : Service() {
 
     private val auth = FirebaseAuth.getInstance()
 
-    sealed class LoginResult {
-        data class Success(val userId: String) : LoginResult()
-        object InvalidEmail : LoginResult()
-        object InvalidPassword : LoginResult()
-        object NetworkError : LoginResult()
-        object UnknownError : LoginResult()
-    }
 
     suspend fun login(email: String, password: String): LoginResult {
         return try {

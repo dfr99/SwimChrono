@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.databinding.FragmentLoginBinding
+import es.udc.apm.swimchrono.model.LoginResult
 import es.udc.apm.swimchrono.services.ApiService
 import es.udc.apm.swimchrono.util.Logger
 import kotlinx.coroutines.Dispatchers
@@ -63,7 +64,7 @@ class LoginFragment : Fragment() {
                 val loginResult = apiService.login(email, password)
                 withContext(Dispatchers.Main) {
                     when (loginResult) {
-                        is ApiService.LoginResult.Success -> {
+                        is LoginResult.Success -> {
                             val userId = loginResult.userId
                             Logger.debug(tag, "userID: $userId")
                             saveUserIdToSharedPreferences(userId)
@@ -75,19 +76,19 @@ class LoginFragment : Fragment() {
                             navigateToProfile()
                         }
 
-                        ApiService.LoginResult.InvalidEmail -> {
+                        LoginResult.InvalidEmail -> {
                             showError("Invalid email format")
                         }
 
-                        ApiService.LoginResult.InvalidPassword -> {
+                        LoginResult.InvalidPassword -> {
                             showError("Invalid password")
                         }
 
-                        ApiService.LoginResult.NetworkError -> {
+                        LoginResult.NetworkError -> {
                             showError("Network error occurred")
                         }
 
-                        ApiService.LoginResult.UnknownError -> {
+                        LoginResult.UnknownError -> {
                             showError("Please insert a valid email")
                         }
                     }
