@@ -57,4 +57,7 @@
     <string name="stop">Stop</string>
     <string name="lap">Lap</string>
     <string name="reset">Reset</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
 </resources>

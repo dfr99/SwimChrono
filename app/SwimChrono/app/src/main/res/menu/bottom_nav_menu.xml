@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_navigation_menu">
 
 
     <item
@@ -23,7 +24,7 @@
         android:title="@string/title_club" />
 
     <item
-        android:id="@+id/navigation_profile"
+        android:id="@+id/navigation_login"
         android:icon="@drawable/icon_profile"
         android:title="@string/title_profile" />
 

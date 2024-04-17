@@ -20,30 +20,19 @@ A continuación, se presentan las primeras implementaciones de los casos de uso 
 
 ### 4. Mi Perfil
 
-#### Fragment
-Antes:
+#### Login
 
-![Mi Perfil V1](../images/wireframes-implementation/fragment_profile_V1.png)
+![login](../images/wireframes-implementation/profile_login.png)
 
-Ahora:
+#### Mi perfil
 
 ![Mi Perfil V2](../images/wireframes-implementation/fragment_profile_V2.png)
 
 #### Información personal
-Antes:
-
-![Mi informacion personal V1](../images/wireframes-implementation/profile_personalinfo_V1.png)
-
-Ahora:
 
 ![Mi informacion personal V2](../images/wireframes-implementation/profile_personalinfo_V2.png)
 
 #### Mi QR
-Antes:
-
-![Mi Qr V1](../images/wireframes-implementation/profile_my_qr_V1.png)
-
-Ahora:
 
 ![Mi Qr V2](../images/wireframes-implementation/profile_my_qr_V2.png)
 
