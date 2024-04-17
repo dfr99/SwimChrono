@@ -1,5 +1,6 @@
 package es.udc.apm.swimchrono.ui.profile
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +10,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.databinding.FragmentProfileBinding
 
 class ProfileFragment : Fragment() {
@@ -23,7 +26,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         // Crear una instancia del ViewModel asociado a este fragmento
         val profileViewModel =
@@ -59,13 +62,23 @@ class ProfileFragment : Fragment() {
         }
         binding.buttonNotifications.setOnClickListener {
             Toast.makeText(requireContext(), "Notifications", Toast.LENGTH_SHORT).show()
-            val intentNotifications = Intent(requireContext(), ProfileNotificationsActivity::class.java)
+            val intentNotifications =
+                Intent(requireContext(), ProfileNotificationsActivity::class.java)
             startActivity(intentNotifications)
         }
         binding.buttonProfileSettings.setOnClickListener {
             Toast.makeText(requireContext(), "Settings", Toast.LENGTH_SHORT).show()
             val intentSettings = Intent(requireContext(), ProfileSettingsActivity::class.java)
             startActivity(intentSettings)
+        }
+
+        binding.buttonProfileLogout.setOnClickListener {
+            Toast.makeText(requireContext(), "Goodbye", Toast.LENGTH_SHORT).show()
+            val sharedPreferences =
+                requireContext().getSharedPreferences("user_data", Context.MODE_PRIVATE)
+            sharedPreferences.edit().putString("userId", "").apply()
+            val navController = findNavController()
+            navController.navigate(R.id.navigation_login)
         }
 
     }

@@ -6,7 +6,7 @@ Para la creación de los siguientes wireframes se ha seguido una paleta de color
 
 ![StyleSheet](../images/wireframes/Brand%20Style%20Sheet.png)
 
-## Wireframes de los principales casos de uso (vertical)
+## Wireframes de los principales casos de uso
 
 A continuación, se presentan los bocetos de las diferentes pantallas de la aplicación.
 Se muestran tanto las pantallas

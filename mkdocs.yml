@@ -89,18 +89,21 @@ markdown_extensions:
 
 nav:
     - Inicio: index.md
+    - Contribuciones: contributing/index.md
     - Público Objetivo: target.md
     - Estudio de mercado: market-study.md
-    - Guia de Usuario:
-          - Primeros pasos: user-guide/getting-started.md
-          - Herramientas: user-guide/tools.md
     - Documentación técnica:
           - Actores: development/actors.md
           - Arquitectura: development/architecture.md
-          - Integraciones:
-                - Bluetooth: integrations/bluetooth.md
           - Wireframes:
                 - Diseño: development/wireframes.md
                 - Implementación: development/wireframes-implementation.md
-    - Contribuciones: contributing/index.md
     - Componentes: components/index.md
+    - Integraciones:
+       - Bluetooth: integrations/bluetooth.md
+       - Almacenamiento: integrations/storage.md
+       - Firebase: integrations/firebase.md
+    - Guia de Usuario:
+          - Primeros pasos: user-guide/getting-started.md
+          - Herramientas: user-guide/tools.md
+
