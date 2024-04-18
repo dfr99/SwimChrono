@@ -40,6 +40,7 @@
                     android:layout_marginEnd="15dp"
                     android:textSize="16sp"
                     style="@style/AppTextStyle.Bold"
+                    android:textAlignment="center"
                     android:text="" />
             </TableRow>
             <TableRow
@@ -59,6 +60,7 @@
                     android:layout_marginEnd="15dp"
                     android:textSize="16sp"
                     style="@style/AppTextStyle.Bold"
+                    android:textAlignment="center"
                     android:text="" />
             </TableRow>
             <TableRow
@@ -78,6 +80,7 @@
                     style="@style/AppTextStyle.Bold"
                     android:textSize="16sp"
                     android:layout_marginEnd="15dp"
+                    android:textAlignment="center"
                     android:text="" />
             </TableRow>
             <TableRow
@@ -97,6 +100,7 @@
                     style="@style/AppTextStyle.Bold"
                     android:textSize="16sp"
                     android:layout_marginEnd="15dp"
+                    android:textAlignment="center"
                     android:text="" />
             </TableRow>
             <TableRow
@@ -116,6 +120,7 @@
                     style="@style/AppTextStyle.Bold"
                     android:textSize="16sp"
                     android:layout_marginEnd="15dp"
+                    android:textAlignment="center"
                     android:text="" />
             </TableRow>
             <TableRow
@@ -135,6 +140,7 @@
                     style="@style/AppTextStyle.Bold"
                     android:layout_marginEnd="15dp"
                     android:textSize="16sp"
+                    android:textAlignment="center"
                     android:text="" />
             </TableRow>
         </TableLayout>
