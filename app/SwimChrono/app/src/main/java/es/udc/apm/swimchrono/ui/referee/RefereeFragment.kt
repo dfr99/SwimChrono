@@ -37,7 +37,6 @@ class RefereeFragment : Fragment() {
 
         val races = arrayOf (
             Race(id = 1, swimmer = "David", club = "SAL", race = "100 medley", heat = 6, lane = 3, hour = Date()),
-            Race(id = 2, swimmer = "Adrian", club = "AD Fogar", race = "100 medley", heat = 2, lane = 5, hour = Date())
         )
 
         val racesList = RecyclerRacesListAdapter(races)
