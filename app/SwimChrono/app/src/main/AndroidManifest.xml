@@ -34,7 +34,9 @@
         <activity
             android:name=".ui.profile.ProfileInfoActivity"
             android:exported="false" />
-
+        <activity
+            android:name=".ui.referee.TimerActivity"
+            android:exported="false" />
         <service android:name=".services.ApiService" />
     </application>
 

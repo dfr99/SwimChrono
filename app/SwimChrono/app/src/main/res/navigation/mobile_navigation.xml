@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
+        android:id="@+id/navigation_referee"
+        android:name="es.udc.apm.swimchrono.ui.referee.RefereeFragment"
+        android:label="@string/referee"
+        tools:layout="@layout/fragment_referee"
+        />
+    <fragment
         android:id="@+id/navigation_club"
         android:name="es.udc.apm.swimchrono.ui.club.ClubFragment"
         android:label="@string/title_club"

@@ -9,6 +9,11 @@
         android:title="@string/title_dashboard" />
 
     <item
+        android:id="@+id/navigation_referee"
+        android:icon="@drawable/icon_referee"
+        android:title="@string/referee"
+        />
+    <item
         android:id="@+id/navigation_tournaments"
         android:icon="@drawable/icon_tournaments"
         android:title="@string/title_tournaments" />
