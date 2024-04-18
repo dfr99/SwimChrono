@@ -34,7 +34,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:textSize="32sp" />
+        android:textSize="48sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -51,19 +51,6 @@
             android:backgroundTint="#098797"
             android:text="@string/start"
             android:textColor="#000000" />
-
-        <Button
-            android:id="@+id/lapButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:backgroundTint="#098797"
-            android:layout_marginBottom="5dp"
-            android:text="@string/lap"
-            android:visibility="gone"
-            style="@style/AppTextStyle.Bold"
-            android:textColor="#000000" />
-
     </LinearLayout>
 
 </LinearLayout>

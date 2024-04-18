@@ -24,37 +24,23 @@ class TimerActivity : AppCompatActivity() {
         val buttonExit = findViewById<ImageView>(R.id.ivBackButton)
         val chronometer = findViewById<Chronometer>(R.id.chronometer)
         val startStopButton = findViewById<Button>(R.id.startStopButton)
-        val lapButton = findViewById<Button>(R.id.lapButton)
 
         buttonExit.setOnClickListener {
             Toast.makeText(this, "exit", Toast.LENGTH_SHORT).show()
             finish()
         }
 
-
         startStopButton.setOnClickListener {
             if (!isRunning) {
                 Toast.makeText(this, "Start Chrono", Toast.LENGTH_SHORT).show()
-                lapButton.visibility = Button.VISIBLE
             } else if (isRunning) {
                 Toast.makeText(this, "Stop Chrono", Toast.LENGTH_SHORT).show()
-                lapButton.visibility = Button.GONE
             }
-            toggleChronometer(chronometer, startStopButton)
+            toggleStartStop(chronometer, startStopButton)
         }
-
-        lapButton.setOnClickListener {
-            if (!isRunning) {
-                Toast.makeText(this, "Make a lap", Toast.LENGTH_SHORT).show()
-            } else if (isRunning) {
-                Toast.makeText(this, "Reset Chrono", Toast.LENGTH_SHORT).show()
-            }
-            captureLap(chronometer)
-        }
-
     }
 
-    private fun toggleChronometer(chronometer: Chronometer, startStopButton: Button) {
+    private fun toggleStartStop(chronometer: Chronometer, startStopButton: Button) {
         if (isRunning) {
             stopChronometer(chronometer)
             startStopButton.text = getString(R.string.start)
@@ -63,7 +49,6 @@ class TimerActivity : AppCompatActivity() {
             startChronometer(chronometer)
             startStopButton.text = getString(R.string.stop)
             startStopButton.setBackgroundColor(Color.argb(255,255,0,0))
-
         }
 
         isRunning = !isRunning
@@ -80,23 +65,5 @@ class TimerActivity : AppCompatActivity() {
         if (isRunning) {
             chronometer.stop()
         }
-    }
-
-
-    private fun captureLap(chronometer: Chronometer) {
-        val elapsedMillis = SystemClock.elapsedRealtime() - chronometer.base
-        val hours = (elapsedMillis / 3600000).toInt()
-        val minutes = ((elapsedMillis - hours * 3600000) / 60000).toInt()
-        val seconds = ((elapsedMillis - hours * 3600000 - minutes * 60000) / 1000).toInt()
-        val millis = (elapsedMillis - hours * 3600000 - minutes * 60000 - seconds * 1000).toInt()
-
-        val lapTime = String.format(
-            "%02d:%02d:%02d.%03d", hours, minutes, seconds, millis
-        )
-
-        val lapText = "Lap $lapNumber: $lapTime\n"
-        lapTimesText.append(lapText)
-
-        lapNumber++
     }
 }
