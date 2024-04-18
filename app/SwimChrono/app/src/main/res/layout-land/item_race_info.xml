@@ -16,8 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="false"
-        android:focusable="true"
-        android:background="@color/turquoise_700">
+        android:focusable="true">
 
         <TableLayout
             android:layout_width="match_parent"
@@ -30,10 +29,57 @@
 
                 <TextView
                     android:padding="8dp"
-                    android:layout_marginStart="15dp"
                     android:textSize="20sp"
+                    android:textAlignment="center"
+                    android:textColor="@color/chrono_white"
                     style="@style/AppTextStyle.Bold"
                     android:text="@string/swimmer" />
+
+                <TextView
+                    android:padding="8dp"
+                    android:textSize="20sp"
+                    android:textAlignment="center"
+                    style="@style/AppTextStyle.Bold"
+                    android:textColor="@color/chrono_white"
+                    android:text="@string/club" />
+
+                <TextView
+                    android:padding="8dp"
+                    android:text="@string/heat"
+                    android:textSize="20sp"
+                    android:textAlignment="center"
+                    android:textColor="@color/chrono_white"
+                    style="@style/AppTextStyle.Bold" />
+
+                <TextView
+                    android:padding="8dp"
+                    android:textSize="20sp"
+                    style="@style/AppTextStyle.Bold"
+                    android:textAlignment="center"
+                    android:textColor="@color/chrono_white"
+                    android:text="@string/lane" />
+
+                <TextView
+                    android:padding="8dp"
+                    android:text="@string/race"
+                    android:textSize="20sp"
+                    android:textAlignment="center"
+                    android:textColor="@color/chrono_white"
+                    style="@style/AppTextStyle.Bold" />
+
+                <TextView
+                    android:padding="8dp"
+                    style="@style/AppTextStyle.Bold"
+                    android:textSize="20sp"
+                    android:textAlignment="center"
+                    android:textColor="@color/chrono_white"
+                    android:text="@string/hour" />
+
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/turquoise_700">
 
                 <TextView
                     android:id="@+id/swimmer"
@@ -41,18 +87,8 @@
                     android:layout_marginEnd="15dp"
                     android:textSize="16sp"
                     style="@style/AppTextStyle.Bold"
-                    android:textAlignment="center" android:text="" />
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:padding="8dp"
-                    android:layout_marginStart="15dp"
-                    android:textSize="20sp"
-                    style="@style/AppTextStyle.Bold"
-                    android:text="@string/club" />
+                    android:textAlignment="center"
+                    android:text="" />
 
                 <TextView
                     android:id="@+id/club"
@@ -62,17 +98,6 @@
                     style="@style/AppTextStyle.Bold"
                     android:textAlignment="center"
                     android:text="" />
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:padding="8dp"
-                    android:text="@string/race"
-                    android:layout_marginStart="15dp"
-                    android:textSize="20sp"
-                    style="@style/AppTextStyle.Bold" />
 
                 <TextView
                     android:id="@+id/race"
@@ -82,17 +107,6 @@
                     android:layout_marginEnd="15dp"
                     android:textAlignment="center"
                     android:text="" />
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:padding="8dp"
-                    android:layout_marginStart="15dp"
-                    android:textSize="20sp"
-                    android:text="@string/heat"
-                    style="@style/AppTextStyle.Bold" />
 
                 <TextView
                     android:id="@+id/heat"
@@ -102,17 +116,6 @@
                     android:layout_marginEnd="15dp"
                     android:textAlignment="center"
                     android:text="" />
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:padding="8dp"
-                    android:layout_marginStart="15dp"
-                    android:textSize="20sp"
-                    style="@style/AppTextStyle.Bold"
-                    android:text="@string/lane" />
 
                 <TextView
                     android:id="@+id/lane"
@@ -122,17 +125,6 @@
                     android:layout_marginEnd="15dp"
                     android:textAlignment="center"
                     android:text="" />
-            </TableRow>
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:padding="8dp"
-                    android:layout_marginStart="15dp"
-                    style="@style/AppTextStyle.Bold"
-                    android:textSize="20sp"
-                    android:text="@string/hour" />
 
                 <TextView
                     android:id="@+id/hour"
