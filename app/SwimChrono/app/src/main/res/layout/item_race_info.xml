@@ -16,14 +16,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="false"
-        android:focusable="true">
+        android:focusable="true"
+        android:background="@color/turquoise_700">
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:stretchColumns="*"
-            android:divider="@color/black"
-            android:showDividers="middle">
+            android:stretchColumns="*">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -32,7 +31,7 @@
                 <TextView
                     android:padding="8dp"
                     android:layout_marginStart="15dp"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     style="@style/AppTextStyle.Bold"
                     android:text="@string/swimmer" />
 
@@ -42,8 +41,7 @@
                     android:layout_marginEnd="15dp"
                     android:textSize="16sp"
                     style="@style/AppTextStyle.Bold"
-                    android:textAlignment="center"
-                    android:text="" />
+                    android:textAlignment="center" android:text="" />
             </TableRow>
             <TableRow
                 android:layout_width="match_parent"
@@ -52,7 +50,7 @@
                 <TextView
                     android:padding="8dp"
                     android:layout_marginStart="15dp"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     style="@style/AppTextStyle.Bold"
                     android:text="@string/club" />
 
@@ -73,7 +71,7 @@
                     android:padding="8dp"
                     android:text="@string/race"
                     android:layout_marginStart="15dp"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     style="@style/AppTextStyle.Bold" />
 
                 <TextView
@@ -92,7 +90,7 @@
                 <TextView
                     android:padding="8dp"
                     android:layout_marginStart="15dp"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:text="@string/heat"
                     style="@style/AppTextStyle.Bold" />
 
@@ -112,7 +110,7 @@
                 <TextView
                     android:padding="8dp"
                     android:layout_marginStart="15dp"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     style="@style/AppTextStyle.Bold"
                     android:text="@string/lane" />
 
@@ -133,7 +131,7 @@
                     android:padding="8dp"
                     android:layout_marginStart="15dp"
                     style="@style/AppTextStyle.Bold"
-                    android:textSize="16sp"
+                    android:textSize="20sp"
                     android:text="@string/hour" />
 
                 <TextView
