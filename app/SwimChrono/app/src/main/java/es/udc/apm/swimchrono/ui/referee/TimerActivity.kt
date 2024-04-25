@@ -39,7 +39,9 @@ class TimerActivity : AppCompatActivity() {
 
         /** Eliminar cuando se arregle el Scan en el fragment**/
         val auxScanButton = findViewById<Button>(R.id.botonScanQRaux)
-        enable_chronno = true /** Solo para pruebas**/
+
+        // Variable de prueba para deshabilitar la necesidad de escanear antes de usar el crono
+        //enable_chronno = true /** Solo para pruebas**/
 
 
         buttonExit.setOnClickListener {
