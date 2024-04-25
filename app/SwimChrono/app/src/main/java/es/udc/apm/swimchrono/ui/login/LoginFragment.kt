@@ -47,8 +47,8 @@ class LoginFragment : Fragment() {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        //FIXME: Es necesario recordar si el usuario se ha logueado correctamente.
-        if (sharedPreferences.getString("userId", null) != "") {
+        val userId = sharedPreferences.getString("userId", null);
+        if (userId != null && userId != "") {
             Toast.makeText(
                 requireContext(),
                 "Successfully logged with cache",
