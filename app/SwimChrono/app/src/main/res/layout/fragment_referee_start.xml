@@ -51,6 +51,15 @@
             android:backgroundTint="#098797"
             android:text="@string/start"
             android:textColor="#000000" />
+        <Button
+            android:id="@+id/botonScanQRaux"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="#098797"
+            android:text="@string/scan_qr_button"
+            android:textColor="#000000" />
+        <!-- Acordarse de añadirlo en el layout LAND-->
     </LinearLayout>
 
 </LinearLayout>
