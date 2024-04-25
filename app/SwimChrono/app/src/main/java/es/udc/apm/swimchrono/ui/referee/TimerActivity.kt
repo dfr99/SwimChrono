@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.os.SystemClock
 import android.widget.Button
 import android.widget.Chronometer
@@ -12,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.google.zxing.integration.android.IntentIntegrator
 import es.udc.apm.swimchrono.R
+import java.util.concurrent.TimeUnit
 
 class TimerActivity : AppCompatActivity() {
 
@@ -23,6 +25,10 @@ class TimerActivity : AppCompatActivity() {
     // Variable para poder activar el crono una vez escaneado
     private var enable_chronno = false
 
+    //private lateinit var chronometer: Chronometer
+    private lateinit var handler: Handler
+    private lateinit var runnable: Runnable
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_referee_start)
@@ -33,6 +39,8 @@ class TimerActivity : AppCompatActivity() {
 
         /** Eliminar cuando se arregle el Scan en el fragment**/
         val auxScanButton = findViewById<Button>(R.id.botonScanQRaux)
+        enable_chronno = true /** Solo para pruebas**/
+
 
         buttonExit.setOnClickListener {
             Toast.makeText(this, "exit", Toast.LENGTH_SHORT).show()
@@ -76,18 +84,53 @@ class TimerActivity : AppCompatActivity() {
         }
     }
 
-    private fun startChronometer(chronometer: Chronometer) {
+    /*private fun startChronometer(chronometer: Chronometer) {
         if (enable_chronno) { /** Eliminar este if si el scan se hace en otro sitio**/
             if (!isRunning) {
                 chronometer.base = SystemClock.elapsedRealtime()
                 chronometer.start()
+                // Iniciar el Handler
+                handler.post(runnable)
             }
+        }
+    }*/
+
+    private fun startChronometer(chronometer: Chronometer) {
+        if (!isRunning) {
+            // Inicializar el Handler y el Runnable solo si aún no se han inicializado
+            if (!::handler.isInitialized) {
+                handler = Handler()
+            }
+            if (!::runnable.isInitialized) {
+                runnable = object : Runnable {
+                    override fun run() {
+                        val timeElapsed = SystemClock.elapsedRealtime() - chronometer.base
+                        val hms = String.format(
+                            //"%02d:%02d:%02d", // Horas:Minutos:Segundos
+                            "%02d:%02d", // Minutos:Segundos
+                            //TimeUnit.MILLISECONDS.toHours(timeElapsed),
+                            TimeUnit.MILLISECONDS.toMinutes(timeElapsed) % TimeUnit.HOURS.toMinutes(1),
+                            TimeUnit.MILLISECONDS.toSeconds(timeElapsed) % TimeUnit.MINUTES.toSeconds(1)
+                        )
+                        val ms = String.format("%03d", timeElapsed % 1000)
+                        chronometer.text = "$hms:$ms"
+                        handler.postDelayed(this, 1) // Actualizar cada milisegundo
+                    }
+                }
+            }
+
+            chronometer.base = SystemClock.elapsedRealtime()
+            chronometer.start()
+            // Iniciar el Handler
+            handler.post(runnable)
         }
     }
 
     private fun stopChronometer(chronometer: Chronometer) {
         if (isRunning) {
             chronometer.stop()
+            // Detener el Handler
+            handler.removeCallbacks(runnable)
         }
     }
 
