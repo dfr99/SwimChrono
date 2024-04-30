@@ -2,7 +2,6 @@ package es.udc.apm.swimchrono.ui.referee
 
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.SystemClock
@@ -11,6 +10,7 @@ import android.widget.Chronometer
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.integration.android.IntentIntegrator
 import es.udc.apm.swimchrono.R
 import java.util.concurrent.TimeUnit
@@ -37,12 +37,6 @@ class TimerActivity : AppCompatActivity() {
         val chronometer = findViewById<Chronometer>(R.id.chronometer)
         val startStopButton = findViewById<Button>(R.id.startStopButton)
 
-        /** Eliminar cuando se arregle el Scan en el fragment**/
-        val auxScanButton = findViewById<Button>(R.id.botonScanQRaux)
-
-        // Variable de prueba para deshabilitar la necesidad de escanear antes de usar el crono
-        //enable_chronno = true /** Solo para pruebas**/
-
 
         buttonExit.setOnClickListener {
             Toast.makeText(this, "exit", Toast.LENGTH_SHORT).show()
@@ -58,18 +52,12 @@ class TimerActivity : AppCompatActivity() {
             toggleStartStop(chronometer, startStopButton)
         }
 
-        /** Eliminar cuando se arregle el Scan en el fragment o se escanee en otro sitio**/
-        auxScanButton.setOnClickListener {
-            initQRScanner()
-        }
-
-
+        initQRScanner()
     }
 
     private fun toggleStartStop(chronometer: Chronometer, startStopButton: Button) {
 
         if (enable_chronno) {
-            /** Eliminar este if si el scan se hace en otro sitio**/
             if (isRunning) {
                 stopChronometer(chronometer)
                 startStopButton.text = getString(R.string.start)
@@ -86,16 +74,6 @@ class TimerActivity : AppCompatActivity() {
         }
     }
 
-    /*private fun startChronometer(chronometer: Chronometer) {
-        if (enable_chronno) { /** Eliminar este if si el scan se hace en otro sitio**/
-            if (!isRunning) {
-                chronometer.base = SystemClock.elapsedRealtime()
-                chronometer.start()
-                // Iniciar el Handler
-                handler.post(runnable)
-            }
-        }
-    }*/
 
     private fun startChronometer(chronometer: Chronometer) {
         if (!isRunning) {
@@ -111,8 +89,12 @@ class TimerActivity : AppCompatActivity() {
                             //"%02d:%02d:%02d", // Horas:Minutos:Segundos
                             "%02d:%02d", // Minutos:Segundos
                             //TimeUnit.MILLISECONDS.toHours(timeElapsed),
-                            TimeUnit.MILLISECONDS.toMinutes(timeElapsed) % TimeUnit.HOURS.toMinutes(1),
-                            TimeUnit.MILLISECONDS.toSeconds(timeElapsed) % TimeUnit.MINUTES.toSeconds(1)
+                            TimeUnit.MILLISECONDS.toMinutes(timeElapsed) % TimeUnit.HOURS.toMinutes(
+                                1
+                            ),
+                            TimeUnit.MILLISECONDS.toSeconds(timeElapsed) % TimeUnit.MINUTES.toSeconds(
+                                1
+                            )
                         )
                         val ms = String.format("%03d", timeElapsed % 1000)
                         chronometer.text = "$hms:$ms"
@@ -137,34 +119,30 @@ class TimerActivity : AppCompatActivity() {
     }
 
 
-
-    /** Eliminar cuando se arregle el Scan en el fragment**/
     // Scan QR functions
     private fun initQRScanner() {
-        //IntentIntegrator(this).initiateScan() //DEPRECATED
-
         val integrator = IntentIntegrator(this)
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE) // Establecer el tipo de codigo de barras
         integrator.setPrompt("Acerque la cámara al código QR")
         integrator.setTorchEnabled(false) // Encender flash
-        integrator.setBeepEnabled(true) // Sonido de confirmacion de codigo escaneado
+        integrator.setBeepEnabled(false) // Sonido de confirmacion de codigo escaneado
         integrator.initiateScan()
     }
 
     //Este método se le llama cada vez que vuelve de un activity
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-        if(result != null){
-            if(result.contents == null){
-                Toast.makeText(this, "Cancelado", Toast.LENGTH_SHORT).show()
-            }else{
-                //Toast.makeText(this, "El valor escaneado es: ${result.contents}", Toast.LENGTH_SHORT).show()
-                Toast.makeText(this, "Puede iniciar el crono", Toast.LENGTH_SHORT).show()
-                enable_chronno = true
-            }
-        }else{
+
+        if (result == null) {
             Toast.makeText(this, "Exception?", Toast.LENGTH_SHORT).show()
             super.onActivityResult(requestCode, resultCode, data)
         }
+
+        if (result.contents == null) {
+            Toast.makeText(this, "Cancelado", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+
+        enable_chronno = true
     }
 }
