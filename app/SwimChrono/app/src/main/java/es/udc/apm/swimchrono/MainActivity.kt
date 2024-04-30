@@ -8,7 +8,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import es.udc.apm.swimchrono.databinding.ActivityMainBinding
-import es.udc.apm.swimchrono.util.Logger
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, _, _ ->
-            Logger.debug("asd", "logger")
             val sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
             val isLoggedIn = sharedPreferences.getString("userId", null) != ""
 

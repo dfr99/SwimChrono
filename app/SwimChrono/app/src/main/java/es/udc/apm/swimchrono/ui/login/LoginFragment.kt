@@ -26,6 +26,7 @@ class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
 
+
     private val binding get() = _binding!!
     private lateinit var apiService: ApiService
 
@@ -41,13 +42,21 @@ class LoginFragment : Fragment() {
         apiService.onCreate()
         sharedPreferences = requireContext().getSharedPreferences("user_data", Context.MODE_PRIVATE)
 
-        val loginViewModel =
-            ViewModelProvider(this).get(LoginViewModel::class.java)
+        val loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+
+        Logger.debug(tag, "Reached observer")
+        // Observa el LiveData en el hilo principal
+        loginViewModel.userLiveData.observe(viewLifecycleOwner) { user ->
+            // Se ejecutará cuando el LiveData tenga un valor
+            // Aquí puedes realizar las acciones que necesites con el usuario
+            Logger.debug(tag, "Usuario actualizado: $user")
+            // Por ejemplo, puedes navegar a otra pantalla, mostrar un diálogo, etc.
+        }
 
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val userId = sharedPreferences.getString("userId", null);
+        val userId = sharedPreferences.getString("userId", null)
         if (userId != null && userId != "") {
             Toast.makeText(
                 requireContext(),
@@ -56,6 +65,9 @@ class LoginFragment : Fragment() {
             ).show()
             navigateToProfile()
         }
+
+
+
         binding.loginButton.setOnClickListener {
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
@@ -65,14 +77,18 @@ class LoginFragment : Fragment() {
                 withContext(Dispatchers.Main) {
                     when (loginResult) {
                         is LoginResult.Success -> {
-                            val userId = loginResult.userId
-                            Logger.debug(tag, "userID: $userId")
-                            saveUserIdToSharedPreferences(userId)
+                            val obtainedUserId: String = loginResult.userId
+                            loginViewModel.getUserData(obtainedUserId)
+                            Logger.debug(tag, "Successfully logged. UID: $obtainedUserId")
                             Toast.makeText(
                                 requireContext(),
                                 "Successfully logged",
                                 Toast.LENGTH_SHORT
                             ).show()
+
+
+                            saveUserIdToSharedPreferences(obtainedUserId)
+
                             navigateToProfile()
                         }
 
@@ -95,6 +111,8 @@ class LoginFragment : Fragment() {
                 }
             }
         }
+
+
         return root
     }
 
@@ -112,9 +130,23 @@ class LoginFragment : Fragment() {
     }
 
     private fun saveUserIdToSharedPreferences(userId: String) {
+        Logger.debug(tag, "saveUserIdToShared")
+
+
         val editor = sharedPreferences.edit()
         editor.putString("userId", userId)
         editor.apply()
+
+        Logger.info(tag, "Updated shared preferences: ${sharedPreferences.all}")
+
+
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        loginViewModel.setFragmentContext(requireContext())
+
+    }
 }

@@ -28,7 +28,7 @@ class TournamentInfoViewModel : ViewModel(), ApiServiceCallback {
         apiService.getTournaments(this)
     }
 
-    override fun onTournamentsReceived(response: Any?) {
+    override fun onDataReceived(response: Any?) {
         val tournamentsList = parseResponse(response)
         _tournaments.postValue(tournamentsList)
         Logger.debug(tag, "Response from ApiService: $tournamentsList")
