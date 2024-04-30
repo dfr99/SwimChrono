@@ -44,13 +44,10 @@ class LoginFragment : Fragment() {
 
         val loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
-        Logger.debug(tag, "Reached observer")
         // Observa el LiveData en el hilo principal
         loginViewModel.userLiveData.observe(viewLifecycleOwner) { user ->
-            // Se ejecutará cuando el LiveData tenga un valor
-            // Aquí puedes realizar las acciones que necesites con el usuario
             Logger.debug(tag, "Usuario actualizado: $user")
-            // Por ejemplo, puedes navegar a otra pantalla, mostrar un diálogo, etc.
+            navigateToProfile()
         }
 
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
@@ -89,7 +86,6 @@ class LoginFragment : Fragment() {
 
                             saveUserIdToSharedPreferences(obtainedUserId)
 
-                            navigateToProfile()
                         }
 
                         LoginResult.InvalidEmail -> {
@@ -118,10 +114,40 @@ class LoginFragment : Fragment() {
 
     private fun navigateToProfile() {
         val navController = findNavController()
+        updateBottomNavigationBar()
         navController.navigate(R.id.action_profile_to_profile_fragment)
 
     }
 
+    private fun updateBottomNavigationBar() {
+        val sharedPreferences =
+            requireContext().getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        val userRole = sharedPreferences.getString("rol", null)
+
+        val clubBottomNavigationView = requireActivity().findViewById<View>(R.id.navigation_club)
+        val refereeBottomNavigationView =
+            requireActivity().findViewById<View>(R.id.navigation_referee)
+
+        // Mostrar u ocultar elementos de la barra de navegación según el rol del usuario
+        when (userRole) {
+            "swimmer" -> {
+                clubBottomNavigationView.visibility = View.VISIBLE
+                refereeBottomNavigationView.visibility = View.GONE
+            }
+
+            "referee" -> {
+                clubBottomNavigationView.visibility = View.GONE
+                refereeBottomNavigationView.visibility = View.VISIBLE
+            }
+
+            else -> {
+                clubBottomNavigationView.visibility = View.GONE
+                refereeBottomNavigationView.visibility = View.GONE
+            }
+        }
+        clubBottomNavigationView.invalidate()
+        refereeBottomNavigationView.invalidate()
+    }
 
     private fun showError(errorMessage: String) {
         binding.errorTextView.text = errorMessage
