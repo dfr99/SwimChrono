@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.SystemClock
 import android.widget.Button
-import android.widget.Chronometer
+//import android.widget.Chronometer
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -29,12 +29,15 @@ class TimerActivity : AppCompatActivity() {
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
 
+    private var startTime: Long = 0
+    private var timeElapsed: Long = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_referee_start)
 
         val buttonExit = findViewById<ImageView>(R.id.ivBackButton)
-        val chronometer = findViewById<Chronometer>(R.id.chronometer)
+        val chronometer = findViewById<TextView>(R.id.chronometer)
         val startStopButton = findViewById<Button>(R.id.startStopButton)
 
 
@@ -55,14 +58,15 @@ class TimerActivity : AppCompatActivity() {
         initQRScanner()
     }
 
-    private fun toggleStartStop(chronometer: Chronometer, startStopButton: Button) {
+    private fun toggleStartStop(chronometer: TextView, startStopButton: Button) {
 
         if (enable_chronno) {
             if (isRunning) {
-                stopChronometer(chronometer)
+                stopChronometer()
                 startStopButton.text = getString(R.string.start)
                 startStopButton.setBackgroundColor(Color.argb(255, 9, 135, 151))
             } else {
+                startTime = System.currentTimeMillis() - timeElapsed
                 startChronometer(chronometer)
                 startStopButton.text = getString(R.string.stop)
                 startStopButton.setBackgroundColor(Color.argb(255, 255, 0, 0))
@@ -75,7 +79,7 @@ class TimerActivity : AppCompatActivity() {
     }
 
 
-    private fun startChronometer(chronometer: Chronometer) {
+    private fun startChronometer(chronometer: TextView) {
         if (!isRunning) {
             // Inicializar el Handler y el Runnable solo si aún no se han inicializado
             if (!::handler.isInitialized) {
@@ -84,7 +88,8 @@ class TimerActivity : AppCompatActivity() {
             if (!::runnable.isInitialized) {
                 runnable = object : Runnable {
                     override fun run() {
-                        val timeElapsed = SystemClock.elapsedRealtime() - chronometer.base
+                        val currentTime = System.currentTimeMillis()
+                        timeElapsed = currentTime - startTime
                         val hms = String.format(
                             //"%02d:%02d:%02d", // Horas:Minutos:Segundos
                             "%02d:%02d", // Minutos:Segundos
@@ -103,16 +108,16 @@ class TimerActivity : AppCompatActivity() {
                 }
             }
 
-            chronometer.base = SystemClock.elapsedRealtime()
-            chronometer.start()
+            //chronometer.base = SystemClock.elapsedRealtime()
+            //chronometer.start()
             // Iniciar el Handler
             handler.post(runnable)
         }
     }
 
-    private fun stopChronometer(chronometer: Chronometer) {
+    private fun stopChronometer() {
         if (isRunning) {
-            chronometer.stop()
+            //chronometer.stop()
             // Detener el Handler
             handler.removeCallbacks(runnable)
         }
@@ -136,6 +141,7 @@ class TimerActivity : AppCompatActivity() {
         if (result == null) {
             Toast.makeText(this, "Exception?", Toast.LENGTH_SHORT).show()
             super.onActivityResult(requestCode, resultCode, data)
+            finish() /**No ha habido ningun caso que se llegase hasta aqui**/
         }
 
         if (result.contents == null) {
