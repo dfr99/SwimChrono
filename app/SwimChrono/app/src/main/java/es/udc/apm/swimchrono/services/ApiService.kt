@@ -20,7 +20,7 @@ import kotlinx.coroutines.tasks.await
 import java.io.IOException
 
 interface ApiServiceCallback {
-    fun onTournamentsReceived(response: Any?)
+    fun onDataReceived(response: Any?)
 }
 
 class ApiService : Service() {
@@ -50,7 +50,7 @@ class ApiService : Service() {
                         // Convertir el snapshot a JSON
                         val response = snapshot.value
                         // Enviar los datos al callback
-                        callback.onTournamentsReceived(response)
+                        callback.onDataReceived(response)
                         Logger.debug(tag, "Response: $response")
                     }
 
@@ -63,6 +63,42 @@ class ApiService : Service() {
             }
         }
     }
+
+
+    fun getUserData(uid: String, callback: ApiServiceCallback) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val tournamentsRef = database.child("users")
+
+                tournamentsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.children.forEach { userSnapshot ->
+                            // Obtener el UID del usuario actual
+                            val userUid = userSnapshot.child("UID").getValue(String::class.java)
+                            // Verificar si el UID coincide con el UID buscado
+                            if (userUid == uid) {
+                                // Obtener los datos del usuario y enviar al callback
+                                val userData = userSnapshot.value
+                                Logger.debug(tag, "Called callback with : $userData")
+                                callback.onDataReceived(userData)
+                                return // Salir del bucle forEach después de encontrar el usuario
+                            }
+                        }
+                        // Si no se encontró ningún usuario con el UID especificado
+                        Logger.error(tag, "No se encontró ningún usuario con el UID: $uid")
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Logger.error(tag, "Error al obtener datos de Firebase: ${error.message}")
+                    }
+                })
+            } catch (e: Exception) {
+                Logger.error(tag, "Error $e")
+            }
+
+        }
+    }
+
 
     private val auth = FirebaseAuth.getInstance()
 

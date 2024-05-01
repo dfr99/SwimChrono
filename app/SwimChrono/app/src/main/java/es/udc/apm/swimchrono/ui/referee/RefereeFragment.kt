@@ -3,12 +3,12 @@ package es.udc.apm.swimchrono.ui.referee
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.zxing.integration.android.IntentIntegrator
@@ -24,7 +24,7 @@ class RefereeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_referee, container, false)
@@ -40,21 +40,26 @@ class RefereeFragment : Fragment() {
 
         // Button Scan QR
 
-        val btnScanQR: Button = view.findViewById(R.id.botonScanQR)
-        btnScanQR.setOnClickListener {
+//        val btnScanQR: Button = view.findViewById(R.id.botonScanQR)
+//        btnScanQR.setOnClickListener {
+//
+//
+//            initQRScanner()
+//
+//
+//        }
 
 
-            initQRScanner()
-
-
-        }
-
-
-
-
-
-        val races = arrayOf (
-            Race(id = 1, swimmer = "David", club = "SAL", race = "100 medley", heat = 6, lane = 3, hour = Date()),
+        val races = arrayOf(
+            Race(
+                id = 1,
+                swimmer = "David",
+                club = "SAL",
+                race = "100 medley",
+                heat = 6,
+                lane = 3,
+                hour = Date()
+            ),
         )
 
         val racesList = RecyclerRacesListAdapter(races)
@@ -72,8 +77,6 @@ class RefereeFragment : Fragment() {
     }
 
 
-
-
     // Scan QR functions
 
     /**NO FUNCIONA**/
@@ -88,20 +91,28 @@ class RefereeFragment : Fragment() {
             integrator.setBeepEnabled(true) // Sonido de confirmacion de codigo escaneado
             integrator.initiateScan()
         } else {
-            Toast.makeText(requireContext(), "BOTÓN EN REPARACIÓN: Para escanear accede a START", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                requireContext(),
+                "BOTÓN EN REPARACIÓN: Para escanear accede a START",
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 
     //Este método se le llama cada vez que vuelve de un activity
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-        if(result != null){
-            if(result.contents == null){
+        if (result != null) {
+            if (result.contents == null) {
                 Toast.makeText(requireContext(), "Cancelado", Toast.LENGTH_SHORT).show()
-            }else{
-                Toast.makeText(requireContext(), "El valor escaneado es: ${result.contents}", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "El valor escaneado es: ${result.contents}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-        }else{
+        } else {
             Toast.makeText(requireContext(), "Exception?", Toast.LENGTH_SHORT).show()
             super.onActivityResult(requestCode, resultCode, data)
         }
@@ -109,8 +120,6 @@ class RefereeFragment : Fragment() {
         Toast.makeText(requireContext(), "YA FUNCIONA", Toast.LENGTH_SHORT).show()
 
     }
-
-
 
 
 }

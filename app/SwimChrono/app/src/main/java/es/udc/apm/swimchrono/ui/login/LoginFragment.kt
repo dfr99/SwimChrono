@@ -26,6 +26,7 @@ class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
 
+
     private val binding get() = _binding!!
     private lateinit var apiService: ApiService
 
@@ -41,13 +42,18 @@ class LoginFragment : Fragment() {
         apiService.onCreate()
         sharedPreferences = requireContext().getSharedPreferences("user_data", Context.MODE_PRIVATE)
 
-        val loginViewModel =
-            ViewModelProvider(this).get(LoginViewModel::class.java)
+        val loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+
+        // Observa el LiveData en el hilo principal
+        loginViewModel.userLiveData.observe(viewLifecycleOwner) { user ->
+            Logger.debug(tag, "Usuario actualizado: $user")
+            navigateToProfile()
+        }
 
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val userId = sharedPreferences.getString("userId", null);
+        val userId = sharedPreferences.getString("userId", null)
         if (userId != null && userId != "") {
             Toast.makeText(
                 requireContext(),
@@ -56,6 +62,9 @@ class LoginFragment : Fragment() {
             ).show()
             navigateToProfile()
         }
+
+
+
         binding.loginButton.setOnClickListener {
             val email = binding.emailEditText.text.toString()
             val password = binding.passwordEditText.text.toString()
@@ -65,15 +74,18 @@ class LoginFragment : Fragment() {
                 withContext(Dispatchers.Main) {
                     when (loginResult) {
                         is LoginResult.Success -> {
-                            val userId = loginResult.userId
-                            Logger.debug(tag, "userID: $userId")
-                            saveUserIdToSharedPreferences(userId)
+                            val obtainedUserId: String = loginResult.userId
+                            loginViewModel.getUserData(obtainedUserId)
+                            Logger.debug(tag, "Successfully logged. UID: $obtainedUserId")
                             Toast.makeText(
                                 requireContext(),
                                 "Successfully logged",
                                 Toast.LENGTH_SHORT
                             ).show()
-                            navigateToProfile()
+
+
+                            saveUserIdToSharedPreferences(obtainedUserId)
+
                         }
 
                         LoginResult.InvalidEmail -> {
@@ -95,15 +107,47 @@ class LoginFragment : Fragment() {
                 }
             }
         }
+
+
         return root
     }
 
     private fun navigateToProfile() {
         val navController = findNavController()
+        updateBottomNavigationBar()
         navController.navigate(R.id.action_profile_to_profile_fragment)
 
     }
 
+    private fun updateBottomNavigationBar() {
+        val sharedPreferences =
+            requireContext().getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        val userRole = sharedPreferences.getString("rol", null)
+
+        val clubBottomNavigationView = requireActivity().findViewById<View>(R.id.navigation_club)
+        val refereeBottomNavigationView =
+            requireActivity().findViewById<View>(R.id.navigation_referee)
+
+        // Mostrar u ocultar elementos de la barra de navegación según el rol del usuario
+        when (userRole) {
+            "swimmer" -> {
+                clubBottomNavigationView.visibility = View.VISIBLE
+                refereeBottomNavigationView.visibility = View.GONE
+            }
+
+            "referee" -> {
+                clubBottomNavigationView.visibility = View.GONE
+                refereeBottomNavigationView.visibility = View.VISIBLE
+            }
+
+            else -> {
+                clubBottomNavigationView.visibility = View.GONE
+                refereeBottomNavigationView.visibility = View.GONE
+            }
+        }
+        clubBottomNavigationView.invalidate()
+        refereeBottomNavigationView.invalidate()
+    }
 
     private fun showError(errorMessage: String) {
         binding.errorTextView.text = errorMessage
@@ -112,9 +156,23 @@ class LoginFragment : Fragment() {
     }
 
     private fun saveUserIdToSharedPreferences(userId: String) {
+        Logger.debug(tag, "saveUserIdToShared")
+
+
         val editor = sharedPreferences.edit()
         editor.putString("userId", userId)
         editor.apply()
+
+        Logger.info(tag, "Updated shared preferences: ${sharedPreferences.all}")
+
+
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        loginViewModel.setFragmentContext(requireContext())
+
+    }
 }
