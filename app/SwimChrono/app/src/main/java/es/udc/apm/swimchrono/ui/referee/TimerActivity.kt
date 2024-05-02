@@ -39,6 +39,7 @@ class TimerActivity : AppCompatActivity() {
         val buttonExit = findViewById<ImageView>(R.id.ivBackButton)
         val chronometer = findViewById<TextView>(R.id.chronometer)
         val startStopButton = findViewById<Button>(R.id.startStopButton)
+        val resetButton = findViewById<Button>(R.id.resetButton)
 
 
         buttonExit.setOnClickListener {
@@ -53,6 +54,19 @@ class TimerActivity : AppCompatActivity() {
                 Toast.makeText(this, "Stop Chrono", Toast.LENGTH_SHORT).show()
             }
             toggleStartStop(chronometer, startStopButton)
+        }
+
+        resetButton.setOnClickListener {
+            stopChronometer()
+            timeElapsed = 0
+            startTime = System.currentTimeMillis()
+            chronometer.text = "00:00:000" // Actualiza el texto del cronómetro a cero
+
+            // Cambiamos el estado del boton
+            isRunning = false
+            startStopButton.text = getString(R.string.start)
+            startStopButton.setBackgroundColor(Color.argb(255, 9, 135, 151))
+
         }
 
         initQRScanner()
