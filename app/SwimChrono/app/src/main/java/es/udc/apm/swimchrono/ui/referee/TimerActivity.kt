@@ -38,8 +38,8 @@ class TimerActivity : AppCompatActivity() {
 
         val buttonExit = findViewById<ImageView>(R.id.ivBackButton)
         val chronometer = findViewById<TextView>(R.id.chronometer)
-        val startStopButton = findViewById<Button>(R.id.startStopButton)
-        val resetButton = findViewById<Button>(R.id.resetButton)
+        val startStopButton_old = findViewById<Button>(R.id.startStopButton_old)
+        val resetButton_old = findViewById<Button>(R.id.resetButton_old)
 
 
         buttonExit.setOnClickListener {
@@ -47,16 +47,16 @@ class TimerActivity : AppCompatActivity() {
             finish()
         }
 
-        startStopButton.setOnClickListener {
+        startStopButton_old.setOnClickListener {
             if (!isRunning) {
                 Toast.makeText(this, "Start Chrono", Toast.LENGTH_SHORT).show()
             } else if (isRunning) {
                 Toast.makeText(this, "Stop Chrono", Toast.LENGTH_SHORT).show()
             }
-            toggleStartStop(chronometer, startStopButton)
+            toggleStartStop(chronometer, startStopButton_old)
         }
 
-        resetButton.setOnClickListener {
+        resetButton_old.setOnClickListener {
             stopChronometer()
             timeElapsed = 0
             startTime = System.currentTimeMillis()
@@ -64,8 +64,8 @@ class TimerActivity : AppCompatActivity() {
 
             // Cambiamos el estado del boton
             isRunning = false
-            startStopButton.text = getString(R.string.start)
-            startStopButton.setBackgroundColor(Color.argb(255, 9, 135, 151))
+            startStopButton_old.text = getString(R.string.start)
+            startStopButton_old.setBackgroundColor(Color.argb(255, 9, 135, 151)) // @color/chrono_play
 
         }
 
@@ -78,12 +78,12 @@ class TimerActivity : AppCompatActivity() {
             if (isRunning) {
                 stopChronometer()
                 startStopButton.text = getString(R.string.start)
-                startStopButton.setBackgroundColor(Color.argb(255, 9, 135, 151))
+                startStopButton.setBackgroundColor(Color.argb(255, 9, 135, 151)) // @color/chrono_play
             } else {
                 startTime = System.currentTimeMillis() - timeElapsed
                 startChronometer(chronometer)
                 startStopButton.text = getString(R.string.stop)
-                startStopButton.setBackgroundColor(Color.argb(255, 255, 0, 0))
+                startStopButton.setBackgroundColor(Color.argb(255, 246, 117, 117)) // @color/chrono_red
             }
 
             isRunning = !isRunning
