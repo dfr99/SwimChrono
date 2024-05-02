@@ -65,4 +65,3 @@ Tras exponen la aplicación a potenciales usuarios de la misma, se ha recopilado
 - Se debe mostrar el número total de carreras, tanto en la pantalla de _Dashboard_ como en la pantalla.
 - Ajustar la distancia entre elementos para no saturar algunas pantallas. Se destaca la pantalla de **Carreras**.
 - Añadir más gestualidad a la aplicación.
-- 
