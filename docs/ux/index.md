@@ -1,5 +1,16 @@
 # Usabilidad y UX
 
+## Decisiones de diseño
+
+En la fase de diseño se han tenido en cuenta estos puntos sobre accesibilidad (a11y):
+
+- Se ha escogido una tipografía que no dificulta la lectura.
+- Se ha elegido una [paleta de colores](#hoja-de-estilos) que permite altos contrastes y evita que los textos queden poco visibles. A nivel de código, el tema y los colores empleados se definen en los ficheros [_themes.xml_](https://github.com/dfr99/SwimChrono/blob/main/app/SwimChrono/app/src/main/res/values/themes.xml) y [_colors.xml_](https://github.com/dfr99/SwimChrono/blob/main/app/SwimChrono/app/src/main/res/values/colors.xml), respectivamente. 
+- Se ha configurado tanto el tema Claro como el tema Oscuro.
+- Se han añadido tags ARIA en las imágenes para que los lectores de pantalla puedan describir dichas imágenes.
+
+En cuanto a internacionalización (i18n), se ha creado un fichero [_strings.xml_](https://github.com/dfr99/SwimChrono/blob/main/app/SwimChrono/app/src/main/res/values/strings.xml) que permite a la aplicación obtener el texto que se debe mostrar en pantalla en el idioma preferido del usuario.
+
 ## Detección de mejoras
 
 A día 2 de mayo de 2024, se han detectado las siguientes mejoras de usabilidad para la aplicación SwimChrono:
@@ -8,11 +19,9 @@ A día 2 de mayo de 2024, se han detectado las siguientes mejoras de usabilidad 
 
 ![Login de la aplicación](./images/login.png){ width="300" height="150" style="display: block; margin: 0 auto" }
 
-
 - Sería interesante implementar gestos en la aplicación. Por ejemplo, a la hora de deslizar para navegar entre las diferentes pantallas o volver atrás.
-- Actualmente, se definen los estilos y los colores de forma manual. Una mejora sería utilizar _Material Design_ para estos dos apartados.
 
-## Utilización del dispositivos
+## Utilización del dispositivo
 
 Con respecto a la sujección del dispositivo por parte del usuario cuando este está utilizando la aplicación, se asume lo siguiente:
 
@@ -25,6 +34,10 @@ Con respecto a la sujección del dispositivo por parte del usuario cuando este e
 - En disposición horizontal, el dispositivo se sostiene con las dos manos, operando también con los dos pulgares, como se muestra en la siguiente imagen
 
 ![Sujección móvil horizontal 1](./images/disposiciones/horizontal_1.png){ width="400" height="300" style="display: block; margin: 0 auto" }
+
+Por lo tanto, los componentes de la pantanlla han sido colocados para que stisfagan el mapa de calor de un dispositivo móvil con esa sujección.
+
+![Mapa de calor para un dispostivo móvil en orientación vertical sujetado con una mano y manejado con el dedo pulgar](./images/heat_map.jpeg){ width="600" height="400" style="display: block; margin: 0 auto" }
 
 ## Material Design
 
@@ -44,3 +57,12 @@ Durante el desarrollo de la aplicación SwimChrono se ha aplicado _Material Desi
 	- Es ergónomico: sus secciones son fácilmente alcanzables para el usuario.
 	- Cuando es utilizado, _BottomNavigation_ aparece en la parte inferior de todas las pantallas de forma consistente.
 	- Las secciones de _BottomNavigation_ son igual de importantes. En nuestro caso, a través de este elemento se accede a la pantalla principal de cada una de las funcionalidades disponibles en la aplicación salvo el cronómetro. Esta última depende de tener carreras registradas en ese momento, por lo que se considera en otro orden.
+
+## Feedback de los usuarios
+
+Tras exponen la aplicación a potenciales usuarios de la misma, se ha recopilado la siguiente información:
+
+- Se debe mostrar el número total de carreras, tanto en la pantalla de _Dashboard_ como en la pantalla.
+- Ajustar la distancia entre elementos para no saturar algunas pantallas. Se destaca la pantalla de **Carreras**.
+- Añadir más gestualidad a la aplicación.
+- 
