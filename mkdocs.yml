@@ -35,6 +35,8 @@ theme:
           enable_creation_date: true
     icon:
         repo: fontawesome/brands/github
+    favicon: favicon.png
+    logo: favicon.png
     plugins:
         - tags
     palette:
@@ -64,8 +66,6 @@ markdown_extensions:
     - md_in_html
     - toc:
           permalink: true
-
-    # Python Markdown Extensions
     - pymdownx.arithmatex:
           generic: true
     - pymdownx.betterem:
