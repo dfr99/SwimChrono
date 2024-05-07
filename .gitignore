@@ -33,3 +33,6 @@ site
 
 # Python byte-compiled
 __pycache__/
+
+# Python environment
+test/**
