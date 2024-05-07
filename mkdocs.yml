@@ -104,7 +104,4 @@ nav:
        - Almacenamiento: integrations/storage.md
        - Firebase: integrations/firebase.md
        - QR (Zxing): integrations/zxing-qr.md
-    - Guia de Usuario:
-          - Primeros pasos: user-guide/getting-started.md
-          - Herramientas: user-guide/tools.md
     - Usabilidad y UX: ux/index.md
