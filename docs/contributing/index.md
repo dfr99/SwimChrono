@@ -82,31 +82,7 @@ para contribuir a este proyecto paso a paso:
 6) Una vez el revisor aprueba la PR, cerrar, mergear y borrar la rama
 con los cambios.
 
-```mermaid
-%%{init: {'theme':'default'}}%%
-flowchart LR
-    subgraph main branch
-        direction LR
-        main -.- commit1d((#1)) --> commit5d((#5)) -- merge\ncommit --> commit6d((#6)) -.- infd((...))
-        style main fill:#54d3a4,stroke:#333,stroke-width:2px
-        style commit1d fill:#54d3a4,stroke:#333,stroke-width:2px
-        style commit5d fill:#54d3a4,stroke:#333,stroke-width:2px
-        style commit6d fill:#54d3a4,stroke:#333,stroke-width:2px
-        style infd fill:#54d3a4,stroke:#333,stroke-width:2px
-    end
-
-    subgraph feature branch
-        direction LR
-        commit1d -.-> commit1f
-        feature/example -..- commit1f((#1)) --> commit2f((#2)) --> commit3f((#3)) --> commit4f((#4))
-        commit4f -. merge\nsquash .-> commit5d
-        style feature/example fill:#af88dd,stroke:#333,stroke-width:2px
-        style commit1f fill:#af88dd,stroke:#333,stroke-width:2px
-        style commit2f fill:#af88dd,stroke:#333,stroke-width:2px
-        style commit3f fill:#af88dd,stroke:#333,stroke-width:2px
-        style commit4f fill:#af88dd,stroke:#333,stroke-width:2px
-    end
-```
+![Flujo de trabajo en el repositorio](../images/contributing/tbd.png)
 
 ## Formato del código
 
