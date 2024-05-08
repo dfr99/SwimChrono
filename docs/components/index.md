@@ -61,70 +61,79 @@ que las actividades son independientes y tienen sus propio ciclo de vida.
 
 ## Servicios
 
-<!-- Acceso a API como servicio-->
-Para la comunicación con la API que ofrece el backend donde se guardan los datos de los nadadores, entrenadores, clubes y competiciones, se ha optado por implementar un servicio en la aplicación SwimChrono. Este servicio se encargará de realizar las llamadas a la API y manejar los datos devueltos.
+La aplicación obtendrá datos de Firebase Realtime Database, aquí es donde tenemos todos los datos relativos a torneos, carreras, nadadores, entrenadores y tiempos. También se utiliza FirebaseAuth que permite gestión de cuentas.
 
 ### Implementación del Servicio
 
-El servicio ApiService se implementará como un componente de la aplicación que manejará las operaciones de red relacionadas con la gestión de nadadores. Este servicio se encargará de enviar y recibir datos desde la API de nadadores y manejará la lógica relacionada con las llamadas HTTP.
-
-### Funcionalidades del Servicio
-
-El servicio ApiService incluirá los siguientes métodos para interactuar con la API de nadadores:
-
-- GET /torneos: Este método realizará una solicitud GET a la API para obtener la lista de torneos con la información detallada de las pruebas que se realizarán. También se obtendrá la información de los nadadores asignados a dichas carreras.
-- GET /nadadores/{id}: Este método realizará una solicitud GET a la API para obtener los datos relevantes de dicho nadador. También se obtendrán los datos de los torneos próximos que tiene asignados.
-- GET /clubes: Este método realizará una solicitud GET a la API para obtener la lista de clubes. Contará con la información de los nadadores y los entrenadores que se encuentran asociados a dicho club.
-- PUT /prueba/{id}: Este método realizará una solicitud PUT a la API la cual actualizará los tiempos de las pruebas realizadas a través de la aplicación.
-
-Cabe destacar que estos métodos no son definitivos pues será necesario definir y desplegar una API RESTful para simular el funcionamiento correcto de la aplicación.
-
-### Uso del servicio
-
-El servicio ApiService será lanzado desde diversos puntos de la aplicación, según sea necesario. Por ejemplo, cuando un fragmento requiera datos de la lista de nadadores, puede iniciar el servicio para realizar una llamada GET a la API. De manera similar, cuando se agregue un nuevo tiempo desde la vista del cronómetro se hará una llamada PUT a la API que actualizará el tiempo cronometrado.
-
-### Uso de los Datos Recibidos
-
-Una vez que el servicio ApiService reciba los datos de la API de nadadores, los procesará según sea necesario. Por ejemplo, si se recibe una lista de nadadores en respuesta a una solicitud GET, el servicio puede procesar estos datos y enviarlos de vuelta al fragmento solicitante para su visualización en la interfaz de usuario.
+Se implementará un servicio llamado APIService, que nos permitirá comunicarnos con Firebase y todas sus funcionalidades. Una vez que el servicio ApiService reciba los datos de nadadores, los procesará según sea necesario. Por ejemplo, si se recibe una lista de nadadores en respuesta a una solicitud GET, el servicio puede procesar estos datos y enviarlos de vuelta al fragmento solicitante para su visualización en la interfaz de usuario.
 
 Este enfoque permite separar las operaciones de red de la lógica de la interfaz de usuario, lo que hace que el código sea más modular y fácil de mantener.
 
-A continuación se muestra la primera implementación del servicio dn la aplicación. Se muestra la llamada getTournaments() que es la encargada de obtener la lista de todos los torneos.
+A continuación se muestra la primera implementación del servicio dn la aplicación. Se muestra la llamada getTournaments() que es la encargada de obtener la lista de todos los torneos. También se puede ver la implementación del login de la aplicación.
 
 ```kotlin
 class ApiService : Service() {
 
     private val tag = this.javaClass.name
+    private lateinit var database: DatabaseReference
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
 
+    override fun onCreate() {
+        super.onCreate()
+        // Obtener referencia a la instancia de Firebase Database
+        database = FirebaseDatabase.getInstance().reference
+
+    }
+
     fun getTournaments(callback: ApiServiceCallback) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val url = URL("https://swimcrhono-api-55mh.onrender.com/tournaments")
-                val connection = url.openConnection() as HttpURLConnection
-                connection.requestMethod = "GET"
+                // Obtener referencia al nodo "tournaments" en Firebase Database
+                val tournamentsRef = database.child("tournaments")
 
-                val responseCode = connection.responseCode
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    val inputStream = connection.inputStream
-                    val response = inputStream.bufferedReader().use { it.readText() }
-                    inputStream.close()
-                    callback.onTournamentsReceived(response)
-                    Logger.debug(tag, "Response: $response")
-                } else {
-                    Logger.error(tag, "Error en la respuesta: $responseCode")
-                }
+                tournamentsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        // Convertir el snapshot a JSON
+                        val response = snapshot.value
+                        // Enviar los datos al callback
+                        callback.onTournamentsReceived(response)
+                        Logger.debug(tag, "Response: $response")
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Logger.error(tag, "Error al obtener datos de Firebase: ${error.message}")
+                    }
+                })
             } catch (e: Exception) {
-                Logger.error(tag, "Error al realizar la solicitud GET $e")
+                Logger.error(tag, "Error $e")
+            }
+        }
+    }
+
+    private val auth = FirebaseAuth.getInstance()
+
+
+    suspend fun login(email: String, password: String): LoginResult {
+        return try {
+            val result = auth.signInWithEmailAndPassword(email, password).await()
+            LoginResult.Success(result.user?.uid ?: "")
+        } catch (e: FirebaseAuthInvalidUserException) {
+            LoginResult.InvalidEmail
+        } catch (e: FirebaseAuthInvalidCredentialsException) {
+            LoginResult.InvalidPassword
+        } catch (e: Exception) {
+            if (e is IOException) {
+                LoginResult.NetworkError
+            } else {
+                LoginResult.UnknownError
             }
         }
     }
 
 }
-
 ```
 <!-- Variables -->
 [backstack]: https://developer.android.com/reference/androidx/fragment/app/FragmentTransaction#addToBackStack(java.lang.String)

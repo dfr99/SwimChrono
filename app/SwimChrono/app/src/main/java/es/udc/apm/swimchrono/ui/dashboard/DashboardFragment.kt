@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.databinding.FragmentDashboardBinding
+import es.udc.apm.swimchrono.services.ApiService
 import es.udc.apm.swimchrono.ui.tournaments.TournamentInfoFragment
 import es.udc.apm.swimchrono.util.Logger
 import java.text.SimpleDateFormat
@@ -23,6 +24,8 @@ class DashboardFragment : Fragment(), OnTournamentItemClickListener {
     private val viewModel: DashboardViewModel by viewModels()
 
     private var _binding: FragmentDashboardBinding? = null
+
+    private lateinit var apiService: ApiService
 
     private val binding get() = _binding!!
 
@@ -44,6 +47,9 @@ class DashboardFragment : Fragment(), OnTournamentItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        apiService = ApiService()
+        apiService.onCreate()
 
         viewModel.getTournaments()
 
@@ -80,7 +86,7 @@ class DashboardFragment : Fragment(), OnTournamentItemClickListener {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         return binding.root

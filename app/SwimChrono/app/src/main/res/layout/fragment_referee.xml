@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/chrono_white"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/titleText"
+        style="@style/AppTextStyle.Bold"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:ellipsize="none"
+        android:foregroundGravity="fill"
+        android:text="@string/title_chronometer_race"
+        android:textSize="24sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/races"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:nestedScrollingEnabled="false"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/item_race_info" />
+
+    <Button
+        android:id="@+id/beginButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#098797"
+        android:text="@string/scan_qr_button"
+        android:textColor="#000000" />
+
+</LinearLayout>

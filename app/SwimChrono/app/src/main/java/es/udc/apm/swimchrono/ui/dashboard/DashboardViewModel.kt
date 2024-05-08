@@ -7,7 +7,6 @@ import es.udc.apm.swimchrono.model.Tournament
 import es.udc.apm.swimchrono.services.ApiService
 import es.udc.apm.swimchrono.services.ApiServiceCallback
 import es.udc.apm.swimchrono.util.Logger
-import org.json.JSONArray
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -20,35 +19,43 @@ class DashboardViewModel : ViewModel(), ApiServiceCallback {
 
     private val apiService = ApiService()
 
+    init {
+        // Inicializamos el ApiService en el init del ViewModel
+        apiService.onCreate()
+    }
+
     fun getTournaments() {
         apiService.getTournaments(this)
     }
 
-    override fun onTournamentsReceived(response: String) {
+    override fun onDataReceived(response: Any?) {
         val tournamentsList = parseResponse(response)
         _tournaments.postValue(tournamentsList)
         Logger.debug(tag, "Response from ApiService: $tournamentsList")
     }
 
 
-    private fun parseResponse(response: String): List<Tournament> {
+    private fun parseResponse(response: Any?): List<Tournament> {
         val tournamentList = mutableListOf<Tournament>()
 
+        if (response is ArrayList<*>) {
+            for (item in response) {
+                if (item is HashMap<*, *>) {
+                    val id = (item["id"] as? Long)?.toInt() ?: 0
+                    val type = item["tipo"] as? String ?: ""
+                    val name = item["nombre"] as? String ?: ""
+                    val location = item["lugar"] as? String ?: ""
+                    val participants = (item["num_participantes"] as? Long)?.toInt() ?: 0
+                    val dateString = item["fecha"] as? String ?: ""
 
-        val jsonArray = JSONArray(response)
-        for (i in 0 until jsonArray.length()) {
-            val jsonObject = jsonArray.getJSONObject(i)
-            val id = jsonObject.getInt("ID")
-            val type = jsonObject.getString("TIPO")
-            val name = jsonObject.getString("NOMBRE")
-            val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
-            val date = dateFormat.parse(jsonObject.getString("FECHA"))
-            val participants = jsonObject.getInt("NÚMERO PARTICIPANTES")
-            val location = jsonObject.getString("LUGAR")
-            val races = emptyList<String>() //FIXME: Crear un objeto Race
+                    val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
+                    val date = dateFormat.parse(dateString)
 
-            val tournament = Tournament(id, type, name, date, participants, location, races)
-            tournamentList.add(tournament)
+                    val tournament =
+                        Tournament(id, type, name, date, participants, location, emptyList())
+                    tournamentList.add(tournament)
+                }
+            }
         }
 
         return tournamentList

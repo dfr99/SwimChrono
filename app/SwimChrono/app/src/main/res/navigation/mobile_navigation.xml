@@ -12,6 +12,12 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
+        android:id="@+id/navigation_referee"
+        android:name="es.udc.apm.swimchrono.ui.referee.RefereeFragment"
+        android:label="@string/referee"
+        tools:layout="@layout/fragment_referee"
+        />
+    <fragment
         android:id="@+id/navigation_club"
         android:name="es.udc.apm.swimchrono.ui.club.ClubFragment"
         android:label="@string/title_club"
@@ -24,8 +30,21 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
+        android:id="@+id/navigation_login"
+        android:name="es.udc.apm.swimchrono.ui.login.LoginFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_login">
+        <action
+            android:id="@+id/action_profile_to_profile_fragment"
+            app:destination="@id/navigation_profile" />
+
+    </fragment>
+
+
+    <fragment
         android:id="@+id/navigation_profile"
         android:name="es.udc.apm.swimchrono.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
+
 </navigation>

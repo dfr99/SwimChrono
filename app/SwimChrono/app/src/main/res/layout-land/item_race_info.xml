@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item_race_info"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:padding="20dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="false"
+        android:focusable="true">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:padding="8dp"
+                    android:textSize="20sp"
+                    android:textAlignment="center"
+                    android:textColor="@color/chrono_white"
+                    style="@style/AppTextStyle.Bold"
+                    android:text="@string/swimmer" />
+
+                <TextView
+                    android:padding="8dp"
+                    android:textSize="20sp"
+                    android:textAlignment="center"
+                    style="@style/AppTextStyle.Bold"
+                    android:textColor="@color/chrono_white"
+                    android:text="@string/club" />
+
+                <TextView
+                    android:padding="8dp"
+                    android:text="@string/heat"
+                    android:textSize="20sp"
+                    android:textAlignment="center"
+                    android:textColor="@color/chrono_white"
+                    style="@style/AppTextStyle.Bold" />
+
+                <TextView
+                    android:padding="8dp"
+                    android:textSize="20sp"
+                    style="@style/AppTextStyle.Bold"
+                    android:textAlignment="center"
+                    android:textColor="@color/chrono_white"
+                    android:text="@string/lane" />
+
+                <TextView
+                    android:padding="8dp"
+                    android:text="@string/race"
+                    android:textSize="20sp"
+                    android:textAlignment="center"
+                    android:textColor="@color/chrono_white"
+                    style="@style/AppTextStyle.Bold" />
+
+                <TextView
+                    android:padding="8dp"
+                    style="@style/AppTextStyle.Bold"
+                    android:textSize="20sp"
+                    android:textAlignment="center"
+                    android:textColor="@color/chrono_white"
+                    android:text="@string/hour" />
+
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/turquoise_700">
+
+                <TextView
+                    android:id="@+id/swimmer"
+                    android:padding="8dp"
+                    android:layout_marginEnd="15dp"
+                    android:textSize="16sp"
+                    style="@style/AppTextStyle.Bold"
+                    android:textAlignment="center"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/club"
+                    android:padding="8dp"
+                    android:layout_marginEnd="15dp"
+                    android:textSize="16sp"
+                    style="@style/AppTextStyle.Bold"
+                    android:textAlignment="center"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/race"
+                    android:padding="8dp"
+                    style="@style/AppTextStyle.Bold"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="15dp"
+                    android:textAlignment="center"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/heat"
+                    android:padding="8dp"
+                    style="@style/AppTextStyle.Bold"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="15dp"
+                    android:textAlignment="center"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/lane"
+                    android:padding="8dp"
+                    style="@style/AppTextStyle.Bold"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="15dp"
+                    android:textAlignment="center"
+                    android:text="" />
+
+                <TextView
+                    android:id="@+id/hour"
+                    android:padding="8dp"
+                    style="@style/AppTextStyle.Bold"
+                    android:layout_marginEnd="15dp"
+                    android:textSize="16sp"
+                    android:textAlignment="center"
+                    android:text="" />
+            </TableRow>
+        </TableLayout>
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

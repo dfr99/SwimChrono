@@ -6,7 +6,7 @@ Para la creación de los siguientes wireframes se ha seguido una paleta de color
 
 ![StyleSheet](../images/wireframes/Brand%20Style%20Sheet.png)
 
-## Wireframes de los principales casos de uso (vertical)
+## Wireframes de los principales casos de uso
 
 A continuación, se presentan los bocetos de las diferentes pantallas de la aplicación.
 Se muestran tanto las pantallas
@@ -45,7 +45,15 @@ En esta pantalla, los **nadadores y entrenadores** podrán explorar información
 
 Esta sección estará destinada a los **cronometradores oficiales** para registrar y gestionar los tiempos de los participantes en los eventos.
 
+#### Disposición en vertical
+
 ![Cronometrador Oficial](../images/wireframes/Referee.png)
+
+#### Disposición en horizontal
+
+![Races](../images/wireframes/races.png)
+
+![Timer](../images/wireframes/timer.png)
 
 ### 5. Mi Perfil
 
