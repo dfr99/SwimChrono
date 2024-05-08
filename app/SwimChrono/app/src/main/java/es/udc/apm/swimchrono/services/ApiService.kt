@@ -100,6 +100,71 @@ class ApiService : Service() {
     }
 
 
+    fun getClubData(id: Int?, callback: ApiServiceCallback) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val clubsRef = database.child("clubs")
+
+                clubsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.children.forEach { clubSnapshot ->
+                            // Obtener el ID del club
+                            val clubId = clubSnapshot.child("id").getValue(Int::class.java)
+                            // Verificar si el id del club coincide con el club buscado
+                            if (clubId == id) {
+                                // Obtener los datos del club y enviar al callback
+                                val clubData = clubSnapshot.value
+                                Logger.debug(tag, "Called callback with : $clubData")
+                                callback.onDataReceived(clubData)
+                                return // Salir del bucle forEach después de encontrar el club
+                            }
+                        }
+                        // Si no se encontró ningún usuario con el UID especificado
+                        Logger.error(tag, "No se encontró ningún club con el ID: $id")
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Logger.error(tag, "Error al obtener datos de Firebase: ${error.message}")
+                    }
+                })
+            } catch (e: Exception) {
+                Logger.error(tag, "Error $e")
+            }
+        }
+    }
+
+
+    fun isUserMember(uid: String, callback: ApiServiceCallback) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val clubsRef = database.child("clubs")
+                clubsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.children.forEach { clubSnapshot ->
+                            val members = clubSnapshot.child("miembros").getValue(Array::class.java)
+                            members?.forEach { memberUid ->
+                                if (memberUid == uid) {
+                                    val clubId = clubSnapshot.child("id").getValue(Int::class.java)
+                                    getClubData(clubId, callback)
+                                    return
+                                }
+                        }
+                        // Si no se encontró ningún usuario con el UID especificado
+                        Logger.error(tag, "No se encontró ningún club")
+                    }
+                }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Logger.error(tag, "Error al obtener datos de Firebase: ${error.message}")
+                    }
+                })
+            } catch (e: Exception) {
+                Logger.error(tag, "Error $e")
+            }
+        }
+    }
+
+
     private val auth = FirebaseAuth.getInstance()
 
 
