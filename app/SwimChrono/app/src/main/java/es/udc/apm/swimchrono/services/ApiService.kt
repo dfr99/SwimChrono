@@ -100,7 +100,7 @@ class ApiService : Service() {
     }
 
 
-    fun getClubData(id: Int?, callback: ApiServiceCallback) {
+    fun getClub(id: Int?, callback: ApiServiceCallback) {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val clubsRef = database.child("clubs")
@@ -141,11 +141,11 @@ class ApiService : Service() {
                 clubsRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         snapshot.children.forEach { clubSnapshot ->
-                            val members = clubSnapshot.child("miembros").getValue(Array::class.java)
+                            val members = clubSnapshot.child("members").getValue(Array::class.java)
                             members?.forEach { memberUid ->
                                 if (memberUid == uid) {
                                     val clubId = clubSnapshot.child("id").getValue(Int::class.java)
-                                    getClubData(clubId, callback)
+                                    getClub(clubId, callback)
                                     return
                                 }
                         }
