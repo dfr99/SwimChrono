@@ -1,16 +1,12 @@
 package es.udc.apm.swimchrono.ui.club
 
-import android.location.Address
-import android.provider.ContactsContract.CommonDataKinds.Phone
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import es.udc.apm.swimchrono.model.Club
-import es.udc.apm.swimchrono.model.Tournament
 import es.udc.apm.swimchrono.services.ApiService
 import es.udc.apm.swimchrono.services.ApiServiceCallback
 import es.udc.apm.swimchrono.util.Logger
-import java.net.URL
 
 class ClubViewModel : ViewModel(), ApiServiceCallback {
 
