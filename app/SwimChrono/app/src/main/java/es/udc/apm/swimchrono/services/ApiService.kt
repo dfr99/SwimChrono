@@ -3,6 +3,7 @@ package es.udc.apm.swimchrono.services
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
@@ -70,7 +71,6 @@ class ApiService : Service() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val tournamentsRef = database.child("users")
-
                 tournamentsRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         snapshot.children.forEach { userSnapshot ->
@@ -80,7 +80,7 @@ class ApiService : Service() {
                             if (userUid == uid) {
                                 // Obtener los datos del usuario y enviar al callback
                                 val userData = userSnapshot.value
-                                Logger.debug(tag, "Called callback with : $userData")
+                                Logger.debug(tag, "On ApiService.getUserData(): $userData")
                                 callback.onDataReceived(userData)
                                 return // Salir del bucle forEach después de encontrar el usuario
                             }
@@ -115,7 +115,7 @@ class ApiService : Service() {
                             if (clubId == id) {
                                 // Obtener los datos del club y enviar al callback
                                 val clubData = clubSnapshot.value
-                                Logger.debug(tag, "Called callback with : $clubData")
+                                Logger.debug(tag, "On ApiService.getClub(): Called callback with : $clubData")
                                 callback.onDataReceived(clubData)
                                 return // Salir del bucle forEach después de encontrar el club
                             }
@@ -142,29 +142,31 @@ class ApiService : Service() {
                 clubsRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         snapshot.children.forEach { clubSnapshot ->
-                            val membersRef = database.child("members")
-                            membersRef.addListenerForSingleValueEvent(object : ValueEventListener {
-                                override fun onDataChange(snapshot: DataSnapshot) {
-                                    snapshot.children.forEach { memberSnapshot ->
-                                        val memberUid =
-                                            memberSnapshot.child("UID").getValue(String::class.java)
-                                        if (memberUid == uid) {
-                                            val clubId =
-                                                clubSnapshot.child("id").getValue(Int::class.java)
-                                            getClub(clubId, callback)
-                                            return
-                                        }
-                                    }
-                                }
+                            val genericType = object :
+                                GenericTypeIndicator<List<HashMap<String, String>>>() {}
 
-                                override fun onCancelled(error: DatabaseError) {
-                                    Logger.error(
-                                        tag,
-                                        "Error al obtener datos de Firebase: ${error.message}"
-                                    )
+                            clubSnapshot.child("members").getValue(genericType)?.forEach { user ->
+                                if (user.containsValue(uid)) {
+                                    val clubId = clubSnapshot.child("id").getValue(Int::class.java)
+                                    Logger.debug(tag,
+                                        "Encontrado el usuario ".plus(uid).plus(" en el club ").plus(clubId).plus(" como deportista"))
+                                    getClub(clubId, callback)
+                                    return
                                 }
-                            })
+                            }
+
+                            clubSnapshot.child("trainers").getValue(genericType)?.forEach { trainer ->
+                                if (trainer.containsValue(uid)) {
+                                    val clubId = clubSnapshot.child("id").getValue(Int::class.java)
+                                    Logger.debug(tag,
+                                        "Encontrado el usuario ".plus(uid).plus(" en el club ").plus(clubId).plus(" como entrenador"))
+                                    getClub(clubId, callback)
+                                    return
+                                }
+                            }
                         }
+
+                        Logger.error(tag, "El usuario".plus(uid).plus("no pertenece a ningún club"))
                     }
 
                     override fun onCancelled(error: DatabaseError) {

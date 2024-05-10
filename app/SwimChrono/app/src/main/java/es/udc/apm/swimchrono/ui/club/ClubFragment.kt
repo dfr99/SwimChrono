@@ -10,10 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.services.ApiService
 import es.udc.apm.swimchrono.databinding.FragmentClubBinding
-import es.udc.apm.swimchrono.model.User
 import es.udc.apm.swimchrono.ui.login.LoginViewModel
 
 
@@ -35,23 +33,32 @@ class ClubFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        _binding = FragmentClubBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         apiService = ApiService()
         apiService.onCreate()
         sharedPreferences = requireContext().getSharedPreferences("user_data", Context.MODE_PRIVATE)
 
-        _binding = FragmentClubBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        val userId = sharedPreferences.getString("userId", null)
+        if (userId != null) {
+            clubViewModel.getClub(userId)
+        }
 
-        val clubMemberRecyclerView: RecyclerView = root.findViewById(R.id.club_member_list)
+        val clubMemberRecyclerView: RecyclerView = binding.clubMemberList
         clubMemberRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val trainersRecyclerView : RecyclerView = root.findViewById(R.id.trainer)
+        val trainersRecyclerView : RecyclerView = binding.trainer
         trainersRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val userId = sharedPreferences.getString("userId", null)
-        userId?.let { clubViewModel.getClub(it) }
-
         clubViewModel.club.observe(viewLifecycleOwner) { club ->
+
+            val clubAdapter = ClubDataAdapter(club)
+            clubMemberRecyclerView.adapter = clubAdapter
 
             val clubMembers = mutableListOf<Array<String>>()
             for (member in club.members) {
@@ -60,6 +67,7 @@ class ClubFragment : Fragment() {
                     clubMembers.add(arrayOf(user.name, user.surname, user.email))
                 }
             }
+
             val clubMemberAdapter = RecyclerClubMembersListAdapter(clubMembers)
             clubMemberRecyclerView.adapter = clubMemberAdapter
 
@@ -73,8 +81,6 @@ class ClubFragment : Fragment() {
             val trainersAdapter = RecyclerItemTrainerAdapter(trainers)
             trainersRecyclerView.adapter = trainersAdapter
         }
-
-        return root
     }
 
     override fun onDestroyView() {

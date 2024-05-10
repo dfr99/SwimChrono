@@ -9,7 +9,7 @@ import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.model.Club
 
 class ClubDataAdapter(
-    private val dataSet: List<Club>
+    private val dataSet: Club
 ) :
     RecyclerView.Adapter<ClubDataAdapter.ViewHolder>() {
 
@@ -28,14 +28,16 @@ class ClubDataAdapter(
         return ViewHolder(view)
     }
 
+    override fun getItemCount(): Int {
+        return 1
+    }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val clubData = dataSet[position]
+        val clubData = dataSet
 
         holder.clubName.text = clubData.name
         holder.address.text = clubData.address
         holder.phone.text = clubData.phone
         holder.url.text = clubData.url
     }
-
-    override fun getItemCount() = dataSet.size
 }
