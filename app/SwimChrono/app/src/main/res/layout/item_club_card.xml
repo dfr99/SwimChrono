@@ -18,58 +18,27 @@
         android:clickable="true"
         android:focusable="true">
 
-        <ImageView
-            android:id="@+id/tournament_photo"
-            android:layout_width="109dp"
-            android:layout_height="69dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:contentDescription="@string/icono_del_club"
-            android:src="@drawable/old_cf" />
-
-        <TextView
-            style="@style/AppTextStyle.Bold"
-            android:layout_width="100dp"
-            android:layout_height="20dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/rounded_border"
-            android:text="@string/local_league" />
-
         <TextView
             android:id="@+id/nombre_club"
             style="@style/AppTextStyle.Bold"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
             android:layout_height="30dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="45dp"
-            android:layout_marginEnd="30dp"
-            android:text="@string/club_fluvial_lugo"
-            android:layout_marginBottom="10dp"
+            android:textSize="20sp"
+            android:gravity="center"
             android:textColor="@color/chrono_white" />
 
         <TextView
             style="@style/AppTextStyle.Bold"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="70dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="10dp"
             android:text="@string/full_info"
-            android:textAlignment="center"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
             android:textColor="@color/chrono_white" />
 
         <TextView
@@ -79,11 +48,11 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="80dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
-            android:textColor="@color/chrono_white"
-            android:text="@string/direccion"/>
+            android:gravity="center"
+            android:textColor="@color/chrono_white" />
 
         <TextView
             android:id="@+id/pagina_web"
@@ -92,11 +61,10 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="125dp"
+            android:layout_marginTop="100dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
             android:textColor="@color/chrono_white"
-            android:text="@string/url"
             android:autoLink="web" />
 
         <TextView
@@ -106,24 +74,12 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="120dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
-            android:textColor="@color/chrono_white"
-            android:text="@string/phone" />
+            android:textColor="@color/chrono_white" />
 
-        <TextView
-            android:id="@+id/miembros"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="206dp"
-            android:layout_marginTop="150dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="10dp"
-            android:textColor="@color/chrono_white"
-            android:text="@string/members_number" />
+
 
     </RelativeLayout>
 

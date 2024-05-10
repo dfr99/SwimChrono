@@ -54,27 +54,23 @@ class ClubFragment : Fragment() {
         clubViewModel.club.observe(viewLifecycleOwner) { club ->
 
             val clubMembers = mutableListOf<Array<String>>()
-
             for (member in club.members) {
                 userViewModel.getUserData(member)
                 userViewModel.userLiveData.observe(viewLifecycleOwner) { user ->
                     clubMembers.add(arrayOf(user.name, user.surname, user.email))
                 }
             }
+            val clubMemberAdapter = RecyclerClubMembersListAdapter(clubMembers)
+            clubMemberRecyclerView.adapter = clubMemberAdapter
 
             val trainers = mutableListOf<Array<String>>()
-
             for (trainer in club.trainers) {
                 userViewModel.getUserData(trainer)
                 userViewModel.userLiveData.observe(viewLifecycleOwner) { user ->
                     trainers.add(arrayOf(user.name, user.surname, user.email))
                 }
             }
-
-            val clubMemberAdapter = RecyclerClubMembersListAdapter()
-            clubMemberRecyclerView.adapter = clubMemberAdapter
-
-            val trainersAdapter = RecyclerItemTrainerAdapter()
+            val trainersAdapter = RecyclerItemTrainerAdapter(trainers)
             trainersRecyclerView.adapter = trainersAdapter
         }
 

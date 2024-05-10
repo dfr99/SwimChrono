@@ -10,6 +10,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.GenericTypeIndicator
 import com.google.firebase.database.ValueEventListener
 import es.udc.apm.swimchrono.model.LoginResult
 import es.udc.apm.swimchrono.util.Logger
@@ -141,18 +142,30 @@ class ApiService : Service() {
                 clubsRef.addListenerForSingleValueEvent(object : ValueEventListener {
                     override fun onDataChange(snapshot: DataSnapshot) {
                         snapshot.children.forEach { clubSnapshot ->
-                            val members = clubSnapshot.child("members").getValue(Array::class.java)
-                            members?.forEach { memberUid ->
-                                if (memberUid == uid) {
-                                    val clubId = clubSnapshot.child("id").getValue(Int::class.java)
-                                    getClub(clubId, callback)
-                                    return
+                            val membersRef = database.child("members")
+                            membersRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onDataChange(snapshot: DataSnapshot) {
+                                    snapshot.children.forEach { memberSnapshot ->
+                                        val memberUid =
+                                            memberSnapshot.child("UID").getValue(String::class.java)
+                                        if (memberUid == uid) {
+                                            val clubId =
+                                                clubSnapshot.child("id").getValue(Int::class.java)
+                                            getClub(clubId, callback)
+                                            return
+                                        }
+                                    }
                                 }
+
+                                override fun onCancelled(error: DatabaseError) {
+                                    Logger.error(
+                                        tag,
+                                        "Error al obtener datos de Firebase: ${error.message}"
+                                    )
+                                }
+                            })
                         }
-                        // Si no se encontró ningún usuario con el UID especificado
-                        Logger.error(tag, "No se encontró ningún club")
                     }
-                }
 
                     override fun onCancelled(error: DatabaseError) {
                         Logger.error(tag, "Error al obtener datos de Firebase: ${error.message}")

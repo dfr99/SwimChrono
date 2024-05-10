@@ -6,19 +6,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import es.udc.apm.swimchrono.R
+import es.udc.apm.swimchrono.model.Club
 
 class ClubDataAdapter(
-    private val dataSet: Array<String>
+    private val dataSet: List<Club>
 ) :
     RecyclerView.Adapter<ClubDataAdapter.ViewHolder>() {
 
     class ViewHolder(
         view: View
     ) : RecyclerView.ViewHolder(view) {
-        val nombreClub: TextView = view.findViewById(R.id.nombre_club)
-        val direccion: TextView = view.findViewById(R.id.direccion)
-        val telefono: TextView = view.findViewById(R.id.telefono)
-        val miembros: TextView = view.findViewById(R.id.miembros)
+        val clubName: TextView = view.findViewById(R.id.nombre_club)
+        val address: TextView = view.findViewById(R.id.direccion)
+        val phone: TextView = view.findViewById(R.id.telefono)
         val url: TextView = view.findViewById(R.id.pagina_web)
     }
 
@@ -29,9 +29,12 @@ class ClubDataAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        TODO("Parsear datos de item_club_card")
-        // val clubData = dataSet[position]
-        // holder.name.text = clubMember
+        val clubData = dataSet[position]
+
+        holder.clubName.text = clubData.name
+        holder.address.text = clubData.address
+        holder.phone.text = clubData.phone
+        holder.url.text = clubData.url
     }
 
     override fun getItemCount() = dataSet.size

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import es.udc.apm.swimchrono.R
 
 class RecyclerClubMembersListAdapter(
-    private val dataSet: Array<String>
+    private val dataSet: List<Array<String>>
 ) :
     RecyclerView.Adapter<RecyclerClubMembersListAdapter.ViewHolder>() {
 
@@ -16,6 +16,7 @@ class RecyclerClubMembersListAdapter(
         view: View
     ) : RecyclerView.ViewHolder(view) {
         val name: TextView = view.findViewById(R.id.text_user_name)
+        val email: TextView = view.findViewById(R.id.text_user_email)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,7 +27,9 @@ class RecyclerClubMembersListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val clubMember = dataSet[position]
-        holder.name.text = clubMember
+
+        holder.name.text = clubMember[0].plus(" ").plus(clubMember[1])
+        holder.email.text = clubMember[2]
     }
 
     override fun getItemCount() = dataSet.size
