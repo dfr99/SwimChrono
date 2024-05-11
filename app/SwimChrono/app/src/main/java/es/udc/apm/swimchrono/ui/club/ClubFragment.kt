@@ -10,9 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
+import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.services.ApiService
 import es.udc.apm.swimchrono.databinding.FragmentClubBinding
+import es.udc.apm.swimchrono.databinding.ItemClubCardBinding
 import es.udc.apm.swimchrono.ui.login.LoginViewModel
+import es.udc.apm.swimchrono.util.Logger
 
 
 class ClubFragment : Fragment() {
@@ -47,7 +51,10 @@ class ClubFragment : Fragment() {
         val userId = sharedPreferences.getString("userId", null)
         if (userId != null) {
             clubViewModel.getClub(userId)
+            Logger.info(tag, "From ClubFragment: Get club data")
         }
+
+        val clubInfo: ItemClubCardBinding = binding.itemClubCard
 
         val clubMemberRecyclerView: RecyclerView = binding.clubMemberList
         clubMemberRecyclerView.layoutManager = LinearLayoutManager(requireContext())
@@ -57,29 +64,32 @@ class ClubFragment : Fragment() {
 
         clubViewModel.club.observe(viewLifecycleOwner) { club ->
 
-            val clubAdapter = ClubDataAdapter(club)
-            clubMemberRecyclerView.adapter = clubAdapter
+            clubInfo.nombreClub.text = club.name
+            clubInfo.direccion.text = getString(R.string.address).plus(" ").plus(club.address)
+            clubInfo.paginaWeb.text = getString(R.string.url).plus(" ").plus(club.url)
+            clubInfo.telefono.text = getString(R.string.phone).plus(" ").plus(club.phone)
 
-            val clubMembers = mutableListOf<Array<String>>()
-            for (member in club.members) {
-                userViewModel.getUserData(member)
-                userViewModel.userLiveData.observe(viewLifecycleOwner) { user ->
-                    clubMembers.add(arrayOf(user.name, user.surname, user.email))
-                }
-            }
+            // val clubMembers = mutableListOf<Array<String>>()
+            // for (member in club.members) {
+                // userViewModel.getUserData(member)
+                // userViewModel.userLiveData.observe(viewLifecycleOwner) { user ->
+                //   clubMembers.add(arrayOf(user.name, user.surname, user.email))
+                // }
+            // }
 
-            val clubMemberAdapter = RecyclerClubMembersListAdapter(clubMembers)
-            clubMemberRecyclerView.adapter = clubMemberAdapter
+            // val clubMemberAdapter = RecyclerClubMembersListAdapter(clubMembers)
+            // clubMemberRecyclerView.adapter = clubMemberAdapter
 
-            val trainers = mutableListOf<Array<String>>()
-            for (trainer in club.trainers) {
-                userViewModel.getUserData(trainer)
-                userViewModel.userLiveData.observe(viewLifecycleOwner) { user ->
-                    trainers.add(arrayOf(user.name, user.surname, user.email))
-                }
-            }
-            val trainersAdapter = RecyclerItemTrainerAdapter(trainers)
-            trainersRecyclerView.adapter = trainersAdapter
+            // val trainers = mutableListOf<Array<String>>()
+            // for (trainer in club.trainers) {
+                // userViewModel.getUserData(trainer)
+                // userViewModel.userLiveData.observe(viewLifecycleOwner) { user ->
+                    // trainers.add(arrayOf(user.name, user.surname, user.email))
+                // }
+            // }
+             
+            // val trainersAdapter = RecyclerItemTrainerAdapter(trainers)
+            // trainersRecyclerView.adapter = trainersAdapter
         }
     }
 

@@ -51,4 +51,7 @@
     <string name="scan_qr_button">Scan QR</string>
     <string name="initTimeCrono">00:00:000</string>
     <string name="resetTextButton">reset</string>
+    <string name="address">Address:</string>
+    <string name="url">URL:</string>
+    <string name="phone">Phone:</string>
 </resources>
