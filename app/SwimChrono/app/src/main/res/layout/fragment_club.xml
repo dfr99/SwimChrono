@@ -37,14 +37,13 @@
         <TextView
             android:id="@+id/text_trainer"
             style="@style/AppTextStyle.Bold"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
             android:layout_marginTop="5dp"
             android:text="@string/trainer"
             android:textSize="20sp"
-            app:layout_constraintTop_toBottomOf="@+id/item_club_card"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/item_club_card" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/trainer"

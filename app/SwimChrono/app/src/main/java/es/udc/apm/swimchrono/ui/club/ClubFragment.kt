@@ -4,8 +4,10 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -56,9 +58,11 @@ class ClubFragment : Fragment() {
 
         val clubInfo: ItemClubCardBinding = binding.itemClubCard
 
+        val clubMemberTextView : TextView = binding.textMembers
         val clubMemberRecyclerView: RecyclerView = binding.clubMemberList
         clubMemberRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
+        val trainerTextView : TextView = binding.textTrainer
         val trainersRecyclerView : RecyclerView = binding.trainer
         trainersRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
@@ -69,18 +73,19 @@ class ClubFragment : Fragment() {
             clubInfo.paginaWeb.text = getString(R.string.url).plus(" ").plus(club.url)
             clubInfo.telefono.text = getString(R.string.phone).plus(" ").plus(club.phone)
 
-            // val clubMembers = mutableListOf<Array<String>>()
+            val clubMembers = mutableListOf<Array<String>>()
             // for (member in club.members) {
                 // userViewModel.getUserData(member)
                 // userViewModel.userLiveData.observe(viewLifecycleOwner) { user ->
-                //   clubMembers.add(arrayOf(user.name, user.surname, user.email))
+                  // clubMembers.add(arrayOf(user.name, user.surname, user.email))
                 // }
             // }
 
-            // val clubMemberAdapter = RecyclerClubMembersListAdapter(clubMembers)
-            // clubMemberRecyclerView.adapter = clubMemberAdapter
+            val clubMemberAdapter = RecyclerClubMembersListAdapter(clubMembers)
+            clubMemberTextView.text = getString(R.string.members).plus(" (").plus(clubMembers.size).plus(")")
+            clubMemberRecyclerView.adapter = clubMemberAdapter
 
-            // val trainers = mutableListOf<Array<String>>()
+            val trainers = mutableListOf<Array<String>>()
             // for (trainer in club.trainers) {
                 // userViewModel.getUserData(trainer)
                 // userViewModel.userLiveData.observe(viewLifecycleOwner) { user ->
@@ -88,8 +93,9 @@ class ClubFragment : Fragment() {
                 // }
             // }
              
-            // val trainersAdapter = RecyclerItemTrainerAdapter(trainers)
-            // trainersRecyclerView.adapter = trainersAdapter
+            val trainersAdapter = RecyclerItemTrainerAdapter(trainers)
+            trainerTextView.text = getString(R.string.trainer).plus(" (").plus(trainers.size).plus(")")
+            trainersRecyclerView.adapter = trainersAdapter
         }
     }
 

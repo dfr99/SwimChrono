@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.local.IndexManager.IndexType
 import es.udc.apm.swimchrono.model.Club
+import es.udc.apm.swimchrono.model.User
 import es.udc.apm.swimchrono.services.ApiService
 import es.udc.apm.swimchrono.services.ApiServiceCallback
 import es.udc.apm.swimchrono.util.Logger
@@ -17,6 +18,9 @@ class ClubViewModel : ViewModel(), ApiServiceCallback {
 
     private val _club = MutableLiveData<Club>()
     val club: LiveData<Club> = _club
+
+    private val _user = MutableLiveData<User>()
+    val user: LiveData<User> = _user
 
     private var apiService = ApiService()
 
