@@ -17,8 +17,10 @@ import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.services.ApiService
 import es.udc.apm.swimchrono.databinding.FragmentClubBinding
 import es.udc.apm.swimchrono.databinding.ItemClubCardBinding
+import es.udc.apm.swimchrono.model.User
 import es.udc.apm.swimchrono.ui.login.LoginViewModel
 import es.udc.apm.swimchrono.util.Logger
+import kotlinx.coroutines.awaitAll
 
 
 class ClubFragment : Fragment() {
@@ -72,30 +74,33 @@ class ClubFragment : Fragment() {
             clubInfo.direccion.text = getString(R.string.address).plus(" ").plus(club.address)
             clubInfo.paginaWeb.text = getString(R.string.url).plus(" ").plus(club.url)
             clubInfo.telefono.text = getString(R.string.phone).plus(" ").plus(club.phone)
+            clubInfo.membersNumber.text = getString(R.string.number_of_members).plus(" ").plus(club.membersNumber.toString())
 
-            val clubMembers = mutableListOf<Array<String>>()
-            // for (member in club.members) {
-                // userViewModel.getUserData(member)
-                // userViewModel.userLiveData.observe(viewLifecycleOwner) { user ->
-                  // clubMembers.add(arrayOf(user.name, user.surname, user.email))
-                // }
-            // }
-
-            val clubMemberAdapter = RecyclerClubMembersListAdapter(clubMembers)
-            clubMemberTextView.text = getString(R.string.members).plus(" (").plus(clubMembers.size).plus(")")
-            clubMemberRecyclerView.adapter = clubMemberAdapter
+            trainerTextView.text =
+                getString(R.string.trainer).plus(" (").plus(club.trainers.size).plus(")")
+            clubMemberTextView.text =
+                getString(R.string.members).plus(" (").plus(club.members.size).plus(")")
 
             val trainers = mutableListOf<Array<String>>()
-            // for (trainer in club.trainers) {
-                // userViewModel.getUserData(trainer)
-                // userViewModel.userLiveData.observe(viewLifecycleOwner) { user ->
-                    // trainers.add(arrayOf(user.name, user.surname, user.email))
+            for (trainer in club.trainers) {
+                clubViewModel.getUser(trainer)
+                clubViewModel.user.observe(viewLifecycleOwner) { user ->
+                    trainers.add(arrayOf(user.name, user.surname, user.email))
+                }
+            }
+
+            val trainersAdapter = RecyclerClubMembersListAdapter(trainers)
+            trainersRecyclerView.adapter = trainersAdapter
+
+            // val members = mutableListOf<Array<String>>()
+            // for (member in club.members) {
+                // clubViewModel.getUser(member)
+                // clubViewModel.user.observe(viewLifecycleOwner) { user ->
+                    // members.add(arrayOf(user.name, user.surname, user.email))
+                    // val clubMembersAdapter = RecyclerClubMembersListAdapter(members)
+                    // clubMemberRecyclerView.adapter = clubMembersAdapter
                 // }
             // }
-             
-            val trainersAdapter = RecyclerItemTrainerAdapter(trainers)
-            trainerTextView.text = getString(R.string.trainer).plus(" (").plus(trainers.size).plus(")")
-            trainersRecyclerView.adapter = trainersAdapter
         }
     }
 

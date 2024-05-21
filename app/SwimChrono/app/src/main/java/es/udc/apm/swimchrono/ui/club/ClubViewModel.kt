@@ -33,14 +33,49 @@ class ClubViewModel : ViewModel(), ApiServiceCallback {
         apiService.isUserMember(uid, this)
     }
 
-    override fun onDataReceived(response: Any?) {
-        val clubData = parseResponse(response)
-        _club.postValue(clubData)
-        Logger.debug(tag, "On ClubViewModel.onDataReceived(response)," +
-                "after invocation of parseResponse(): $clubData")
+    fun getUser(uid: String) {
+        apiService.getUserData(uid, this)
     }
 
-    private fun parseResponse(response: Any?): Club {
+
+    override fun onDataReceived(response: Any?) {
+        if (response is HashMap<*, *>) {
+            if (response.contains("id")) {
+                val clubData = parseClub(response)
+                _club.postValue(clubData)
+                Logger.debug(
+                    tag, "On ClubViewModel.onDataReceived(response)," +
+                            "after invocation of parseResponse(): $clubData")
+            } else if (response.contains("UID")) {
+                val userData = parseUser(response)
+                _user.postValue(userData)
+                Logger.debug(
+                    tag, "On ClubViewModel.onDataReceived(response)," +
+                            "after invocation of parseResponse(): $userData"
+                )
+            }
+        } else {
+            Logger.error(tag, "Empty response")
+        }
+    }
+
+    private fun parseUser(response: Any?): User {
+        val res: HashMap<*, *>? = response as? HashMap<*, *>
+
+        val uid = res?.get("UID") as? String ?: ""
+        val name = res?.get("nombre") as? String ?: ""
+        val surname = res?.get("apellido") as? String ?: ""
+        val phone = res?.get("numero_telefono") as? String ?: ""
+        val birthday = res?.get("fecha_nacimiento") as? String ?: ""
+        val role = res?.get("rol") as? String ?: ""
+        val dni = res?.get("DNI") as? String ?: ""
+        val email = res?.get("email") as? String ?: ""
+
+        val userData = User(uid, name, surname, phone, birthday, role, dni, email)
+        return userData
+    }
+
+     private fun parseClub(response: Any?): Club {
         val res: HashMap<*, *>? = response as? HashMap<*, *>
         val trainersList: MutableList<String> = mutableListOf()
         val membersList: MutableList<String> = mutableListOf()
