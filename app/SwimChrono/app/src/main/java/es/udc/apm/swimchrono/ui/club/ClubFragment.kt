@@ -60,13 +60,13 @@ class ClubFragment : Fragment() {
 
         val clubInfo: ItemClubCardBinding = binding.itemClubCard
 
-        val clubMemberTextView : TextView = binding.textMembers
-        val clubMemberRecyclerView: RecyclerView = binding.clubMemberList
-        clubMemberRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
         val trainerTextView : TextView = binding.textTrainer
-        val trainersRecyclerView : RecyclerView = binding.trainer
+        val trainersRecyclerView : RecyclerView = binding.trainers
         trainersRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        val clubMemberTextView : TextView = binding.textMembers
+        val membersRecyclerView: RecyclerView = binding.members
+        membersRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         clubViewModel.club.observe(viewLifecycleOwner) { club ->
 
@@ -81,26 +81,17 @@ class ClubFragment : Fragment() {
             clubMemberTextView.text =
                 getString(R.string.members).plus(" (").plus(club.members.size).plus(")")
 
-            val trainers = mutableListOf<Array<String>>()
-            for (trainer in club.trainers) {
-                clubViewModel.getUser(trainer)
-                clubViewModel.user.observe(viewLifecycleOwner) { user ->
-                    trainers.add(arrayOf(user.name, user.surname, user.email))
-                }
+            clubViewModel.getUsers(club.id, "trainers")
+            clubViewModel.trainers.observe(viewLifecycleOwner) { trainers ->
+                val trainersAdapter = RecyclerUsersListAdapter(trainers)
+                trainersRecyclerView.adapter = trainersAdapter
             }
 
-            val trainersAdapter = RecyclerClubMembersListAdapter(trainers)
-            trainersRecyclerView.adapter = trainersAdapter
-
-            // val members = mutableListOf<Array<String>>()
-            // for (member in club.members) {
-                // clubViewModel.getUser(member)
-                // clubViewModel.user.observe(viewLifecycleOwner) { user ->
-                    // members.add(arrayOf(user.name, user.surname, user.email))
-                    // val clubMembersAdapter = RecyclerClubMembersListAdapter(members)
-                    // clubMemberRecyclerView.adapter = clubMembersAdapter
-                // }
-            // }
+            clubViewModel.getUsers(club.id, "members")
+            clubViewModel.members.observe(viewLifecycleOwner) { members ->
+                val clubMembersAdapter = RecyclerUsersListAdapter(members)
+                membersRecyclerView.adapter = clubMembersAdapter
+            }
         }
     }
 

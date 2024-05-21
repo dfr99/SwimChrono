@@ -46,7 +46,7 @@
             app:layout_constraintTop_toBottomOf="@+id/item_club_card" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/trainer"
+            android:id="@+id/trainers"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_marginTop="5dp"
@@ -69,7 +69,7 @@
             app:layout_constraintTop_toBottomOf="@+id/trainer" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/club_member_list"
+            android:id="@+id/members"
             android:layout_width="match_parent"
             android:layout_height="350dp"
             android:padding="5dp"

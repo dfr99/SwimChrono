@@ -14,6 +14,7 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.GenericTypeIndicator
 import com.google.firebase.database.ValueEventListener
 import es.udc.apm.swimchrono.model.LoginResult
+import es.udc.apm.swimchrono.model.User
 import es.udc.apm.swimchrono.util.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -179,10 +180,97 @@ class ApiService : Service() {
         }
     }
 
+    fun getUsers(id: Int?, userType: String, callback: ApiServiceCallback) {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val clubsRef = database.child("clubs")
+                val trainersRef = database.child("users")
+                val users = mutableListOf<Any?>()
+                val genericType = object : GenericTypeIndicator<List<HashMap<String, String>>>() {}
+
+                clubsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        snapshot.children.forEach { clubSnapshot ->
+                            // Obtener el ID del club
+                            val clubId = clubSnapshot.child("id").getValue(Int::class.java)
+                            // Verificar si el id del club coincide con el club buscado
+                            if (clubId == id) {
+                                if (userType == "trainers") {
+                                    clubSnapshot.child("trainers").getValue(genericType)
+                                        ?.forEach { user ->
+                                            trainersRef.addListenerForSingleValueEvent(object :
+                                                ValueEventListener {
+                                                override fun onDataChange(snapshot: DataSnapshot) {
+                                                    snapshot.children.forEach { userSnapshot ->
+                                                        val userId = userSnapshot.child("UID")
+                                                            .getValue(String::class.java)
+                                                        if (userId == user["UID"]) {
+                                                            // Obtener los datos del usuario y añadirlos a la lista
+                                                            val userData = userSnapshot.value
+                                                            users.add(userData)
+                                                            Logger.debug(
+                                                                tag,
+                                                                "On ApiService.getUsers(trainers): Called callback with : $userData"
+                                                            )
+                                                        }
+                                                    }
+                                                    callback.onDataReceived(users)
+                                                }
+
+                                                override fun onCancelled(error: DatabaseError) {
+                                                    Logger.error(
+                                                        tag,
+                                                        "Error al obtener datos de Firebase: ${error.message}"
+                                                    )
+                                                }
+                                            })
+                                        }
+                                } else if (userType == "members") {
+                                    clubSnapshot.child("members").getValue(genericType)
+                                        ?.forEach { user ->
+                                            trainersRef.addListenerForSingleValueEvent(object :
+                                                ValueEventListener {
+                                                override fun onDataChange(snapshot: DataSnapshot) {
+                                                    snapshot.children.forEach { userSnapshot ->
+                                                        val userId = userSnapshot.child("UID")
+                                                            .getValue(String::class.java)
+                                                        if (userId == user["UID"]) {
+                                                            // Obtener los datos del usuario y añadirlos a la lista
+                                                            val userData = userSnapshot.value
+                                                            users.add(userData)
+                                                            Logger.debug(
+                                                                tag,
+                                                                "On ApiService.getUsers(members): Called callback with : $userData"
+                                                            )
+                                                        }
+                                                    }
+                                                    callback.onDataReceived(users)
+                                                }
+
+                                                override fun onCancelled(error: DatabaseError) {
+                                                    Logger.error(
+                                                        tag,
+                                                        "Error al obtener datos de Firebase: ${error.message}"
+                                                    )
+                                                }
+                                            })
+                                        }
+                                }
+                            }
+                        }
+                    }
+                    override fun onCancelled(error: DatabaseError) {
+                        Logger.error(tag, "Error al obtener datos de Firebase: ${error.message}")
+                    }
+                })
+            } catch (e: Exception) {
+                Logger.error(tag, "Error $e")
+            }
+        }
+    }
+
 
     private val auth = FirebaseAuth.getInstance()
-
-
     suspend fun login(email: String, password: String): LoginResult {
         return try {
             val result = auth.signInWithEmailAndPassword(email, password).await()

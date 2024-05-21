@@ -19,8 +19,11 @@ class ClubViewModel : ViewModel(), ApiServiceCallback {
     private val _club = MutableLiveData<Club>()
     val club: LiveData<Club> = _club
 
-    private val _user = MutableLiveData<User>()
-    val user: LiveData<User> = _user
+    private val _trainers = MutableLiveData<List<HashMap<String,String>>>()
+    val trainers : LiveData<List<HashMap<String,String>>> = _trainers
+
+    private val _members = MutableLiveData<List<HashMap<String,String>>>()
+    val members : LiveData<List<HashMap<String,String>>> = _members
 
     private var apiService = ApiService()
 
@@ -33,46 +36,57 @@ class ClubViewModel : ViewModel(), ApiServiceCallback {
         apiService.isUserMember(uid, this)
     }
 
-    fun getUser(uid: String) {
-        apiService.getUserData(uid, this)
+    fun getUsers(cid: Int, userType: String) {
+        apiService.getUsers(cid, userType, this)
     }
 
-
     override fun onDataReceived(response: Any?) {
-        if (response is HashMap<*, *>) {
-            if (response.contains("id")) {
+        when (response) {
+            is HashMap<*, *> -> {
                 val clubData = parseClub(response)
                 _club.postValue(clubData)
                 Logger.debug(
                     tag, "On ClubViewModel.onDataReceived(response)," +
-                            "after invocation of parseResponse(): $clubData")
-            } else if (response.contains("UID")) {
-                val userData = parseUser(response)
-                _user.postValue(userData)
-                Logger.debug(
-                    tag, "On ClubViewModel.onDataReceived(response)," +
-                            "after invocation of parseResponse(): $userData"
+                            "after invocation of parseResponse(): $clubData"
                 )
             }
-        } else {
-            Logger.error(tag, "Empty response")
+
+            is List<*> -> {
+                val usersData = parseUsers(response)
+                if (usersData[0]["rol"] == "trainer") {
+                    _trainers.postValue(usersData)
+                } else if (usersData[0]["rol"] == "swimmer") {
+                    _members.postValue(usersData)
+                }
+                Logger.debug(tag, "On ClubViewModel.onDataReceived(response)," +
+                        "after invocation of parseResponse(): $usersData")
+            }
+
+            else -> {
+                Logger.error(tag, "Cannot parse response: $response")
+            }
         }
     }
 
-    private fun parseUser(response: Any?): User {
-        val res: HashMap<*, *>? = response as? HashMap<*, *>
+    private fun parseUsers(response: Any?): List<HashMap<String, String>> {
+        val users = mutableListOf<HashMap<String, String>>()
 
-        val uid = res?.get("UID") as? String ?: ""
-        val name = res?.get("nombre") as? String ?: ""
-        val surname = res?.get("apellido") as? String ?: ""
-        val phone = res?.get("numero_telefono") as? String ?: ""
-        val birthday = res?.get("fecha_nacimiento") as? String ?: ""
-        val role = res?.get("rol") as? String ?: ""
-        val dni = res?.get("DNI") as? String ?: ""
-        val email = res?.get("email") as? String ?: ""
-
-        val userData = User(uid, name, surname, phone, birthday, role, dni, email)
-        return userData
+        if (response is List<*>) {
+            response.forEach{ user ->
+                if (user is HashMap<*, *>) {
+                    users.add(hashMapOf(
+                        "nombre" to (user["nombre"] as? String ?: ""),
+                        "apellido" to (user["apellido"] as? String ?: ""),
+                        "email" to (user["email"] as? String ?: ""),
+                        "rol" to (user["rol"] as? String ?: "")
+                    ))
+                } else {
+                    Logger.error(tag,
+                        "Response does not contains HashMap<*,*> items")
+                }
+            }
+        }
+        return users
     }
 
      private fun parseClub(response: Any?): Club {
