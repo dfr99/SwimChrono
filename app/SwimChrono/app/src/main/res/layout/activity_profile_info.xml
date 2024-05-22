@@ -134,8 +134,67 @@
 
             </TableRow>
 
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/celdas_profile_info">
+
+                <TextView
+                    android:id="@+id/tvRolTitle"
+                    style="@style/AppTextStyle.Bold"
+                    android:layout_width="116dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/celdas_profile_info"
+                    android:gravity="center"
+                    android:text="Rol"
+                    android:textColor="@color/chronno_black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvRol"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/celdas_profile_info"
+                    android:gravity="center"
+                    android:text="Nadador"
+                    android:textColor="@color/chronno_black"
+                    android:textSize="16sp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/celdas_profile_info">
+
+                <TextView
+                    android:id="@+id/tvClubTitle"
+                    style="@style/AppTextStyle.Bold"
+                    android:layout_width="116dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/celdas_profile_info"
+                    android:gravity="center"
+                    android:text="Club"
+                    android:textColor="@color/chronno_black"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvClub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/celdas_profile_info"
+                    android:gravity="center"
+                    android:text="Basquet Coruña"
+                    android:textColor="@color/chronno_black"
+                    android:textSize="16sp" />
+
+            </TableRow>
+
         </TableLayout>
 
+
     </LinearLayout>
+
+
 
 </LinearLayout>
