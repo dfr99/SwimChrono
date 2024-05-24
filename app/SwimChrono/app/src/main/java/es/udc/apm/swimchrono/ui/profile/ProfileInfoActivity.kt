@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import es.udc.apm.swimchrono.R
+import es.udc.apm.swimchrono.notifications.NotificationManager
 
 class ProfileInfoActivity : AppCompatActivity() {
 
