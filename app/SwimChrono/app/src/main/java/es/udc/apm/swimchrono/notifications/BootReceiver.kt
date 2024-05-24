@@ -19,13 +19,13 @@ class BootReceiver : BroadcastReceiver() {
 
     private fun rescheduleNotification(context: Context) {
         // Recuperar fecha y hora de SharedPreferences
-        val sharedPreferences: SharedPreferences = context.getSharedPreferences(NotificationManager.PREFS_NAME, Context.MODE_PRIVATE)
-        val year = sharedPreferences.getInt(NotificationManager.YEAR_KEY, 0)
-        val month = sharedPreferences.getInt(NotificationManager.MONTH_KEY, 0)
-        val day = sharedPreferences.getInt(NotificationManager.DAY_KEY, 0)
-        val hour = sharedPreferences.getInt(NotificationManager.HOUR_KEY, 0)
-        val minute = sharedPreferences.getInt(NotificationManager.MINUTE_KEY, 0)
-        val second = sharedPreferences.getInt(NotificationManager.SECOND_KEY, 0)
+        val sharedPreferences: SharedPreferences = context.getSharedPreferences(AlarmNotificationManager.PREFS_NAME, Context.MODE_PRIVATE)
+        val year = sharedPreferences.getInt(AlarmNotificationManager.YEAR_KEY, 0)
+        val month = sharedPreferences.getInt(AlarmNotificationManager.MONTH_KEY, 0)
+        val day = sharedPreferences.getInt(AlarmNotificationManager.DAY_KEY, 0)
+        val hour = sharedPreferences.getInt(AlarmNotificationManager.HOUR_KEY, 0)
+        val minute = sharedPreferences.getInt(AlarmNotificationManager.MINUTE_KEY, 0)
+        val second = sharedPreferences.getInt(AlarmNotificationManager.SECOND_KEY, 0)
 
         if (year == 0 && month == 0 && day == 0 && hour == 0 && minute == 0 && second == 0) {
             // Si no se encuentran valores en SharedPreferences, no hacer nada
@@ -54,7 +54,7 @@ class BootReceiver : BroadcastReceiver() {
         val notificationIntent = Intent(context, AlarmNotification::class.java)
         val pendingIntent = PendingIntent.getBroadcast(
             context,
-            NotificationManager.NOTIFICATION_ID,
+            AlarmNotificationManager.NOTIFICATION_ID,
             notificationIntent,
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )

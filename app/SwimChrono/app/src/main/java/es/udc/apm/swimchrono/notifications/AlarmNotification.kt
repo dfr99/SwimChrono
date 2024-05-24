@@ -24,13 +24,13 @@ class AlarmNotification : BroadcastReceiver() {
         val flag = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0
         val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, flag)
 
-        val notification = NotificationCompat.Builder(context, NotificationManager.MY_CHANNEL_ID)
+        val notification = NotificationCompat.Builder(context, AlarmNotificationManager.MY_CHANNEL_ID)
             .setSmallIcon(R.mipmap.ic_launcher) // Icono del mensaje
-            .setContentTitle("My title") // Titulo del mensaje
-            .setContentText("Esto es un ejemplo <3") // Texto sin ampliar
+            .setContentTitle("¡Empieza la carrera!") // Titulo del mensaje
+            .setContentText("¡Calienta que sales!") // Texto sin ampliar
             .setStyle(
                 NotificationCompat.BigTextStyle() // Texto tras ampliar
-                    .bigText("Holita holi Holita holi Holita holi Holita holi Holita holi Holita holi Holita holi Holita holi Holita holi Holita holi Holita holi Holita holi Holita holi ")
+                    .bigText("Está por comenzar la carrera, ten todo listo y preparado")
             )
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_HIGH) // Prioridad alta para heads-up notification
@@ -38,6 +38,6 @@ class AlarmNotification : BroadcastReceiver() {
             .build() // Lanzar la notificacion
 
         val manager = context.getSystemService(Context.NOTIFICATION_SERVICE) as AndroidNotificationManager
-        manager.notify(NotificationManager.NOTIFICATION_ID, notification)
+        manager.notify(AlarmNotificationManager.NOTIFICATION_ID, notification)
     }
 }

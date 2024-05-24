@@ -4,9 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
-import android.os.SystemClock
 import android.widget.Button
-//import android.widget.Chronometer
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -66,6 +64,7 @@ class TimerActivity : AppCompatActivity() {
             isRunning = false
             startStopButton.text = getString(R.string.start)
             startStopButton.setBackgroundColor(Color.argb(255, 9, 135, 151)) // @color/chrono_play
+            startStopButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_play, 0, 0, 0)
 
         }
 

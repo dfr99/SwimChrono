@@ -83,7 +83,7 @@
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="@color/chrono_play"
                 android:drawableLeft="@drawable/icon_repeat"
-                android:text = "@string/reset_text"/>
+                android:text = "@string/resetTextButton"/>
 
             <!--Button
                 android:id="@+id/startStopButton"

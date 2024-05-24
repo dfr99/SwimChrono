@@ -1,13 +1,11 @@
 package es.udc.apm.swimchrono.ui.profile
 
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import es.udc.apm.swimchrono.R
-import es.udc.apm.swimchrono.notifications.NotificationManager
 
 class ProfileInfoActivity : AppCompatActivity() {
 

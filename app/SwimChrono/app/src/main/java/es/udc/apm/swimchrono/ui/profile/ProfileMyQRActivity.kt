@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.BarcodeFormat
@@ -23,6 +24,7 @@ class ProfileMyQRActivity : AppCompatActivity() {
 
         val buttonExit = findViewById<ImageView>(R.id.ivBackButton)
         var ivCodigoQR: ImageView = findViewById(R.id.ivCodigoQR)
+        val nameUserQR = findViewById<TextView>(R.id.tvNameQR)
 
         sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
 
@@ -50,6 +52,11 @@ class ProfileMyQRActivity : AppCompatActivity() {
         } catch (e:Exception) {
             e.printStackTrace()
         }
+
+
+        // Nombre y apellidos del usuario
+        /** Todavia por añadir**/
+        nameUserQR.setText("AleRV")
 
 
 

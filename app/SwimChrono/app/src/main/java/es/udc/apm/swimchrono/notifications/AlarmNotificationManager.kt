@@ -8,11 +8,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
-import androidx.core.app.NotificationCompat
 import java.util.Calendar
 
 
-class NotificationManager(private val context: Context) {
+class AlarmNotificationManager(val context: Context) {
     companion object {
         const val MY_CHANNEL_ID = "myChannelID"
         const val NAME_CHANNEL = "Canal SwimChrono"
