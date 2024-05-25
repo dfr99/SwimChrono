@@ -1,23 +1,27 @@
 package es.udc.apm.swimchrono.ui.referee
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.ExpandableListView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.viewModels
 import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.databinding.FragmentRefereeBinding
-import es.udc.apm.swimchrono.model.Race
+import es.udc.apm.swimchrono.services.ApiService
+import es.udc.apm.swimchrono.ui.club.RefereeViewModel
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 class RefereeFragment : Fragment() {
+
+    private val viewModel: RefereeViewModel by viewModels()
+
+    private var selectedRaceId: Int? = null
+
+    private lateinit var apiService: ApiService
 
     private var _binding: FragmentRefereeBinding? = null
 
@@ -29,38 +33,30 @@ class RefereeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_referee, container, false)
 
-        val beginChrono: Button = view.findViewById(R.id.beginButton)
+        apiService = ApiService()
+        apiService.onCreate()
 
-        beginChrono.setOnClickListener {
-            val intent = Intent(activity, TimerActivity::class.java)
-            startActivity(intent)
+        viewModel.getTournaments()
 
-            Log.d("BeginChronoClicked", "Go to chrono")
+
+        val expandableListView = view.findViewById<ExpandableListView>(R.id.expandableListView)
+
+        viewModel.tournaments.observe(viewLifecycleOwner) { tournaments ->
+            val currentDate = Date()
+            val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
+
+
+            // Filtrar los torneos para el día de hoy y los torneos futuros
+            val todayTournaments =
+                tournaments.filter { dateFormat.format(it.date!!) == dateFormat.format(currentDate) }
+
+            val adapter = context?.let {
+                TournamentExpandableListAdapter(it, todayTournaments) { raceId ->
+                    selectedRaceId = raceId // Store the selected race ID
+                }
+            }
+            expandableListView.setAdapter(adapter)
         }
-
-        val dateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
-        val currentHourString = dateFormat.format(Date())
-
-        val currentHour = dateFormat.parse(currentHourString)
-        val races = arrayOf(
-            Race(
-                id = 1,
-                style = "Espalda",
-                category = "Masculino",
-                distance = "100",
-                heat = 6,
-                lane = 3,
-                hour = currentHour,
-                times = emptyMap() // Puedes inicializar con los tiempos si los tienes disponibles
-            )
-        )
-
-
-        val racesList = RecyclerRacesListAdapter(races)
-        val clubMemberRecyclerView: RecyclerView = view.findViewById(R.id.races)
-
-        clubMemberRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        clubMemberRecyclerView.adapter = racesList
 
         return view
     }

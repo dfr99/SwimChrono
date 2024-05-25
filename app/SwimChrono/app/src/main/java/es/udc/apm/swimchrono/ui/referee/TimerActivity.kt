@@ -16,6 +16,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.zxing.integration.android.IntentIntegrator
 import es.udc.apm.swimchrono.R
+import es.udc.apm.swimchrono.util.Logger
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -35,12 +36,25 @@ class TimerActivity : AppCompatActivity() {
     private var startTime: Long = 0
     private var timeElapsed: Long = 0
 
+    private var tournamentId = -1;
+    private var raceId = -1;
+
     private lateinit var database: DatabaseReference
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_referee_start)
+
+        tournamentId = intent.getIntExtra("TOURNAMENT_ID", -1)
+        raceId = intent.getIntExtra("RACE_ID", -1)
+
+        if (tournamentId != -1 && raceId != -1) {
+            Logger.debug("TimerActivity", "Received Tournament ID: $tournamentId, Race ID: $raceId")
+            // Use the tournament ID and race ID as needed
+        } else {
+            Logger.debug("TimerActivity", "No Tournament ID or Race ID received")
+        }
 
         database = FirebaseDatabase.getInstance().reference
 
@@ -186,7 +200,9 @@ class TimerActivity : AppCompatActivity() {
 
     private suspend fun addTimeToFirebase(uid: String, newTime: String) {
         val tiemposRef =
-            database.child("tournaments").child("0").child("carreras").child("0").child("tiempos")
+            database.child("tournaments").child(tournamentId.toString()).child("carreras").child(
+                raceId.toString()
+            ).child("tiempos")
                 .child(uid)
 
         val snapshot = tiemposRef.get().await()
