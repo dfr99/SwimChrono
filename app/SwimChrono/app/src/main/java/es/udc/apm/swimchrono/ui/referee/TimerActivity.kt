@@ -14,7 +14,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.GenericTypeIndicator
 import com.google.zxing.integration.android.IntentIntegrator
 import es.udc.apm.swimchrono.R
 import kotlinx.coroutines.DelicateCoroutinesApi
@@ -188,20 +187,14 @@ class TimerActivity : AppCompatActivity() {
     private suspend fun addTimeToFirebase(uid: String, newTime: String) {
         val tiemposRef =
             database.child("tournaments").child("0").child("carreras").child("0").child("tiempos")
+                .child(uid)
 
         val snapshot = tiemposRef.get().await()
-        var tiemposList =
-            snapshot.getValue(object : GenericTypeIndicator<MutableList<Map<String, String>>>() {})
-
-        val newEntry = mapOf("uid" to uid, "time" to newTime)
-
-        if (tiemposList != null) {
-            tiemposList.add(newEntry)
+        if (snapshot.exists()) {
+            tiemposRef.setValue(newTime).await()
         } else {
-            tiemposList = mutableListOf(newEntry)
+            tiemposRef.setValue(newTime).await()
         }
-
-        tiemposRef.setValue(tiemposList).await()
     }
 
 
