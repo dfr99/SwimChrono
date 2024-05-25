@@ -125,6 +125,23 @@ class TimerActivity : AppCompatActivity() {
             val swimmerUID = sharedPreferences.getString("swimmerUID", null);
             Toast.makeText(this, swimmerUID, Toast.LENGTH_SHORT).show()
 
+            stopChronometer()
+            startStopButton.text = getString(R.string.start)
+            startStopButton.setBackgroundColor(
+                Color.argb(
+                    255,
+                    9,
+                    135,
+                    151
+                )
+            ) // @color/chrono_play
+            startStopButton.setCompoundDrawablesWithIntrinsicBounds(
+                R.drawable.icon_play,
+                0,
+                0,
+                0
+            )
+
 
             val builder = AlertDialog.Builder(this)
 
