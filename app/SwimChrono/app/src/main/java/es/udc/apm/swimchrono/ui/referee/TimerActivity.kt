@@ -328,15 +328,17 @@ class TimerActivity : AppCompatActivity() {
     //Este método se le llama cada vez que vuelve de un activity
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-
         if (result == null) {
             Toast.makeText(this, "Exception?", Toast.LENGTH_SHORT).show()
             super.onActivityResult(requestCode, resultCode, data)
             finish()
         }
-
+        var content = result.contents
+        if (content == null) {
+            content = ""
+        }
         // Check valid QR
-        val uid = extractUID(result.contents)
+        val uid = extractUID(content)
 
         if (uid != null) {
             val sharedPreferences =
@@ -351,6 +353,5 @@ class TimerActivity : AppCompatActivity() {
             finish()
         }
 
-        Toast.makeText(this, result.contents, Toast.LENGTH_SHORT).show()
     }
 }
