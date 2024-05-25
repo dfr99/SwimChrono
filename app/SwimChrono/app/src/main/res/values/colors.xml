@@ -6,8 +6,7 @@
     <color name="turquoise_200">#18c3d8</color>
     <color name="turquoise_700">#169EAE</color>
     <color name="black">#FF000000</color>
-    <color name="chronno_black">#A1000000</color>
-    <color name="chrono_white">#FFFFFF</color>
-    <color name="chrono_red">#F67575</color>
-    <color name="chrono_play">#098797</color>
+    <color name="white">#FFFFFF</color>
+    <color name="red">#F67575</color>
+    <color name="chrono_green">#30922E</color>
 </resources>

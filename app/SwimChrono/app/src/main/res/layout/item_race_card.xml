@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_weight="0.25"
-            android:textColor="@color/chrono_white" />
+            android:textColor="@color/white" />
 
 
         <TextView
@@ -31,9 +31,9 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:textAlignment="center"
-            android:textColor="@color/chrono_white"
+            android:textColor="@color/white"
             app:drawableLeftCompat="@drawable/baseline_calendar_month_24"
-            app:drawableTint="@color/chrono_white" />
+            app:drawableTint="@color/white" />
 
         <TextView
             android:id="@+id/race_style"
@@ -55,7 +55,7 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:textAlignment="center"
-            android:textColor="@color/chrono_white" />
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
@@ -77,7 +77,7 @@
                 android:layout_weight="1"
                 android:padding="8dp"
                 android:text="@string/postion"
-                android:textColor="@color/chrono_white" />
+                android:textColor="@color/white" />
 
             <TextView
                 style="@style/AppTextStyle"
@@ -86,7 +86,7 @@
                 android:layout_weight="1"
                 android:padding="8dp"
                 android:text="@string/name"
-                android:textColor="@color/chrono_white" />
+                android:textColor="@color/white" />
 
             <TextView
                 style="@style/AppTextStyle"
@@ -95,7 +95,7 @@
                 android:layout_weight="1"
                 android:padding="8dp"
                 android:text="@string/surname"
-                android:textColor="@color/chrono_white" />
+                android:textColor="@color/white" />
 
             <TextView
                 style="@style/AppTextStyle"
@@ -104,7 +104,7 @@
                 android:layout_weight="1"
                 android:padding="8dp"
                 android:text="@string/time"
-                android:textColor="@color/chrono_white" />
+                android:textColor="@color/white" />
         </TableRow>
 
 
@@ -118,7 +118,7 @@
                 android:background="@color/forest_blue_500"
                 android:padding="8dp"
                 android:text="1"
-                android:textColor="@color/chrono_white" />
+                android:textColor="@color/white" />
 
             <TextView
                 style="@style/AppTextStyle"
@@ -128,7 +128,7 @@
                 android:background="@color/forest_blue_500"
                 android:padding="8dp"
                 android:text="Susan"
-                android:textColor="@color/chrono_white" />
+                android:textColor="@color/white" />
 
             <TextView
                 style="@style/AppTextStyle"
@@ -138,7 +138,7 @@
                 android:background="@color/forest_blue_500"
                 android:padding="8dp"
                 android:text="Doe"
-                android:textColor="@color/chrono_white" />
+                android:textColor="@color/white" />
 
             <TextView
                 style="@style/AppTextStyle"
@@ -148,7 +148,7 @@
                 android:background="@color/forest_blue_500"
                 android:padding="8dp"
                 android:text="01:02:01"
-                android:textColor="@color/chrono_white" />
+                android:textColor="@color/white" />
         </TableRow>
 
         <TableRow>
@@ -161,7 +161,7 @@
                 android:background="@color/forest_blue_500"
                 android:padding="8dp"
                 android:text="2"
-                android:textColor="@color/chrono_white" />
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/grid_item2"
@@ -172,7 +172,7 @@
                 android:background="@color/forest_blue_500"
                 android:padding="8dp"
                 android:text="John"
-                android:textColor="@color/chrono_white" />
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/grid_item3"
@@ -183,7 +183,7 @@
                 android:background="@color/forest_blue_500"
                 android:padding="8dp"
                 android:text="Doe"
-                android:textColor="@color/chrono_white" />
+                android:textColor="@color/white" />
 
             <TextView
                 android:id="@+id/grid_item4"
@@ -194,7 +194,7 @@
                 android:background="@color/forest_blue_500"
                 android:padding="8dp"
                 android:text="00:50:01"
-                android:textColor="@color/chrono_white" />
+                android:textColor="@color/white" />
         </TableRow>
 
     </TableLayout>

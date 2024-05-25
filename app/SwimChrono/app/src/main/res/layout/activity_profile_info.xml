@@ -1,7 +1,5 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--Linearlayout-->
+<?xml version="1.0" encoding="utf-8"?><!--Linearlayout-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -58,13 +56,13 @@
 
                 <TextView
                     android:id="@+id/tvNameTitle"
+                    style="@style/AppTextStyle.Bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/celdas_profile_info"
                     android:gravity="center"
                     android:text="@string/profile_info_nombre"
-                    style="@style/AppTextStyle.Bold"
-                    android:textColor="@color/chronno_black"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -74,7 +72,7 @@
                     android:background="@drawable/celdas_profile_info"
                     android:gravity="center"
                     android:text="@string/name_example"
-                    android:textColor="@color/chronno_black"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
             </TableRow>
 
@@ -85,13 +83,13 @@
 
                 <TextView
                     android:id="@+id/tvSurnameTitle"
+                    style="@style/AppTextStyle.Bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/celdas_profile_info"
-                    android:text="@string/profile_info_surname"
                     android:gravity="center"
-                    style="@style/AppTextStyle.Bold"
-                    android:textColor="@color/chronno_black"
+                    android:text="@string/profile_info_surname"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -101,7 +99,7 @@
                     android:background="@drawable/celdas_profile_info"
                     android:gravity="center"
                     android:text="@string/surname_example"
-                    android:textColor="@color/chronno_black"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
             </TableRow>
@@ -119,7 +117,7 @@
                     android:background="@drawable/celdas_profile_info"
                     android:gravity="center"
                     android:text="@string/profile_info_telephone"
-                    android:textColor="@color/chronno_black"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -129,7 +127,7 @@
                     android:background="@drawable/celdas_profile_info"
                     android:gravity="center"
                     android:text="@string/telephone_example"
-                    android:textColor="@color/chronno_black"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
             </TableRow>
@@ -147,7 +145,7 @@
                     android:background="@drawable/celdas_profile_info"
                     android:gravity="center"
                     android:text="Rol"
-                    android:textColor="@color/chronno_black"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -157,7 +155,7 @@
                     android:background="@drawable/celdas_profile_info"
                     android:gravity="center"
                     android:text="Nadador"
-                    android:textColor="@color/chronno_black"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
             </TableRow>
@@ -175,7 +173,7 @@
                     android:background="@drawable/celdas_profile_info"
                     android:gravity="center"
                     android:text="Club"
-                    android:textColor="@color/chronno_black"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
                 <TextView
@@ -185,7 +183,7 @@
                     android:background="@drawable/celdas_profile_info"
                     android:gravity="center"
                     android:text="Basquet Coruña"
-                    android:textColor="@color/chronno_black"
+                    android:textColor="@color/black"
                     android:textSize="16sp" />
 
             </TableRow>
@@ -194,7 +192,5 @@
 
 
     </LinearLayout>
-
-
 
 </LinearLayout>
