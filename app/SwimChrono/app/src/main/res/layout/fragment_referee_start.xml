@@ -59,31 +59,40 @@
             android:gravity="center"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
 
             <Button
-                android:id="@+id/startStopButton_old"
-                android:layout_width="match_parent"
+                android:id="@+id/startStopButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="@color/chrono_play"
+                android:drawableLeft="@drawable/icon_play"
+                android:gravity="center"
+                android:text="@string/start"/>
+
+            <Button
+                android:id="@+id/resetButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="5dp"
                 android:backgroundTint="@color/chrono_play"
-                android:text="@string/start"
-                android:textColor="#000000" />
+                android:drawableLeft="@drawable/icon_repeat"
+                android:text = "@string/resetTextButton"/>
 
-            <Button
-                android:id="@+id/resetButton_old"
-                android:layout_width="match_parent"
+            <!--Button
+                android:id="@+id/startStopButton"
+                android:layout_width="214dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="5dp"
-                android:backgroundTint="#098797"
-                android:text="@string/resetTextButton"
-                android:textColor="#000000" />
+                android:drawableLeft="@drawable/icon_personal_info"
+                android:backgroundTint="@color/chrono_play"
+                android:text="@string/personal_info_title"
+                android:textSize="16sp" /-->
 
 
             <!--LinearLayout DESCOMENTAR PARA BOTONES CON ICONOS
