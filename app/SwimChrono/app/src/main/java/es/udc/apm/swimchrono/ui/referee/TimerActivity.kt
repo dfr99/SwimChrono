@@ -1,29 +1,33 @@
 package es.udc.apm.swimchrono.ui.referee
 
+import android.app.AlertDialog
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
-import android.os.SystemClock
 import android.widget.Button
-//import android.widget.Chronometer
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.GenericTypeIndicator
 import com.google.zxing.integration.android.IntentIntegrator
 import es.udc.apm.swimchrono.R
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.tasks.await
 import java.util.concurrent.TimeUnit
+
 
 class TimerActivity : AppCompatActivity() {
 
     private var isRunning = false
-    private lateinit var lapTimesText: TextView
-    private var lapNumber = 1
-
-    /** Eliminar esta variable si el scan se hace en otro sitio**/
-    // Variable para poder activar el crono una vez escaneado
-    private var enable_chronno = false
 
     //private lateinit var chronometer: Chronometer
     private lateinit var handler: Handler
@@ -32,14 +36,21 @@ class TimerActivity : AppCompatActivity() {
     private var startTime: Long = 0
     private var timeElapsed: Long = 0
 
+    private lateinit var database: DatabaseReference
+
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_referee_start)
 
+        database = FirebaseDatabase.getInstance().reference
+
+
         val buttonExit = findViewById<ImageView>(R.id.ivBackButton)
         val chronometer = findViewById<TextView>(R.id.chronometer)
-        val startStopButton_old = findViewById<Button>(R.id.startStopButton_old)
-        val resetButton_old = findViewById<Button>(R.id.resetButton_old)
+        val startStopButton = findViewById<Button>(R.id.startStopButton)
+        val resetButton = findViewById<Button>(R.id.resetButton)
+        val saveButton = findViewById<Button>(R.id.saveButton)
 
 
         buttonExit.setOnClickListener {
@@ -47,16 +58,17 @@ class TimerActivity : AppCompatActivity() {
             finish()
         }
 
-        startStopButton_old.setOnClickListener {
+        startStopButton.setOnClickListener {
             if (!isRunning) {
                 Toast.makeText(this, "Start Chrono", Toast.LENGTH_SHORT).show()
             } else if (isRunning) {
                 Toast.makeText(this, "Stop Chrono", Toast.LENGTH_SHORT).show()
             }
-            toggleStartStop(chronometer, startStopButton_old)
+            toggleStartStop(chronometer, startStopButton)
         }
 
-        resetButton_old.setOnClickListener {
+        resetButton.setOnClickListener {
+            // TODO: Confirmation POPUP
             stopChronometer()
             timeElapsed = 0
             startTime = System.currentTimeMillis()
@@ -64,32 +76,122 @@ class TimerActivity : AppCompatActivity() {
 
             // Cambiamos el estado del boton
             isRunning = false
-            startStopButton_old.text = getString(R.string.start)
-            startStopButton_old.setBackgroundColor(Color.argb(255, 9, 135, 151)) // @color/chrono_play
+            startStopButton.text = getString(R.string.start)
+            startStopButton.setBackgroundColor(Color.argb(255, 9, 135, 151)) // @color/chrono_play
+            startStopButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_play, 0, 0, 0)
+
+        }
+
+        saveButton.setOnClickListener {
+
+            val sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE)
+
+            val swimmerUID = sharedPreferences.getString("swimmerUID", null);
+            Toast.makeText(this, swimmerUID, Toast.LENGTH_SHORT).show()
+
+
+            val builder = AlertDialog.Builder(this)
+
+            val positiveButtonClick: (DialogInterface, Int) -> Unit =
+                { dialogInterface: DialogInterface, i: Int ->
+                    GlobalScope.launch(Dispatchers.IO) {
+                        try {
+                            val minutes = TimeUnit.MILLISECONDS.toMinutes(timeElapsed)
+                            val seconds = TimeUnit.MILLISECONDS.toSeconds(timeElapsed) % 60
+                            val millis = timeElapsed % 1000
+
+                            val result = String.format("%02d:%02d:%03d", minutes, seconds, millis)
+                            addTimeToFirebase(swimmerUID!!, result)
+
+                        } catch (_: Exception) {
+                        }
+                    }
+                }
+
+            val negativeButtonClick = { dialog: DialogInterface, which: Int ->
+                Toast.makeText(
+                    applicationContext,
+                    android.R.string.cancel, Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            with(builder)
+            {
+                setTitle("Save Alert")
+                setMessage("Are you sure?")
+                setPositiveButton(
+                    android.R.string.ok,
+                    DialogInterface.OnClickListener(function = positiveButtonClick)
+                )
+                setNegativeButton(android.R.string.cancel, negativeButtonClick)
+                show()
+            }
 
         }
 
         initQRScanner()
     }
 
+    private suspend fun addTimeToFirebase(uid: String, newTime: String) {
+        val tiemposRef =
+            database.child("tournaments").child("0").child("carreras").child("0").child("tiempos")
+
+        val snapshot = tiemposRef.get().await()
+        var tiemposList =
+            snapshot.getValue(object : GenericTypeIndicator<MutableList<Map<String, String>>>() {})
+
+        val newEntry = mapOf("uid" to uid, "time" to newTime)
+
+        if (tiemposList != null) {
+            tiemposList.add(newEntry)
+        } else {
+            tiemposList = mutableListOf(newEntry)
+        }
+
+        tiemposRef.setValue(tiemposList).await()
+    }
+
+
     private fun toggleStartStop(chronometer: TextView, startStopButton: Button) {
 
-        if (enable_chronno) {
-            if (isRunning) {
-                stopChronometer()
-                startStopButton.text = getString(R.string.start)
-                startStopButton.setBackgroundColor(Color.argb(255, 9, 135, 151)) // @color/chrono_play
-            } else {
-                startTime = System.currentTimeMillis() - timeElapsed
-                startChronometer(chronometer)
-                startStopButton.text = getString(R.string.stop)
-                startStopButton.setBackgroundColor(Color.argb(255, 246, 117, 117)) // @color/chrono_red
-            }
-
-            isRunning = !isRunning
+        if (isRunning) {
+            stopChronometer()
+            startStopButton.text = getString(R.string.start)
+            startStopButton.setBackgroundColor(
+                Color.argb(
+                    255,
+                    9,
+                    135,
+                    151
+                )
+            ) // @color/chrono_play
+            startStopButton.setCompoundDrawablesWithIntrinsicBounds(
+                R.drawable.icon_play,
+                0,
+                0,
+                0
+            )
         } else {
-            Toast.makeText(this, "Escanea el QR del competidor", Toast.LENGTH_SHORT).show()
+            startTime = System.currentTimeMillis() - timeElapsed
+            startChronometer(chronometer)
+            startStopButton.text = getString(R.string.stop)
+            startStopButton.setBackgroundColor(
+                Color.argb(
+                    255,
+                    246,
+                    117,
+                    117
+                )
+            ) // @color/chrono_red
+            startStopButton.setCompoundDrawablesWithIntrinsicBounds(
+                R.drawable.icon_pause,
+                0,
+                0,
+                0
+            )
         }
+        isRunning = !isRunning
+
     }
 
 
@@ -122,8 +224,6 @@ class TimerActivity : AppCompatActivity() {
                 }
             }
 
-            //chronometer.base = SystemClock.elapsedRealtime()
-            //chronometer.start()
             // Iniciar el Handler
             handler.post(runnable)
         }
@@ -148,6 +248,19 @@ class TimerActivity : AppCompatActivity() {
         integrator.initiateScan()
     }
 
+    fun extractUID(input: String): String? {
+        // Definimos el prefijo esperado
+        val prefix = "UID: "
+
+        // Verificamos si el input comienza con el prefijo
+        return if (input.startsWith(prefix)) {
+            // Extraemos el UID usando substring
+            input.substring(prefix.length).trim { it <= ' ' }
+        } else {
+            null
+        }
+    }
+
     //Este método se le llama cada vez que vuelve de un activity
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
@@ -155,14 +268,25 @@ class TimerActivity : AppCompatActivity() {
         if (result == null) {
             Toast.makeText(this, "Exception?", Toast.LENGTH_SHORT).show()
             super.onActivityResult(requestCode, resultCode, data)
-            finish() /**No ha habido ningun caso que se llegase hasta aqui**/
-        }
-
-        if (result.contents == null) {
-            Toast.makeText(this, "Cancelado", Toast.LENGTH_SHORT).show()
             finish()
         }
 
-        enable_chronno = true
+        // Check valid QR
+        val uid = extractUID(result.contents)
+
+        if (uid != null) {
+            val sharedPreferences =
+                getSharedPreferences("user_data", Context.MODE_PRIVATE)
+
+            val editor = sharedPreferences.edit()
+            editor.putString("swimmerUID", uid)
+            editor.apply()
+
+        } else {
+            Toast.makeText(this, "Please scan a valid QR", Toast.LENGTH_SHORT).show()
+            finish()
+        }
+
+        Toast.makeText(this, result.contents, Toast.LENGTH_SHORT).show()
     }
 }
