@@ -68,17 +68,53 @@ class TimerActivity : AppCompatActivity() {
         }
 
         resetButton.setOnClickListener {
-            // TODO: Confirmation POPUP
-            stopChronometer()
-            timeElapsed = 0
-            startTime = System.currentTimeMillis()
-            chronometer.text = "00:00:000" // Actualiza el texto del cronómetro a cero
 
-            // Cambiamos el estado del boton
-            isRunning = false
-            startStopButton.text = getString(R.string.start)
-            startStopButton.setBackgroundColor(Color.argb(255, 9, 135, 151)) // @color/chrono_play
-            startStopButton.setCompoundDrawablesWithIntrinsicBounds(R.drawable.icon_play, 0, 0, 0)
+            val positiveButtonClick: (DialogInterface, Int) -> Unit =
+                { dialogInterface: DialogInterface, i: Int ->
+                    stopChronometer()
+                    timeElapsed = 0
+                    startTime = System.currentTimeMillis()
+                    chronometer.text = "00:00:000" // Actualiza el texto del cronómetro a cero
+
+                    // Cambiamos el estado del boton
+                    isRunning = false
+                    startStopButton.text = getString(R.string.start)
+                    startStopButton.setBackgroundColor(
+                        Color.argb(
+                            255,
+                            9,
+                            135,
+                            151
+                        )
+                    ) // @color/chrono_play
+                    startStopButton.setCompoundDrawablesWithIntrinsicBounds(
+                        R.drawable.icon_play,
+                        0,
+                        0,
+                        0
+                    )
+
+                }
+
+            val negativeButtonClick = { dialog: DialogInterface, which: Int ->
+                Toast.makeText(
+                    applicationContext,
+                    android.R.string.cancel, Toast.LENGTH_SHORT
+                ).show()
+            }
+
+            val builder = AlertDialog.Builder(this)
+            with(builder)
+            {
+                setTitle("Save Alert")
+                setMessage("Want to reset the timer?")
+                setPositiveButton(
+                    android.R.string.ok,
+                    DialogInterface.OnClickListener(function = positiveButtonClick)
+                )
+                setNegativeButton(android.R.string.cancel, negativeButtonClick)
+                show()
+            }
 
         }
 
@@ -118,7 +154,7 @@ class TimerActivity : AppCompatActivity() {
             with(builder)
             {
                 setTitle("Save Alert")
-                setMessage("Are you sure?")
+                setMessage("Want to save the current time?")
                 setPositiveButton(
                     android.R.string.ok,
                     DialogInterface.OnClickListener(function = positiveButtonClick)
