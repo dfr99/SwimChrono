@@ -9,5 +9,5 @@ data class Tournament(
     val date: Date?,
     val participants: Int,
     val location: String,
-    val races: List<String>
+    val races: List<Race>,
 )

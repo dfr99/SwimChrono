@@ -30,7 +30,7 @@
                 <TextView
                     style="@style/AppTextStyle.Bold"
                     android:padding="8dp"
-                    android:text="@string/swimmer"
+                    android:text="@string/category"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
@@ -38,7 +38,15 @@
                 <TextView
                     style="@style/AppTextStyle.Bold"
                     android:padding="8dp"
-                    android:text="@string/club"
+                    android:text="@string/distance"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <TextView
+                    style="@style/AppTextStyle.Bold"
+                    android:padding="8dp"
+                    android:text="@string/style"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
@@ -59,13 +67,6 @@
                     android:textColor="@color/white"
                     android:textSize="20sp" />
 
-                <TextView
-                    style="@style/AppTextStyle.Bold"
-                    android:padding="8dp"
-                    android:text="@string/race"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"
-                    android:textSize="20sp" />
 
                 <TextView
                     style="@style/AppTextStyle.Bold"
@@ -83,7 +84,7 @@
                 android:background="@color/turquoise_700">
 
                 <TextView
-                    android:id="@+id/swimmer"
+                    android:id="@+id/category"
                     style="@style/AppTextStyle.Bold"
                     android:layout_marginEnd="15dp"
                     android:padding="8dp"
@@ -92,7 +93,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/club"
+                    android:id="@+id/distance"
                     style="@style/AppTextStyle.Bold"
                     android:layout_marginEnd="15dp"
                     android:padding="8dp"
@@ -101,7 +102,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/race"
+                    android:id="@+id/style"
                     style="@style/AppTextStyle.Bold"
                     android:layout_marginEnd="15dp"
                     android:padding="8dp"
@@ -137,6 +138,7 @@
                     android:textSize="16sp" />
             </TableRow>
         </TableLayout>
+
     </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>

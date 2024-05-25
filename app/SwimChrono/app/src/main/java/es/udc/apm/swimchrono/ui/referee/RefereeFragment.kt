@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.RecyclerView
 import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.databinding.FragmentRefereeBinding
 import es.udc.apm.swimchrono.model.Race
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 class RefereeFragment : Fragment() {
 
@@ -36,18 +38,23 @@ class RefereeFragment : Fragment() {
             Log.d("BeginChronoClicked", "Go to chrono")
         }
 
+        val dateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+        val currentHourString = dateFormat.format(Date())
 
+        val currentHour = dateFormat.parse(currentHourString)
         val races = arrayOf(
             Race(
                 id = 1,
-                swimmer = "David",
-                club = "SAL",
-                race = "100 medley",
+                style = "Espalda",
+                category = "Masculino",
+                distance = "100",
                 heat = 6,
                 lane = 3,
-                hour = Date()
-            ),
+                hour = currentHour,
+                times = emptyMap() // Puedes inicializar con los tiempos si los tienes disponibles
+            )
         )
+
 
         val racesList = RecyclerRacesListAdapter(races)
         val clubMemberRecyclerView: RecyclerView = view.findViewById(R.id.races)

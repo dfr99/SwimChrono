@@ -12,18 +12,18 @@ import java.util.Locale
 
 
 class RecyclerRacesListAdapter(
-    private val dataSet: Array<Race>
+    private val dataSet: Array<Race>,
 ) :
     RecyclerView.Adapter<RecyclerRacesListAdapter.ViewHolder>() {
     class ViewHolder(
-        view: View
+        view: View,
     ) : RecyclerView.ViewHolder(view) {
-        val swimmer : TextView = view.findViewById(R.id.swimmer)
-        val club : TextView = view.findViewById(R.id.club)
-        val race : TextView = view.findViewById(R.id.race)
-        val heat : TextView = view.findViewById(R.id.heat)
-        val lane : TextView = view.findViewById(R.id.lane)
-        val hour : TextView = view.findViewById(R.id.hour)
+        val category: TextView = view.findViewById(R.id.category)
+        val distance: TextView = view.findViewById(R.id.distance)
+        val style: TextView = view.findViewById(R.id.style)
+        val heat: TextView = view.findViewById(R.id.heat)
+        val lane: TextView = view.findViewById(R.id.lane)
+        val hour: TextView = view.findViewById(R.id.hour)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,13 +34,13 @@ class RecyclerRacesListAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dataRace = dataSet[position]
-        holder.swimmer.text = dataRace.swimmer
-        holder.club.text = dataRace.club
-        holder.race.text = dataRace.race
+        holder.category.text = dataRace.category
+        holder.distance.text = dataRace.distance
+        holder.style.text = dataRace.style
         holder.heat.text = dataRace.heat.toString()
         holder.lane.text = dataRace.lane.toString()
 
-        val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
         holder.hour.text = dateFormat.format(dataRace.hour)
     }
 
