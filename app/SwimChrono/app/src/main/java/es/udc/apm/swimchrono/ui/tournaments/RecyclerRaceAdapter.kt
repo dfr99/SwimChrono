@@ -1,5 +1,6 @@
 package es.udc.apm.swimchrono.ui.tournaments
 
+import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.model.Race
+import es.udc.apm.swimchrono.services.ApiService
+import es.udc.apm.swimchrono.services.ApiServiceCallback
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -19,6 +22,8 @@ class RecyclerRaceAdapter(
     private val dataSet: List<Race>,
 ) :
     RecyclerView.Adapter<RecyclerRaceAdapter.ViewHolder>() {
+
+    private var apiService = ApiService()
 
     class ViewHolder(
         view: View,
@@ -54,11 +59,26 @@ class RecyclerRaceAdapter(
 
         val headerRow = TableRow(holder.itemView.context).apply {
             addView(TextView(holder.itemView.context).apply {
-                text = holder.itemView.context.getString(R.string.uid)
+                text = holder.itemView.context.getString(R.string.dni)
                 setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
                 setPadding(8, 8, 8, 8)
                 layoutParams = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
             })
+
+            addView(TextView(holder.itemView.context).apply {
+                text = holder.itemView.context.getString(R.string.name)
+                setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
+                setPadding(8, 8, 8, 8)
+                layoutParams = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
+            })
+            addView(TextView(holder.itemView.context).apply {
+                text = holder.itemView.context.getString(R.string.surname)
+                setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
+                setPadding(8, 8, 8, 8)
+                layoutParams = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
+            })
+
+
             addView(TextView(holder.itemView.context).apply {
                 text = holder.itemView.context.getString(R.string.time)
                 setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
@@ -81,14 +101,6 @@ class RecyclerRaceAdapter(
     fun addRowToTable(tableLayout: TableLayout, uid: String, time: String, context: Context) {
         val tableRow = TableRow(context)
 
-        val uidTextView = TextView(context).apply {
-            text = uid
-            setTextColor(ContextCompat.getColor(context, R.color.white))
-            setBackgroundColor(ContextCompat.getColor(context, R.color.forest_blue_700))
-            setPadding(8, 8, 8, 8)
-            layoutParams = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
-        }
-
         val timeTextView = TextView(context).apply {
             text = time
             setTextColor(ContextCompat.getColor(context, R.color.white))
@@ -97,9 +109,88 @@ class RecyclerRaceAdapter(
             layoutParams = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
         }
 
-        tableRow.addView(uidTextView)
         tableRow.addView(timeTextView)
 
         tableLayout.addView(tableRow)
+
+        apiService = ApiService()
+        apiService.onCreate()
+
+
+        // Obtener los datos del usuario y actualizar la fila de la tabla
+        apiService.getUserData(uid, object : ApiServiceCallback {
+            override fun onDataReceived(userData: Any?) {
+                (userData as? Map<String, Any>)?.let {
+                    val name = it["nombre"] as? String ?: "Unknown"
+                    val surname = it["apellido"] as? String ?: "Unknown"
+                    val dni = it["DNI"] as? String ?: "Unknown"
+
+                    // Actualizar la fila de la tabla con los datos del usuario
+                    (context as Activity).runOnUiThread {
+                        tableRow.removeAllViews()
+
+                        val dniTextView = TextView(context).apply {
+                            text = dni
+                            setTextColor(ContextCompat.getColor(context, R.color.white))
+                            setBackgroundColor(
+                                ContextCompat.getColor(
+                                    context,
+                                    R.color.forest_blue_700
+                                )
+                            )
+                            setPadding(8, 8, 8, 8)
+                            layoutParams =
+                                TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
+                        }
+                        val nameTextView = TextView(context).apply {
+                            text = name
+                            setTextColor(ContextCompat.getColor(context, R.color.white))
+                            setBackgroundColor(
+                                ContextCompat.getColor(
+                                    context,
+                                    R.color.forest_blue_700
+                                )
+                            )
+                            setPadding(8, 8, 8, 8)
+                            layoutParams =
+                                TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
+                        }
+
+                        val surnameTextView = TextView(context).apply {
+                            text = surname
+                            setTextColor(ContextCompat.getColor(context, R.color.white))
+                            setBackgroundColor(
+                                ContextCompat.getColor(
+                                    context,
+                                    R.color.forest_blue_700
+                                )
+                            )
+                            setPadding(8, 8, 8, 8)
+                            layoutParams =
+                                TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
+                        }
+
+                        val updatedTimeTextView = TextView(context).apply {
+                            text = time
+                            setTextColor(ContextCompat.getColor(context, R.color.white))
+                            setBackgroundColor(
+                                ContextCompat.getColor(
+                                    context,
+                                    R.color.forest_blue_700
+                                )
+                            )
+                            setPadding(8, 8, 8, 8)
+                            layoutParams =
+                                TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
+                        }
+
+                        tableRow.addView(dniTextView)
+                        tableRow.addView(nameTextView)
+                        tableRow.addView(surnameTextView)
+                        tableRow.addView(updatedTimeTextView)
+                    }
+                }
+            }
+        })
     }
 }
