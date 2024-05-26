@@ -3,6 +3,7 @@ package es.udc.apm.swimchrono.ui.tournaments
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import es.udc.apm.swimchrono.model.Race
 import es.udc.apm.swimchrono.model.Tournament
 import es.udc.apm.swimchrono.services.ApiService
 import es.udc.apm.swimchrono.services.ApiServiceCallback
@@ -51,8 +52,32 @@ class TournamentInfoViewModel : ViewModel(), ApiServiceCallback {
                     val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
                     val date = dateFormat.parse(dateString)
 
+                    val races = mutableListOf<Race>()
+                    val racesData = item["carreras"] as? ArrayList<*>
+                    racesData?.let {
+                        for (raceItem in it) {
+                            if (raceItem is HashMap<*, *>) {
+                                val raceId = (raceItem["id"] as? Long)?.toInt() ?: 0
+                                val style = raceItem["estilo"] as? String ?: ""
+                                val category = raceItem["categoria"] as? String ?: ""
+                                val distance = raceItem["distancia"] as? String ?: ""
+                                val heat = (raceItem["heat"] as? Long)?.toInt() ?: 0
+                                val lane = (raceItem["lane"] as? Long)?.toInt() ?: 0
+                                val hourString = raceItem["hour"] as? String ?: "00:00:00"
+                                val hourFormat = SimpleDateFormat("HH:mm:ss", Locale.ENGLISH)
+                                val hour = hourFormat.parse(hourString)
+                                val times =
+                                    raceItem["tiempos"] as? Map<String, String> ?: emptyMap()
+
+                                val race =
+                                    Race(raceId, style, category, distance, heat, lane, hour, times)
+                                races.add(race)
+                            }
+                        }
+                    }
+
                     val tournament =
-                        Tournament(id, type, name, date, participants, location, emptyList())
+                        Tournament(id, type, name, date, participants, location, races)
                     tournamentList.add(tournament)
                 }
             }

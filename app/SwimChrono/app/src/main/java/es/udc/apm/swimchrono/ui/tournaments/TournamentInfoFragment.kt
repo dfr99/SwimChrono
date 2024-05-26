@@ -51,30 +51,21 @@ class TournamentInfoFragment : Fragment() {
         viewModel.tournaments.observe(viewLifecycleOwner) { tournaments ->
 
             val tournamentId = arguments?.getInt(ARG_TOURNAMENT_ID)
+            val filteredTournaments =
+                tournaments.filter { tournament -> tournament.id == tournamentId }
 
             val todayTournamentAdapter = RecyclerTournamentAdapter(
-                tournaments.filter { tournament -> tournament.id == tournamentId },
-                null
+                filteredTournaments, null
             )
             infoRecyclerView.adapter = todayTournamentAdapter
+            val raceAdapter = RecyclerRaceAdapter(filteredTournaments[0].races)
 
+            val raceRecyclerView: RecyclerView = binding.tournamentRacesRecyclerView
+            raceRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+            raceRecyclerView.adapter = raceAdapter
         }
 
-        // Retrieve tournament name from arguments
-
-        val races = arrayOf(
-            arrayOf("1", "17:00 (aprox.)", "Freestyle", "4x25 (200 mts.)"),
-            arrayOf("2", "18:00 (aprox.)", "Freestyle", "4x25 (200 mts.)"),
-            arrayOf("3", "19:00 (aprox.)", "Freestyle", "4x25 (200 mts.)"),
-            arrayOf("4", "19:30 (aprox.)", "Freestyle", "4x25 (200 mts.)"),
-        )
-
-        val raceAdapter = RecyclerRaceAdapter(races)
-
-        val raceRecyclerView: RecyclerView = binding.tournamentRacesRecyclerView
-        raceRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-
-        raceRecyclerView.adapter = raceAdapter
     }
 
 
