@@ -14,7 +14,9 @@ import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.model.Race
 import es.udc.apm.swimchrono.services.ApiService
 import es.udc.apm.swimchrono.services.ApiServiceCallback
+import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 
@@ -59,6 +61,13 @@ class RecyclerRaceAdapter(
 
         val headerRow = TableRow(holder.itemView.context).apply {
             addView(TextView(holder.itemView.context).apply {
+                text = holder.itemView.context.getString(R.string.position)
+                setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
+                setPadding(8, 8, 8, 8)
+                layoutParams = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
+            })
+
+            addView(TextView(holder.itemView.context).apply {
                 text = holder.itemView.context.getString(R.string.dni)
                 setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
                 setPadding(8, 8, 8, 8)
@@ -88,9 +97,28 @@ class RecyclerRaceAdapter(
         }
         holder.tableLayout.addView(headerRow)
 
+
+        fun String.toTimeDate(): Date? {
+            return try {
+                SimpleDateFormat("HH:mm:ss", Locale.getDefault()).parse(this)
+            } catch (e: ParseException) {
+                null
+            }
+        }
+
+        val sortedTimes = race.times.entries.sortedBy { it.value.toTimeDate() }
+
+        var position = 1
         // Agregar las filas dinámicamente a la tabla
-        for ((uid, time) in race.times) {
-            addRowToTable(holder.tableLayout, uid, time, holder.itemView.context)
+        for ((uid, time) in sortedTimes) {
+            addRowToTable(
+                holder.tableLayout,
+                uid,
+                position,
+                time,
+                holder.itemView.context
+            )
+            position += 1
         }
     }
 
@@ -98,18 +126,14 @@ class RecyclerRaceAdapter(
     override fun getItemCount() = dataSet.size
 
 
-    fun addRowToTable(tableLayout: TableLayout, uid: String, time: String, context: Context) {
+    private fun addRowToTable(
+        tableLayout: TableLayout,
+        uid: String,
+        position: Int,
+        time: String,
+        context: Context,
+    ) {
         val tableRow = TableRow(context)
-
-        val timeTextView = TextView(context).apply {
-            text = time
-            setTextColor(ContextCompat.getColor(context, R.color.white))
-            setBackgroundColor(ContextCompat.getColor(context, R.color.forest_blue_700))
-            setPadding(8, 8, 8, 8)
-            layoutParams = TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
-        }
-
-        tableRow.addView(timeTextView)
 
         tableLayout.addView(tableRow)
 
@@ -124,10 +148,23 @@ class RecyclerRaceAdapter(
                     val name = it["nombre"] as? String ?: "Unknown"
                     val surname = it["apellido"] as? String ?: "Unknown"
                     val dni = it["DNI"] as? String ?: "Unknown"
-
                     // Actualizar la fila de la tabla con los datos del usuario
                     (context as Activity).runOnUiThread {
                         tableRow.removeAllViews()
+
+                        val updatedPositionTextView = TextView(context).apply {
+                            text = position.toString()
+                            setTextColor(ContextCompat.getColor(context, R.color.white))
+                            setBackgroundColor(
+                                ContextCompat.getColor(
+                                    context,
+                                    R.color.forest_blue_700
+                                )
+                            )
+                            setPadding(8, 8, 8, 8)
+                            layoutParams =
+                                TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
+                        }
 
                         val dniTextView = TextView(context).apply {
                             text = dni
@@ -184,6 +221,7 @@ class RecyclerRaceAdapter(
                                 TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 1f)
                         }
 
+                        tableRow.addView(updatedPositionTextView)
                         tableRow.addView(dniTextView)
                         tableRow.addView(nameTextView)
                         tableRow.addView(surnameTextView)

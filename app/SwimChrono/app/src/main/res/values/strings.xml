@@ -69,4 +69,5 @@
     <string name="style">Style</string>
     <string name="uid">uid</string>
     <string name="dni">DNI</string>
+    <string name="position">Position\n</string>
 </resources>
