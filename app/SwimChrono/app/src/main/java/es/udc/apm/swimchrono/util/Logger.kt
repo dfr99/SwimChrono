@@ -3,7 +3,7 @@ package es.udc.apm.swimchrono.util
 import android.util.Log
 
 object Logger {
-    private const val TAG = "SwimCrhonoLogger"
+    private const val TAG = "SwimChronoLogger"
 
     fun debug(className: String, message: String) {
         Log.d(TAG, "$className: $message")

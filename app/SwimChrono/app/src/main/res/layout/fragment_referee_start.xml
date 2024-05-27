@@ -2,19 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/chrono_white"
+    android:background="@color/white"
     android:orientation="vertical">
-
-
-
-    <!--ImageView Flecha pequeña antes
-        android:id="@+id/ivBackButton"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:clickable="true"
-        android:contentDescription="@string/contentDescription_back"
-        android:focusable="true"
-        android:src="@drawable/flecha_salida_v2" /-->
 
     <ImageView
         android:id="@+id/ivBackButton"
@@ -40,11 +29,11 @@
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:ellipsize="none"
+            android:gravity="center"
             android:text="@string/title_chronometer"
             android:textAlignment="center"
             android:textSize="34sp"
-            android:textStyle="bold"
-            android:gravity="center"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/chronometer"
@@ -53,205 +42,61 @@
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
+            android:gravity="center"
             android:text="@string/initTimeCrono"
             android:textColor="@color/black"
-            android:textSize="48sp"
-            android:gravity="center"/>
+            android:textSize="48sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:padding="10dp">
 
 
             <Button
                 android:id="@+id/startStopButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:backgroundTint="@color/chrono_play"
+                android:layout_margin="5dp"
                 android:drawableLeft="@drawable/icon_play"
                 android:gravity="center"
-                android:text="@string/start"/>
+                android:padding="10dp"
+                android:text="@string/start" />
 
             <Button
                 android:id="@+id/resetButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="5dp"
-                android:backgroundTint="@color/chrono_play"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:backgroundTint="@color/red"
                 android:drawableLeft="@drawable/icon_repeat"
-                android:text = "@string/resetTextButton"/>
-
-            <!--Button
-                android:id="@+id/startStopButton"
-                android:layout_width="214dp"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/icon_personal_info"
-                android:backgroundTint="@color/chrono_play"
-                android:text="@string/personal_info_title"
-                android:textSize="16sp" /-->
-
-
-            <!--LinearLayout DESCOMENTAR PARA BOTONES CON ICONOS
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/startStopButton"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/button_crono"
-                    android:drawableLeft="@drawable/icon_play"
-                    android:backgroundTint="#098797"
-                    android:textColor="#000000" />
-
-                <Button
-                    android:id="@+id/resetButton"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/button_crono"
-                    android:drawableLeft="@drawable/icon_repeat"
-                    android:backgroundTint="#098797"
-                    android:textColor="#000000" />
-            </LinearLayout-->
-
+                android:padding="10dp"
+                android:text="@string/resetTextButton" />
 
         </LinearLayout>
-
-
-
-    </LinearLayout>
-
-
-</LinearLayout>
-
-
-
-
-
-
-
-
-
-
-    <!-- ################  DISEÑO ANTERIOR  ################################
-
-
-    <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/chrono_white"
-        android:orientation="vertical"
-        android:padding="16dp">
-
-
-
-        <ImageView
-            android:id="@+id/ivBackButton"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:clickable="true"
-            android:contentDescription="@string/contentDescription_back"
-            android:focusable="true"
-            android:src="@drawable/flecha_salida_v2" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-            <TextView
-                android:id="@+id/titleText"
-                style="@style/AppTextStyle.Bold"
-                android:layout_width="match_parent"
-                android:layout_height="52dp"
-                android:ellipsize="none"
-                android:text="@string/title_chronometer"
-                android:textAlignment="center"
-                android:textSize="34sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/chronometer"
-                android:layout_width="220dp"
+            <Button
+                android:id="@+id/saveButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="@string/initTimeCrono"
-                android:textColor="@color/black"
-                android:textSize="48sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/startStopButton_old"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="5dp"
-                    android:backgroundTint="@color/chrono_play"
-                    android:text="@string/start"
-                    android:textColor="#000000" />
-
-                <Button
-                    android:id="@+id/resetButton_old"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="5dp"
-                    android:backgroundTint="#098797"
-                    android:text="@string/resetTextButton"
-                    android:textColor="#000000" />
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/startStopButton"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/button_crono"
-                        android:drawableLeft="@drawable/icon_play"
-                        android:backgroundTint="#098797"
-                        android:textColor="#000000" />
-
-                    <Button
-                        android:id="@+id/resetButton"
-                        android:layout_width="65dp"
-                        android:layout_height="65dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/button_crono"
-                        android:drawableLeft="@drawable/icon_repeat"
-                        android:backgroundTint="#098797"
-                        android:textColor="#000000" />
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-
-
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:backgroundTint="@color/chrono_green"
+                android:drawableLeft="@drawable/baseline_save_24"
+                android:text="@string/saveButtonText" />
         </LinearLayout>
 
-
     </LinearLayout>
-
-
-    -->
+</LinearLayout>

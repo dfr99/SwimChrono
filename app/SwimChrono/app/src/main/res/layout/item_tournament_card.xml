@@ -50,7 +50,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:layout_toEndOf="@+id/tournament_photo"
-            android:textColor="@color/chrono_white"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
         <TextView
@@ -63,9 +63,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:layout_toEndOf="@+id/tournament_photo"
-            android:textColor="@color/chrono_white"
+            android:textColor="@color/white"
             app:drawableLeftCompat="@drawable/baseline_calendar_month_24"
-            app:drawableTint="@color/chrono_white" />
+            app:drawableTint="@color/white" />
 
         <TextView
             android:id="@+id/tournament_people"
@@ -77,9 +77,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:layout_toEndOf="@+id/tournament_date"
-            android:textColor="@color/chrono_white"
+            android:textColor="@color/white"
             app:drawableLeftCompat="@drawable/icon_club"
-            app:drawableTint="@color/chrono_white" />
+            app:drawableTint="@color/white" />
 
         <TextView
             android:id="@+id/tournament_location"
@@ -91,9 +91,9 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:layout_toEndOf="@+id/tournament_people"
-            android:textColor="@color/chrono_white"
+            android:textColor="@color/white"
             app:drawableLeftCompat="@drawable/baseline_map_24"
-            app:drawableTint="@color/chrono_white" />
+            app:drawableTint="@color/white" />
 
 
     </RelativeLayout>

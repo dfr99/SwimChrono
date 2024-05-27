@@ -44,7 +44,8 @@
                 android:id="@+id/text_user_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/chronno_black"
+                android:text="@string/example_email"
+                android:textColor="@color/black"
                 android:textSize="14sp" />
         </LinearLayout>
 

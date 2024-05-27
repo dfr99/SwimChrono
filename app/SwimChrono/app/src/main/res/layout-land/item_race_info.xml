@@ -28,114 +28,117 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:padding="8dp"
-                    android:textSize="20sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/chrono_white"
                     style="@style/AppTextStyle.Bold"
-                    android:text="@string/swimmer" />
+                    android:padding="8dp"
+                    android:text="@string/category"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
 
                 <TextView
-                    android:padding="8dp"
-                    android:textSize="20sp"
-                    android:textAlignment="center"
                     style="@style/AppTextStyle.Bold"
-                    android:textColor="@color/chrono_white"
-                    android:text="@string/club" />
+                    android:padding="8dp"
+                    android:text="@string/distance"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
 
                 <TextView
+                    style="@style/AppTextStyle.Bold"
+                    android:padding="8dp"
+                    android:text="@string/style"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <TextView
+                    style="@style/AppTextStyle.Bold"
                     android:padding="8dp"
                     android:text="@string/heat"
-                    android:textSize="20sp"
                     android:textAlignment="center"
-                    android:textColor="@color/chrono_white"
-                    style="@style/AppTextStyle.Bold" />
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
 
                 <TextView
-                    android:padding="8dp"
-                    android:textSize="20sp"
                     style="@style/AppTextStyle.Bold"
+                    android:padding="8dp"
+                    android:text="@string/lane"
                     android:textAlignment="center"
-                    android:textColor="@color/chrono_white"
-                    android:text="@string/lane" />
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
 
                 <TextView
-                    android:padding="8dp"
-                    android:text="@string/race"
-                    android:textSize="20sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/chrono_white"
-                    style="@style/AppTextStyle.Bold" />
-
-                <TextView
-                    android:padding="8dp"
                     style="@style/AppTextStyle.Bold"
-                    android:textSize="20sp"
+                    android:padding="8dp"
+                    android:text="@string/hour"
                     android:textAlignment="center"
-                    android:textColor="@color/chrono_white"
-                    android:text="@string/hour" />
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
 
             </TableRow>
+
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/turquoise_700">
 
                 <TextView
-                    android:id="@+id/swimmer"
-                    android:padding="8dp"
-                    android:layout_marginEnd="15dp"
-                    android:textSize="16sp"
+                    android:id="@+id/category"
                     style="@style/AppTextStyle.Bold"
+                    android:layout_marginEnd="15dp"
+                    android:padding="8dp"
+                    android:text=""
                     android:textAlignment="center"
-                    android:text="" />
+                    android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/club"
-                    android:padding="8dp"
-                    android:layout_marginEnd="15dp"
-                    android:textSize="16sp"
+                    android:id="@+id/distance"
                     style="@style/AppTextStyle.Bold"
+                    android:layout_marginEnd="15dp"
+                    android:padding="8dp"
+                    android:text=""
                     android:textAlignment="center"
-                    android:text="" />
+                    android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/race"
-                    android:padding="8dp"
+                    android:id="@+id/style"
                     style="@style/AppTextStyle.Bold"
-                    android:textSize="16sp"
                     android:layout_marginEnd="15dp"
+                    android:padding="8dp"
+                    android:text=""
                     android:textAlignment="center"
-                    android:text="" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/heat"
-                    android:padding="8dp"
                     style="@style/AppTextStyle.Bold"
-                    android:textSize="16sp"
                     android:layout_marginEnd="15dp"
+                    android:padding="8dp"
+                    android:text=""
                     android:textAlignment="center"
-                    android:text="" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/lane"
-                    android:padding="8dp"
                     style="@style/AppTextStyle.Bold"
-                    android:textSize="16sp"
                     android:layout_marginEnd="15dp"
+                    android:padding="8dp"
+                    android:text=""
                     android:textAlignment="center"
-                    android:text="" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/hour"
-                    android:padding="8dp"
                     style="@style/AppTextStyle.Bold"
                     android:layout_marginEnd="15dp"
-                    android:textSize="16sp"
+                    android:padding="8dp"
+                    android:text=""
                     android:textAlignment="center"
-                    android:text="" />
+                    android:textSize="16sp" />
             </TableRow>
         </TableLayout>
+
     </RelativeLayout>
 
 </com.google.android.material.card.MaterialCardView>

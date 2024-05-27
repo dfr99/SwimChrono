@@ -6,7 +6,6 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
@@ -29,11 +28,9 @@ class ProfileMyQRActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
 
 
-        val userId = sharedPreferences.getString("userId", "null")
+        val userId = "UID: " + sharedPreferences.getString("userId", null)
 
-        // Variables de prueba de funcionamiento
-        //val userId = "1234"
-        //Toast.makeText(this, "Bienvenido $userId", Toast.LENGTH_SHORT).show()
+        nameUserQR.text = sharedPreferences.getString("userId", null)
 
         // Generación del QR
         try {
@@ -48,31 +45,18 @@ class ProfileMyQRActivity : AppCompatActivity() {
             ivCodigoQR.setImageBitmap(bitmap)
 
 
-
-        } catch (e:Exception) {
+        } catch (e: Exception) {
             e.printStackTrace()
         }
 
 
-        // Nombre y apellidos del usuario
-        /** Todavia por añadir**/
-        nameUserQR.setText("AleRV")
-
-
-
-
         //Botón de salir
         buttonExit.setOnClickListener {
-            //Toast.makeText(this, "exit", Toast.LENGTH_SHORT).show()
             finish()
         }
 
 
     }
-
-
-
-
 
 
 }

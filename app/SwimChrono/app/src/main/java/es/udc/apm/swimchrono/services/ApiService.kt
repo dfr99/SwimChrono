@@ -3,7 +3,6 @@ package es.udc.apm.swimchrono.services
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.FirebaseAuthInvalidUserException
@@ -14,7 +13,6 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.GenericTypeIndicator
 import com.google.firebase.database.ValueEventListener
 import es.udc.apm.swimchrono.model.LoginResult
-import es.udc.apm.swimchrono.model.User
 import es.udc.apm.swimchrono.util.Logger
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -116,7 +114,10 @@ class ApiService : Service() {
                             if (clubId == id) {
                                 // Obtener los datos del club y enviar al callback
                                 val clubData = clubSnapshot.value
-                                Logger.debug(tag, "On ApiService.getClub(): Called callback with : $clubData")
+                                Logger.debug(
+                                    tag,
+                                    "On ApiService.getClub(): Called callback with : $clubData"
+                                )
                                 callback.onDataReceived(clubData)
                                 return // Salir del bucle forEach después de encontrar el club
                             }
@@ -149,22 +150,30 @@ class ApiService : Service() {
                             clubSnapshot.child("members").getValue(genericType)?.forEach { user ->
                                 if (user.containsValue(uid)) {
                                     val clubId = clubSnapshot.child("id").getValue(Int::class.java)
-                                    Logger.debug(tag,
-                                        "Encontrado el usuario ".plus(uid).plus(" en el club ").plus(clubId).plus(" como deportista"))
+                                    Logger.debug(
+                                        tag,
+                                        "Encontrado el usuario ".plus(uid).plus(" en el club ")
+                                            .plus(clubId).plus(" como deportista")
+                                    )
                                     getClub(clubId, callback)
                                     return
                                 }
                             }
 
-                            clubSnapshot.child("trainers").getValue(genericType)?.forEach { trainer ->
-                                if (trainer.containsValue(uid)) {
-                                    val clubId = clubSnapshot.child("id").getValue(Int::class.java)
-                                    Logger.debug(tag,
-                                        "Encontrado el usuario ".plus(uid).plus(" en el club ").plus(clubId).plus(" como entrenador"))
-                                    getClub(clubId, callback)
-                                    return
+                            clubSnapshot.child("trainers").getValue(genericType)
+                                ?.forEach { trainer ->
+                                    if (trainer.containsValue(uid)) {
+                                        val clubId =
+                                            clubSnapshot.child("id").getValue(Int::class.java)
+                                        Logger.debug(
+                                            tag,
+                                            "Encontrado el usuario ".plus(uid).plus(" en el club ")
+                                                .plus(clubId).plus(" como entrenador")
+                                        )
+                                        getClub(clubId, callback)
+                                        return
+                                    }
                                 }
-                            }
                         }
 
                         Logger.error(tag, "El usuario".plus(uid).plus("no pertenece a ningún club"))
@@ -259,6 +268,7 @@ class ApiService : Service() {
                             }
                         }
                     }
+
                     override fun onCancelled(error: DatabaseError) {
                         Logger.error(tag, "Error al obtener datos de Firebase: ${error.message}")
                     }

@@ -2,13 +2,13 @@ package es.udc.apm.swimchrono.notifications
 
 import android.app.AlarmManager
 import android.app.NotificationChannel
-import android.app.NotificationManager as AndroidNotificationManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Build
 import java.util.Calendar
+import android.app.NotificationManager as AndroidNotificationManager
 
 
 class AlarmNotificationManager(val context: Context) {
@@ -31,7 +31,8 @@ class AlarmNotificationManager(val context: Context) {
 
     // Método para crear una notificación sin parámetros
     fun createNotification(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int) {
-        val sharedPreferences: SharedPreferences = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val sharedPreferences: SharedPreferences =
+            context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         //val year = 2024
         //val month = Calendar.MAY
         //val day = 22

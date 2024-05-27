@@ -1,23 +1,27 @@
 package es.udc.apm.swimchrono.ui.referee
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.Toast
+import android.widget.ExpandableListView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.zxing.integration.android.IntentIntegrator
+import androidx.fragment.app.viewModels
 import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.databinding.FragmentRefereeBinding
-import es.udc.apm.swimchrono.model.Race
+import es.udc.apm.swimchrono.services.ApiService
+import es.udc.apm.swimchrono.ui.club.RefereeViewModel
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 class RefereeFragment : Fragment() {
+
+    private val viewModel: RefereeViewModel by viewModels()
+
+    private var selectedRaceId: Int? = null
+
+    private lateinit var apiService: ApiService
 
     private var _binding: FragmentRefereeBinding? = null
 
@@ -29,44 +33,30 @@ class RefereeFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_referee, container, false)
 
-        val beginChrono: Button = view.findViewById(R.id.beginButton)
-        beginChrono.setOnClickListener {
-            val intent = Intent(activity, TimerActivity::class.java)
-            startActivity(intent)
+        apiService = ApiService()
+        apiService.onCreate()
 
-            Log.d("BeginChronoClicked", "Go to chrono")
+        viewModel.getTournaments()
+
+
+        val expandableListView = view.findViewById<ExpandableListView>(R.id.expandableListView)
+
+        viewModel.tournaments.observe(viewLifecycleOwner) { tournaments ->
+            val currentDate = Date()
+            val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
+
+
+            // Filtrar los torneos para el día de hoy y los torneos futuros
+            val todayTournaments =
+                tournaments.filter { dateFormat.format(it.date!!) == dateFormat.format(currentDate) }
+
+            val adapter = context?.let {
+                TournamentExpandableListAdapter(it, todayTournaments) { raceId ->
+                    selectedRaceId = raceId // Store the selected race ID
+                }
+            }
+            expandableListView.setAdapter(adapter)
         }
-
-
-        // Button Scan QR
-
-//        val btnScanQR: Button = view.findViewById(R.id.botonScanQR)
-//        btnScanQR.setOnClickListener {
-//
-//
-//            initQRScanner()
-//
-//
-//        }
-
-
-        val races = arrayOf(
-            Race(
-                id = 1,
-                swimmer = "David",
-                club = "SAL",
-                race = "100 medley",
-                heat = 6,
-                lane = 3,
-                hour = Date()
-            ),
-        )
-
-        val racesList = RecyclerRacesListAdapter(races)
-        val clubMemberRecyclerView: RecyclerView = view.findViewById(R.id.races)
-
-        clubMemberRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        clubMemberRecyclerView.adapter = racesList
 
         return view
     }
@@ -74,51 +64,6 @@ class RefereeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-
-    // Scan QR functions
-
-    /**NO FUNCIONA**/
-    private fun initQRScanner() {
-        //IntentIntegrator(this).initiateScan() //DEPRECATED
-        val funciona = false
-        if (funciona) {
-            val integrator = IntentIntegrator(requireActivity())
-            integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE) // Establecer el tipo de codigo de barras
-            integrator.setPrompt("Acerque la cámara al código QR")
-            integrator.setTorchEnabled(false) // Encender flash
-            integrator.setBeepEnabled(true) // Sonido de confirmacion de codigo escaneado
-            integrator.initiateScan()
-        } else {
-            Toast.makeText(
-                requireContext(),
-                "BOTÓN EN REPARACIÓN: Para escanear accede a START",
-                Toast.LENGTH_LONG
-            ).show()
-        }
-    }
-
-    //Este método se le llama cada vez que vuelve de un activity
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-        if (result != null) {
-            if (result.contents == null) {
-                Toast.makeText(requireContext(), "Cancelado", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(
-                    requireContext(),
-                    "El valor escaneado es: ${result.contents}",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-        } else {
-            Toast.makeText(requireContext(), "Exception?", Toast.LENGTH_SHORT).show()
-            super.onActivityResult(requestCode, resultCode, data)
-        }
-
-        Toast.makeText(requireContext(), "YA FUNCIONA", Toast.LENGTH_SHORT).show()
-
     }
 
 
