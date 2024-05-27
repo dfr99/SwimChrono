@@ -6,16 +6,6 @@
     android:orientation="vertical"
     tools:context=".ui.profile.ProfileInfoActivity">
 
-    <!-- Primera version fecha de salida-->
-    <!--ImageView
-        android:id="@+id/ivBackButton"
-        android:layout_width="72dp"
-        android:layout_height="60dp"
-        android:contentDescription="@string/contentDescription_back"
-        android:clickable="true"
-        android:focusable="true"
-        android:padding="8dp"
-        android:src="@drawable/flecha_salida" /-->
 
     <ImageView
         android:id="@+id/ivBackButton"
@@ -60,10 +50,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/celdas_profile_info"
+                    android:backgroundTint="@color/forest_blue_200"
                     android:gravity="center"
+                    android:padding="10dp"
                     android:text="@string/profile_info_nombre"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tvName"
@@ -71,7 +63,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/celdas_profile_info"
                     android:gravity="center"
-                    android:text="@string/name_example"
+                    android:padding="10dp"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </TableRow>
@@ -87,9 +79,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/celdas_profile_info"
+                    android:backgroundTint="@color/forest_blue_200"
                     android:gravity="center"
+                    android:padding="10dp"
                     android:text="@string/profile_info_surname"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="16sp" />
 
                 <TextView
@@ -98,7 +92,97 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/celdas_profile_info"
                     android:gravity="center"
-                    android:text="@string/surname_example"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/celdas_profile_info">
+
+                <TextView
+                    android:id="@+id/tvEmailTitle"
+                    style="@style/AppTextStyle.Bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/celdas_profile_info"
+                    android:backgroundTint="@color/forest_blue_200"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/email"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvEmail"
+                    android:layout_width="184dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/celdas_profile_info"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/celdas_profile_info">
+
+                <TextView
+                    android:id="@+id/tvDNITitle"
+                    style="@style/AppTextStyle.Bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/celdas_profile_info"
+                    android:backgroundTint="@color/forest_blue_200"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/dni"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:id="@+id/tvDNI"
+                    android:layout_width="184dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/celdas_profile_info"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="16sp" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/celdas_profile_info">
+
+                <TextView
+                    android:id="@+id/tvBirthdayTitle"
+                    style="@style/AppTextStyle.Bold"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/celdas_profile_info"
+                    android:backgroundTint="@color/forest_blue_200"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/fecha_nacimiento"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+
+                <TextView
+                    android:id="@+id/tvBirthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/celdas_profile_info"
+                    android:gravity="center"
+                    android:padding="10dp"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -115,10 +199,13 @@
                     android:layout_width="116dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/celdas_profile_info"
+                    android:backgroundTint="@color/forest_blue_200"
                     android:gravity="center"
+                    android:padding="10dp"
                     android:text="@string/profile_info_telephone"
-                    android:textColor="@color/black"
+                    android:textColor="@color/white"
                     android:textSize="16sp" />
+
 
                 <TextView
                     android:id="@+id/tvNumber"
@@ -126,7 +213,7 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/celdas_profile_info"
                     android:gravity="center"
-                    android:text="@string/telephone_example"
+                    android:padding="10dp"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
@@ -143,9 +230,11 @@
                     android:layout_width="116dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/celdas_profile_info"
+                    android:backgroundTint="@color/forest_blue_200"
                     android:gravity="center"
-                    android:text="Rol"
-                    android:textColor="@color/black"
+                    android:padding="10dp"
+                    android:text="@string/rol"
+                    android:textColor="@color/white"
                     android:textSize="16sp" />
 
                 <TextView
@@ -154,39 +243,12 @@
                     android:layout_height="wrap_content"
                     android:background="@drawable/celdas_profile_info"
                     android:gravity="center"
-                    android:text="Nadador"
+                    android:padding="10dp"
                     android:textColor="@color/black"
                     android:textSize="16sp" />
 
             </TableRow>
 
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/celdas_profile_info">
-
-                <TextView
-                    android:id="@+id/tvClubTitle"
-                    style="@style/AppTextStyle.Bold"
-                    android:layout_width="116dp"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/celdas_profile_info"
-                    android:gravity="center"
-                    android:text="Club"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tvClub"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/celdas_profile_info"
-                    android:gravity="center"
-                    android:text="Basquet Coruña"
-                    android:textColor="@color/black"
-                    android:textSize="16sp" />
-
-            </TableRow>
 
         </TableLayout>
 

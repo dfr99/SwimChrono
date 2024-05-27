@@ -70,4 +70,7 @@
     <string name="uid">uid</string>
     <string name="dni">DNI</string>
     <string name="position">Position\n</string>
+    <string name="rol">Rol</string>
+    <string name="fecha_nacimiento">Fecha Nacimiento</string>
+    <string name="email">Email</string>
 </resources>
