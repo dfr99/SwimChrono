@@ -17,19 +17,11 @@
     <string name="time">Time</string>
     <string name="club_info">Club Info</string>
     <string name="trainer">Trainers</string>
-    <string name="members">Members</string>
-    <string name="local_league">Local League</string>
-    <string name="club_fluvial_lugo">Club Fluvial Lugo</string>
-    <string name="members_number">Members: 100</string>
-    <string name="phone">Teléfono: +34 673 45 34 54</string>
-    <string name="url">URL: https://www.clubfluviallugo.com</string>
-    <string name="direccion">"Rúa Fermín Rivera, s/n, 27004 Lugo"</string>
-    <string name="full_info">FULL INFO</string>
-    <string name="address_r_a_ferm_n_rivera_s_n_27004_lugo">Address: Rúa Fermín Rivera, s/n, 27004 Lugo</string>
-    <string name="members_100">Members: 100</string>
-    <string name="p_gina_web_https_www_clubfluviallugo_com">Página web: https://www.clubfluviallugo.com/</string>
-    <string name="icono_del_club">Icono del club</string>
-    <string name="phone_34_673_45_34_54">Phone: +34 673 45 34 54</string>
+    <string name="members">Members:</string>
+    <string name="phone">Phone:</string>
+    <string name="url">URL:</string>
+    <string name="address">Address:</string>
+    <string name="full_info">INFORMATION</string>
     <string name="john_doe">John Doe</string>
     <string name="profile_fragment_title">Profile Fragment</string>
     <string name="my_qr_title">My QR</string>
@@ -73,6 +65,4 @@
     <string name="rol">Rol</string>
     <string name="birthday">Birthday</string>
     <string name="email">Email</string>
-    <string name="address">Address:</string>
-    <string name="number_of_members">Number of members:</string>
 </resources>

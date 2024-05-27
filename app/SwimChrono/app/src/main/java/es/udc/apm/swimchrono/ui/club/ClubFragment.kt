@@ -69,7 +69,7 @@ class ClubFragment : Fragment() {
             clubInfo.paginaWeb.text = getString(R.string.url).plus(" ").plus(club.url)
             clubInfo.telefono.text = getString(R.string.phone).plus(" ").plus(club.phone)
             clubInfo.membersNumber.text =
-                getString(R.string.number_of_members).plus(" ").plus(club.membersNumber.toString())
+                getString(R.string.members).plus(" ").plus(club.membersNumber.toString())
 
             trainerTextView.text =
                 getString(R.string.trainer).plus(" (").plus(club.trainers.size).plus(")")

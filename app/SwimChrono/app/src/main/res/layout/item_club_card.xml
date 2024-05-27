@@ -25,12 +25,13 @@
             android:layout_height="30dp"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="150dp"
+            android:layout_marginStart="30dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/club_fluvial_lugo"
-            android:textColor="@color/white" />
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
         <TextView
             style="@style/AppTextStyle.Bold"
@@ -38,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:layout_marginTop="45dp"
             android:text="@string/full_info"
             android:textAlignment="center"
             android:textColor="@color/white" />
@@ -52,7 +54,7 @@
             android:layout_marginTop="80dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/direccion"
+            android:text="@string/address"
             android:textColor="@color/white" />
 
         <TextView
@@ -92,7 +94,7 @@
             android:layout_marginTop="140dp"
             android:layout_marginEnd="30dp"
             android:layout_marginBottom="10dp"
-            android:text="@string/members_number"
+            android:text="@string/members"
             android:textColor="@color/white" />
 
     </RelativeLayout>

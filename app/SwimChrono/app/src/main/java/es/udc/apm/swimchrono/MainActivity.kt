@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         if (isLoggedIn) {
             when (userRole) {
                 "admin" -> {
-                    clubBottomNavigationView.visibility = View.GONE
+                    clubBottomNavigationView.visibility = View.VISIBLE
                     myTournamentsBottomNavigationView.visibility = View.VISIBLE
                     refereeBottomNavigationView.visibility = View.VISIBLE
                 }
