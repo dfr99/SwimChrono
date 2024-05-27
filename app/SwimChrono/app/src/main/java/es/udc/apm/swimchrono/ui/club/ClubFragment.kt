@@ -1,23 +1,39 @@
 package es.udc.apm.swimchrono.ui.club
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import es.udc.apm.swimchrono.R
+import es.udc.apm.swimchrono.services.ApiService
 import es.udc.apm.swimchrono.databinding.FragmentClubBinding
+import es.udc.apm.swimchrono.databinding.ItemClubCardBinding
+import es.udc.apm.swimchrono.model.User
+import es.udc.apm.swimchrono.ui.login.LoginViewModel
+import es.udc.apm.swimchrono.util.Logger
+import kotlinx.coroutines.awaitAll
+
 
 class ClubFragment : Fragment() {
+    private var tag = this.javaClass.name
+
+    private lateinit var apiService: ApiService
+
+    private val clubViewModel: ClubViewModel by viewModels()
+    private val userViewModel: LoginViewModel by viewModels()
+
+    private lateinit var sharedPreferences: SharedPreferences
 
     private var _binding: FragmentClubBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -25,56 +41,58 @@ class ClubFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val clubViewModel =
-            ViewModelProvider(this).get(ClubViewModel::class.java)
-
         _binding = FragmentClubBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
 
-        val clubMembers = arrayOf<String>(
-            "Si",
-            "No",
-            "Eso espero",
-            "Non sei quen participa aquí"
-        )
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        val memberList = RecyclerClubMembersListAdapter(clubMembers)
-        val clubMemberRecyclerView: RecyclerView = root.findViewById(R.id.club_member_list)
+        apiService = ApiService()
+        apiService.onCreate()
+        sharedPreferences = requireContext().getSharedPreferences("user_data", Context.MODE_PRIVATE)
 
-        clubMemberRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        clubMemberRecyclerView.adapter = memberList
+        val userId = sharedPreferences.getString("userId", null)
+        if (userId != null) {
+            clubViewModel.getClub(userId)
+            Logger.info(tag, "From ClubFragment: Get club data")
+        }
 
-         val textView: TextView = binding.textClubInfo
-         clubViewModel.text.observe(viewLifecycleOwner) {
-             textView.text = it
-         }
+        val clubInfo: ItemClubCardBinding = binding.itemClubCard
 
-        val clubTrainer = arrayOf<String>(
-            "Jaime López Rego",
-            "David Fraga Rodríguez",
-        )
+        val trainerTextView : TextView = binding.textTrainer
+        val trainersRecyclerView : RecyclerView = binding.trainers
+        trainersRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        val trainerInfo = RecyclerItemTrainerAdapter(clubTrainer)
-        val trainerInfoRecyclerView : RecyclerView = root.findViewById(R.id.trainer)
+        val clubMemberTextView : TextView = binding.textMembers
+        val membersRecyclerView: RecyclerView = binding.members
+        membersRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        trainerInfoRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        trainerInfoRecyclerView.adapter = trainerInfo
+        clubViewModel.club.observe(viewLifecycleOwner) { club ->
 
-        val clubData = arrayOf<String>(
-             "Club Fluvial Lugo",
-             "Rúa Fermín Rivera, s/n, 27004 Lugo",
-             "+34 673 45 34 54",
-             "100",
-             "https://www.clubfluviallugo.com"
-        )
+            clubInfo.nombreClub.text = club.name
+            clubInfo.direccion.text = getString(R.string.address).plus(" ").plus(club.address)
+            clubInfo.paginaWeb.text = getString(R.string.url).plus(" ").plus(club.url)
+            clubInfo.telefono.text = getString(R.string.phone).plus(" ").plus(club.phone)
+            clubInfo.membersNumber.text = getString(R.string.number_of_members).plus(" ").plus(club.membersNumber.toString())
 
-        // val ClubInfo = ClubDataAdapter(clubData)
-        // val ClubInfoRecyclerView :  = root.findViewById(R.id.item_club_card)
+            trainerTextView.text =
+                getString(R.string.trainer).plus(" (").plus(club.trainers.size).plus(")")
+            clubMemberTextView.text =
+                getString(R.string.members).plus(" (").plus(club.members.size).plus(")")
 
-        // ClubInfoRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        // ClubInfoRecyclerView.adapter = trainerInfo
+            clubViewModel.getUsers(club.id, "trainers")
+            clubViewModel.trainers.observe(viewLifecycleOwner) { trainers ->
+                val trainersAdapter = RecyclerUsersListAdapter(trainers)
+                trainersRecyclerView.adapter = trainersAdapter
+            }
 
-        return root
+            clubViewModel.getUsers(club.id, "members")
+            clubViewModel.members.observe(viewLifecycleOwner) { members ->
+                val clubMembersAdapter = RecyclerUsersListAdapter(members)
+                membersRecyclerView.adapter = clubMembersAdapter
+            }
+        }
     }
 
     override fun onDestroyView() {
