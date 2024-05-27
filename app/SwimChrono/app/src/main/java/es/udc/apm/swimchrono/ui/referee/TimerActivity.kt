@@ -12,10 +12,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.zxing.integration.android.IntentIntegrator
 import es.udc.apm.swimchrono.R
+import es.udc.apm.swimchrono.services.ApiService
+import es.udc.apm.swimchrono.services.ApiServiceCallback
 import es.udc.apm.swimchrono.util.Logger
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -27,6 +32,7 @@ import java.util.concurrent.TimeUnit
 
 class TimerActivity : AppCompatActivity() {
 
+    private var apiService = ApiService()
     private var isRunning = false
 
     //private lateinit var chronometer: Chronometer
@@ -36,15 +42,15 @@ class TimerActivity : AppCompatActivity() {
     private var startTime: Long = 0
     private var timeElapsed: Long = 0
 
-    private var tournamentId = -1;
-    private var raceId = -1;
+    private var tournamentId = -1
+    private var raceId = -1
 
     private lateinit var database: DatabaseReference
 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_referee_start)
+        setContentView(R.layout.activity_timer)
 
         tournamentId = intent.getIntExtra("TOURNAMENT_ID", -1)
         raceId = intent.getIntExtra("RACE_ID", -1)
@@ -56,8 +62,68 @@ class TimerActivity : AppCompatActivity() {
             Logger.debug("TimerActivity", "No Tournament ID or Race ID received")
         }
 
+        val sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE)
+
+        val swimmerUID = sharedPreferences.getString("swimmerUID", null)
+
         database = FirebaseDatabase.getInstance().reference
 
+        val categoryText = findViewById<TextView>(R.id.category)
+        val distanceText = findViewById<TextView>(R.id.distance)
+        val styleText = findViewById<TextView>(R.id.style)
+        val heatText = findViewById<TextView>(R.id.heat)
+        val laneText = findViewById<TextView>(R.id.lane)
+        val hourText = findViewById<TextView>(R.id.hour)
+        val swimmerText = findViewById<TextView>(R.id.swimmerName)
+        val dniText = findViewById<TextView>(R.id.swimmerDNI)
+
+        val raceRef =
+            database.child("tournaments").child(tournamentId.toString()).child("carreras").child(
+                raceId.toString()
+            )
+
+        raceRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    // Extraer los valores
+                    val category = dataSnapshot.child("categoria").getValue(String::class.java)
+                    val distance = dataSnapshot.child("distancia").getValue(String::class.java)
+                    val style = dataSnapshot.child("estilo").getValue(String::class.java)
+                    val heat = dataSnapshot.child("heat").getValue(Long::class.java)
+                    val lane = dataSnapshot.child("lane").getValue(Long::class.java)
+                    val hour = dataSnapshot.child("hour").getValue(String::class.java)
+
+                    // Asignar los valores a los TextViews
+                    categoryText.text = category ?: "N/A"
+                    distanceText.text = distance ?: "N/A"
+                    styleText.text = style ?: "N/A"
+                    heatText.text = heat.toString()
+                    laneText.text = lane.toString()
+                    hourText.text = hour ?: "N/A"
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Manejar el error
+            }
+        })
+        apiService = ApiService()
+        apiService.onCreate()
+
+
+        // Obtener los datos del usuario y actualizar la fila de la tabla
+        apiService.getUserData(swimmerUID!!, object : ApiServiceCallback {
+            override fun onDataReceived(response: Any?) {
+                (response as? Map<*, *>)?.let {
+                    val name = it["nombre"] as? String ?: "Unknown"
+                    val surname = it["apellido"] as? String ?: "Unknown"
+                    val dni = it["DNI"] as? String ?: "Unknown"
+
+                    swimmerText.text = "$name $surname"
+                    dniText.text = dni
+                }
+            }
+        })
 
         val buttonExit = findViewById<ImageView>(R.id.ivBackButton)
         val chronometer = findViewById<TextView>(R.id.chronometer)
@@ -74,7 +140,7 @@ class TimerActivity : AppCompatActivity() {
         startStopButton.setOnClickListener {
             if (!isRunning) {
                 Toast.makeText(this, "Start Chrono", Toast.LENGTH_SHORT).show()
-            } else if (isRunning) {
+            } else {
                 Toast.makeText(this, "Stop Chrono", Toast.LENGTH_SHORT).show()
             }
             toggleStartStop(chronometer, startStopButton)
@@ -87,7 +153,8 @@ class TimerActivity : AppCompatActivity() {
                     stopChronometer()
                     timeElapsed = 0
                     startTime = System.currentTimeMillis()
-                    chronometer.text = "00:00:000" // Actualiza el texto del cronómetro a cero
+                    chronometer.text =
+                        getString(R.string._00_00_000) // Actualiza el texto del cronómetro a cero
 
                     // Cambiamos el estado del boton
                     isRunning = false
@@ -120,7 +187,7 @@ class TimerActivity : AppCompatActivity() {
             with(builder)
             {
                 setTitle("Save Alert")
-                setMessage("Want to reset the timer?")
+                setMessage(getString(R.string.want_to_reset_the_timer))
                 setPositiveButton(
                     android.R.string.ok,
                     DialogInterface.OnClickListener(function = positiveButtonClick)
@@ -133,9 +200,7 @@ class TimerActivity : AppCompatActivity() {
 
         saveButton.setOnClickListener {
 
-            val sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE)
 
-            val swimmerUID = sharedPreferences.getString("swimmerUID", null);
             Toast.makeText(this, swimmerUID, Toast.LENGTH_SHORT).show()
 
             stopChronometer()
@@ -167,7 +232,7 @@ class TimerActivity : AppCompatActivity() {
                             val millis = timeElapsed % 1000
 
                             val result = String.format("%02d:%02d:%03d", minutes, seconds, millis)
-                            addTimeToFirebase(swimmerUID!!, result)
+                            addTimeToFirebase(swimmerUID, result)
 
                         } catch (_: Exception) {
                         }
@@ -184,7 +249,7 @@ class TimerActivity : AppCompatActivity() {
             with(builder)
             {
                 setTitle("Save Alert")
-                setMessage("Want to save the current time?")
+                setMessage(getString(R.string.want_to_save_the_current_time))
                 setPositiveButton(
                     android.R.string.ok,
                     DialogInterface.OnClickListener(function = positiveButtonClick)

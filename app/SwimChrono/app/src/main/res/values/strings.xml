@@ -65,4 +65,7 @@
     <string name="rol">Rol</string>
     <string name="birthday">Birthday</string>
     <string name="email">Email</string>
+    <string name="want_to_reset_the_timer">Want to reset the timer?</string>
+    <string name="want_to_save_the_current_time">Want to save the current time?</string>
+    <string name="_00_00_000">00:00:000</string>
 </resources>

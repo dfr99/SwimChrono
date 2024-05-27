@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
@@ -22,20 +21,17 @@ class ProfileMyQRActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile_myqractivity)
 
         val buttonExit = findViewById<ImageView>(R.id.ivBackButton)
-        var ivCodigoQR: ImageView = findViewById(R.id.ivCodigoQR)
-        val nameUserQR = findViewById<TextView>(R.id.tvNameQR)
+        val ivCodigoQR: ImageView = findViewById(R.id.ivCodigoQR)
 
         sharedPreferences = getSharedPreferences("user_data", Context.MODE_PRIVATE)
 
 
         val userId = "UID: " + sharedPreferences.getString("userId", null)
 
-        nameUserQR.text = sharedPreferences.getString("userId", null)
-
         // Generación del QR
         try {
-            var barcodeEncoder: BarcodeEncoder = BarcodeEncoder()
-            var bitmap: Bitmap = barcodeEncoder.encodeBitmap(
+            val barcodeEncoder = BarcodeEncoder()
+            val bitmap: Bitmap = barcodeEncoder.encodeBitmap(
                 userId,
                 BarcodeFormat.QR_CODE, /*Creo que el tamaño no importa*/
                 300,
