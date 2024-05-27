@@ -53,7 +53,7 @@
                     android:backgroundTint="@color/forest_blue_200"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:text="@string/profile_info_nombre"
+                    android:text="@string/name"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
@@ -82,7 +82,7 @@
                     android:backgroundTint="@color/forest_blue_200"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:text="@string/profile_info_surname"
+                    android:text="@string/surname"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
