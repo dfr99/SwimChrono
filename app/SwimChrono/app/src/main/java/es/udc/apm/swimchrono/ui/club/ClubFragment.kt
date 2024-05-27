@@ -15,7 +15,6 @@ import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.databinding.FragmentClubBinding
 import es.udc.apm.swimchrono.databinding.ItemClubCardBinding
 import es.udc.apm.swimchrono.services.ApiService
-import es.udc.apm.swimchrono.ui.login.LoginViewModel
 import es.udc.apm.swimchrono.util.Logger
 
 
@@ -25,7 +24,6 @@ class ClubFragment : Fragment() {
     private lateinit var apiService: ApiService
 
     private val clubViewModel: ClubViewModel by viewModels()
-    private val userViewModel: LoginViewModel by viewModels()
 
     private lateinit var sharedPreferences: SharedPreferences
 
