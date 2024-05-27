@@ -11,7 +11,13 @@ A continuación, se presentan las primeras implementaciones de los casos de uso 
 
 ### 2. Mi Club
 
-![Mi Club](../images/wireframes-implementation/wireframe-club-info.jpg)
+#### Disposición vertical
+
+![Mi Club](../images/wireframes-implementation/fragment_club_vertical.png)
+
+#### Disposición horizontal
+
+![Mi Club](../images/wireframes-implementation/fragment_club_horizontal.png)
 
 ### 3. Cronometrador Oficial
 
