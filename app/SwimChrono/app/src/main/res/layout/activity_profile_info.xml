@@ -171,7 +171,7 @@
                     android:backgroundTint="@color/forest_blue_200"
                     android:gravity="center"
                     android:padding="10dp"
-                    android:text="@string/fecha_nacimiento"
+                    android:text="@string/birthday"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
 
@@ -196,7 +196,6 @@
                 <TextView
                     android:id="@+id/tvNumberTitle"
                     style="@style/AppTextStyle.Bold"
-                    android:layout_width="116dp"
                     android:layout_height="wrap_content"
                     android:background="@drawable/celdas_profile_info"
                     android:backgroundTint="@color/forest_blue_200"
