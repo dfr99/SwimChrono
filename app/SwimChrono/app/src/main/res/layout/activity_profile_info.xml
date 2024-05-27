@@ -65,7 +65,7 @@
                     android:gravity="center"
                     android:padding="10dp"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
             </TableRow>
 
             <TableRow
@@ -84,7 +84,7 @@
                     android:padding="10dp"
                     android:text="@string/profile_info_surname"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tvSurname"
@@ -94,7 +94,7 @@
                     android:gravity="center"
                     android:padding="10dp"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
             </TableRow>
 
@@ -114,7 +114,7 @@
                     android:padding="10dp"
                     android:text="@string/email"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tvEmail"
@@ -124,7 +124,7 @@
                     android:gravity="center"
                     android:padding="10dp"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
             </TableRow>
 
@@ -144,7 +144,7 @@
                     android:padding="10dp"
                     android:text="@string/dni"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tvDNI"
@@ -154,7 +154,7 @@
                     android:gravity="center"
                     android:padding="10dp"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
             </TableRow>
 
@@ -173,7 +173,7 @@
                     android:padding="10dp"
                     android:text="@string/birthday"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
 
                 <TextView
@@ -184,7 +184,7 @@
                     android:gravity="center"
                     android:padding="10dp"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
             </TableRow>
 
@@ -203,7 +203,7 @@
                     android:padding="10dp"
                     android:text="@string/profile_info_telephone"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
 
                 <TextView
@@ -214,7 +214,7 @@
                     android:gravity="center"
                     android:padding="10dp"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
             </TableRow>
 
@@ -234,7 +234,7 @@
                     android:padding="10dp"
                     android:text="@string/rol"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/tvRol"
@@ -244,7 +244,7 @@
                     android:gravity="center"
                     android:padding="10dp"
                     android:textColor="@color/black"
-                    android:textSize="16sp" />
+                    android:textSize="18sp" />
 
             </TableRow>
 
