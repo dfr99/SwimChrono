@@ -47,14 +47,6 @@
             android:text="@string/my_qr_title"
             android:textSize="16sp" />
 
-        <Button
-            android:id="@+id/button_notifications"
-            android:layout_width="214dp"
-            android:layout_height="60dp"
-            android:drawableLeft="@drawable/icon_notifications"
-            android:gravity="center"
-            android:text="@string/notifications_title"
-            android:textSize="16sp" />
 
         <Button
             android:id="@+id/button_profile_settings"

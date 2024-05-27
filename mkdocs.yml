@@ -89,6 +89,7 @@ markdown_extensions:
 
 nav:
     - Inicio: index.md
+    - Guía de usuario: guide/user-guide.md
     - Contribuciones: contributing/index.md
     - Público Objetivo: target.md
     - Estudio de mercado: market-study.md
@@ -100,8 +101,8 @@ nav:
                 - Implementación: development/wireframes-implementation.md
     - Componentes: components/index.md
     - Integraciones:
-       - Bluetooth: integrations/bluetooth.md
-       - Almacenamiento: integrations/storage.md
-       - Firebase: integrations/firebase.md
-       - QR (Zxing): integrations/zxing-qr.md
+          - Bluetooth: integrations/bluetooth.md
+          - Almacenamiento: integrations/storage.md
+          - Firebase: integrations/firebase.md
+          - QR (Zxing): integrations/zxing-qr.md
     - Usabilidad y UX: ux/index.md
