@@ -35,15 +35,15 @@
     <string name="my_qr_title">My QR</string>
     <string name="telephone_example">627111111</string>
     <string name="personal_info_title">Personal Information</string>
-    <string name="profile_info_nombre">Nombre</string>
+    <string name="profile_info_nombre">Name</string>
     <string name="name_example">Alejandro</string>
-    <string name="profile_info_surname">Apellidos</string>
+    <string name="profile_info_surname">Surname</string>
     <string name="surname_example">Rodríguez Vaquero</string>
-    <string name="profile_info_telephone">Nº teléfono</string>
+    <string name="profile_info_telephone">Phone Number</string>
     <string name="name_surname_example">Alejandro R.V.</string>
     <string name="notifications_title">Notifications</string>
     <string name="settings_title">Settings</string>
-    <string name="contentDescription_back">Volver</string>
+    <string name="contentDescription_back">Back</string>
     <string name="image_of_an_user">Image of an user</string>
     <string name="example_email">user@example.com</string>
     <string name="referee">Referee</string>
@@ -71,6 +71,8 @@
     <string name="dni">DNI</string>
     <string name="position">Position\n</string>
     <string name="rol">Rol</string>
-    <string name="fecha_nacimiento">Fecha Nacimiento</string>
+    <string name="birthday">Birthday</string>
     <string name="email">Email</string>
+    <string name="address">Address:</string>
+    <string name="number_of_members">Number of members:</string>
 </resources>
