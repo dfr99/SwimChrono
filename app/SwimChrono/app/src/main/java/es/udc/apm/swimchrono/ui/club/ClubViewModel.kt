@@ -1,13 +1,9 @@
 package es.udc.apm.swimchrono.ui.club
 
-import android.annotation.SuppressLint
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.firestore.local.IndexManager.IndexType
 import es.udc.apm.swimchrono.model.Club
-import es.udc.apm.swimchrono.model.User
 import es.udc.apm.swimchrono.services.ApiService
 import es.udc.apm.swimchrono.services.ApiServiceCallback
 import es.udc.apm.swimchrono.util.Logger
@@ -19,11 +15,11 @@ class ClubViewModel : ViewModel(), ApiServiceCallback {
     private val _club = MutableLiveData<Club>()
     val club: LiveData<Club> = _club
 
-    private val _trainers = MutableLiveData<List<HashMap<String,String>>>()
-    val trainers : LiveData<List<HashMap<String,String>>> = _trainers
+    private val _trainers = MutableLiveData<List<HashMap<String, String>>>()
+    val trainers: LiveData<List<HashMap<String, String>>> = _trainers
 
-    private val _members = MutableLiveData<List<HashMap<String,String>>>()
-    val members : LiveData<List<HashMap<String,String>>> = _members
+    private val _members = MutableLiveData<List<HashMap<String, String>>>()
+    val members: LiveData<List<HashMap<String, String>>> = _members
 
     private var apiService = ApiService()
 
@@ -58,8 +54,10 @@ class ClubViewModel : ViewModel(), ApiServiceCallback {
                 } else if (usersData[0]["rol"] == "swimmer") {
                     _members.postValue(usersData)
                 }
-                Logger.debug(tag, "On ClubViewModel.onDataReceived(response)," +
-                        "after invocation of parseResponse(): $usersData")
+                Logger.debug(
+                    tag, "On ClubViewModel.onDataReceived(response)," +
+                            "after invocation of parseResponse(): $usersData"
+                )
             }
 
             else -> {
@@ -72,24 +70,28 @@ class ClubViewModel : ViewModel(), ApiServiceCallback {
         val users = mutableListOf<HashMap<String, String>>()
 
         if (response is List<*>) {
-            response.forEach{ user ->
+            response.forEach { user ->
                 if (user is HashMap<*, *>) {
-                    users.add(hashMapOf(
-                        "nombre" to (user["nombre"] as? String ?: ""),
-                        "apellido" to (user["apellido"] as? String ?: ""),
-                        "email" to (user["email"] as? String ?: ""),
-                        "rol" to (user["rol"] as? String ?: "")
-                    ))
+                    users.add(
+                        hashMapOf(
+                            "nombre" to (user["nombre"] as? String ?: ""),
+                            "apellido" to (user["apellido"] as? String ?: ""),
+                            "email" to (user["email"] as? String ?: ""),
+                            "rol" to (user["rol"] as? String ?: "")
+                        )
+                    )
                 } else {
-                    Logger.error(tag,
-                        "Response does not contains HashMap<*,*> items")
+                    Logger.error(
+                        tag,
+                        "Response does not contains HashMap<*,*> items"
+                    )
                 }
             }
         }
         return users
     }
 
-     private fun parseClub(response: Any?): Club {
+    private fun parseClub(response: Any?): Club {
         val res: HashMap<*, *>? = response as? HashMap<*, *>
         val trainersList: MutableList<String> = mutableListOf()
         val membersList: MutableList<String> = mutableListOf()
@@ -100,7 +102,7 @@ class ClubViewModel : ViewModel(), ApiServiceCallback {
         val address = res?.get("address") as? String ?: ""
         val phone = res?.get("phone") as? String ?: ""
         val url = res?.get("url") as? String ?: ""
-        val membersNumber = (res?.get("members_number") as? Long)?.toInt()  ?: 0
+        val membersNumber = (res?.get("members_number") as? Long)?.toInt() ?: 0
 
         val trainers = res?.get("trainers") as? List<*> ?: listOf<String>()
         trainers.forEach { trainer ->
@@ -114,7 +116,8 @@ class ClubViewModel : ViewModel(), ApiServiceCallback {
             membersList.add(tmp?.get("UID").toString())
         }
 
-        val clubData = Club(id, name, city, address, phone, url, trainersList, membersList, membersNumber)
+        val clubData =
+            Club(id, name, city, address, phone, url, trainersList, membersList, membersNumber)
         return clubData
     }
 }

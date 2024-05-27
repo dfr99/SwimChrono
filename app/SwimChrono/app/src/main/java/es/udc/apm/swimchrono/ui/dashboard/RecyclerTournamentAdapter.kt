@@ -17,13 +17,13 @@ interface OnTournamentItemClickListener {
 
 class RecyclerTournamentAdapter(
     private val dataSet: List<Tournament>,
-    private val listener: OnTournamentItemClickListener?
+    private val listener: OnTournamentItemClickListener?,
 ) :
     RecyclerView.Adapter<RecyclerTournamentAdapter.ViewHolder>() {
 
     inner class ViewHolder(
         view: View,
-        private val listener: OnTournamentItemClickListener?
+        private val listener: OnTournamentItemClickListener?,
     ) : RecyclerView.ViewHolder(view) {
 
         val tournamentNameTextView: TextView = view.findViewById(R.id.tournament_name)
@@ -37,7 +37,6 @@ class RecyclerTournamentAdapter(
             view.setOnClickListener {
                 val position = adapterPosition
                 if (position != RecyclerView.NO_POSITION) {
-                    // FIXME: This should be with the ID not the name
                     val tournamentId =
                         dataSet[position].id
 
