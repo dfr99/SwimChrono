@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.BaseExpandableListAdapter
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.model.Race
 import es.udc.apm.swimchrono.model.Tournament
 
@@ -61,6 +63,19 @@ class TournamentExpandableListAdapter(
             .inflate(android.R.layout.simple_expandable_list_item_1, parent, false)
         val textView = view.findViewById<TextView>(android.R.id.text1)
         textView.text = tournament.name
+        textView.setBackgroundColor(
+            ContextCompat.getColor(
+                context,
+                R.color.forest_blue_200
+            )
+        )
+
+        textView.setTextColor(
+            ContextCompat.getColor(
+                context,
+                R.color.white
+            )
+        )
         return view
     }
 
@@ -79,7 +94,19 @@ class TournamentExpandableListAdapter(
         text1.text = race.style
         text2.text =
             "${race.category} - ${race.distance} - ${race.heat} - ${race.lane} - ${race.hour}"
+        text1.setTextColor(
+            ContextCompat.getColor(
+                context,
+                R.color.white
+            )
+        )
 
+        text2.setTextColor(
+            ContextCompat.getColor(
+                context,
+                R.color.white
+            )
+        )
 
 
         view.setOnClickListener {
@@ -92,6 +119,12 @@ class TournamentExpandableListAdapter(
             context.startActivity(intent)
         }
 
+        view.setBackgroundColor(
+            ContextCompat.getColor(
+                context,
+                R.color.forest_blue_500
+            )
+        )
         return view
     }
 }
