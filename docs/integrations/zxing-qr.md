@@ -14,4 +14,4 @@ La implementación del escaneo de códigos QR en nuestra aplicación Android fac
 
 ## Ejemplo QR (Contenido: "1234")
 
-<p align="center"><img src="../images/qr-example/QR_example_1234.jpeg" width="350" alt="QR - 1234"></p>
+<p align="center"><img src="../../images/qr-example/QR_example_1234.jpeg" width="350" alt="QR - 1234"></p>
