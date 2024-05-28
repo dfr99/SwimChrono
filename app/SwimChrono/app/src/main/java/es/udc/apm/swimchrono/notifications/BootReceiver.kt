@@ -1,5 +1,6 @@
 package es.udc.apm.swimchrono.notifications
 
+import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.BroadcastReceiver
@@ -17,9 +18,11 @@ class BootReceiver : BroadcastReceiver() {
         }
     }
 
+    @SuppressLint("ScheduleExactAlarm")
     private fun rescheduleNotification(context: Context) {
         // Recuperar fecha y hora de SharedPreferences
-        val sharedPreferences: SharedPreferences = context.getSharedPreferences(AlarmNotificationManager.PREFS_NAME, Context.MODE_PRIVATE)
+        val sharedPreferences: SharedPreferences =
+            context.getSharedPreferences(AlarmNotificationManager.PREFS_NAME, Context.MODE_PRIVATE)
         val year = sharedPreferences.getInt(AlarmNotificationManager.YEAR_KEY, 0)
         val month = sharedPreferences.getInt(AlarmNotificationManager.MONTH_KEY, 0)
         val day = sharedPreferences.getInt(AlarmNotificationManager.DAY_KEY, 0)
@@ -52,9 +55,10 @@ class BootReceiver : BroadcastReceiver() {
 
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val notificationIntent = Intent(context, AlarmNotification::class.java)
+        val id = System.currentTimeMillis().toInt()
         val pendingIntent = PendingIntent.getBroadcast(
             context,
-            AlarmNotificationManager.NOTIFICATION_ID,
+            id,
             notificationIntent,
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )

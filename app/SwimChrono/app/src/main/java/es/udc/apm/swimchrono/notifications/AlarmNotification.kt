@@ -21,7 +21,7 @@ class AlarmNotification : BroadcastReceiver() {
                 Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // Este flag impide que se abra dos veces la app
         }
 
-        // Si la API es 31 no pone el dichoso FLAG_INMUTABLE
+        // Si la API es 31 no pone el FLAG_INMUTABLE
         val flag =
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0
         val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, flag)
@@ -42,6 +42,7 @@ class AlarmNotification : BroadcastReceiver() {
 
         val manager =
             context.getSystemService(Context.NOTIFICATION_SERVICE) as AndroidNotificationManager
-        manager.notify(AlarmNotificationManager.NOTIFICATION_ID, notification)
+        val id = System.currentTimeMillis().toInt()
+        manager.notify(id, notification)
     }
 }

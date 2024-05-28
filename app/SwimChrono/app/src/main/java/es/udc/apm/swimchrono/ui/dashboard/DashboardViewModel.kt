@@ -9,6 +9,8 @@ import es.udc.apm.swimchrono.services.ApiService
 import es.udc.apm.swimchrono.services.ApiServiceCallback
 import es.udc.apm.swimchrono.util.Logger
 import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class DashboardViewModel : ViewModel(), ApiServiceCallback {
@@ -78,12 +80,30 @@ class DashboardViewModel : ViewModel(), ApiServiceCallback {
 
                     val tournament =
                         Tournament(id, type, name, date, participants, location, emptyList())
+
+
                     tournamentList.add(tournament)
                 }
             }
         }
 
         return tournamentList
+    }
+
+
+    // Nueva función para extraer componentes de fecha y hora
+    fun extractDateTimeComponents(date: Date): List<Int> {
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH) + 1
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+        val minute = calendar.get(Calendar.MINUTE)
+        val second = calendar.get(Calendar.SECOND)
+
+        return listOf(year, month, day, hour, minute, second)
     }
 }
 
