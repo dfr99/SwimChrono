@@ -39,8 +39,8 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
-    <string name="initTimeCrono">00:00:000</string>
-    <string name="resetTextButton">reset</string>
+    <string name="initTimeCrono" translatable="false">00:00:000</string>
+    <string name="resetTextButton">Reset</string>
     <string name="saveButtonText">Save time</string>
     <string name="category">Category</string>
     <string name="distance">Distance</string>
@@ -52,6 +52,9 @@
     <string name="email">Email</string>
     <string name="want_to_reset_the_timer">Want to reset the timer?</string>
     <string name="want_to_save_the_current_time">Want to save the current time?</string>
-    <string name="_00_00_000">00:00:000</string>
+    <string name="_00_00_000" translatable="false">00:00:000</string>
     <string name="swimmer">Swimmer</string>
+    <string name="languaje">Languaje</string>
+    <string name="english">English</string>
+    <string name="espanol">Español</string>
 </resources>
