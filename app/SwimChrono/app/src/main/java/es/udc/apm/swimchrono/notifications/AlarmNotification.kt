@@ -12,10 +12,11 @@ import android.app.NotificationManager as AndroidNotificationManager
 
 class AlarmNotification : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent?) {
-        createSimpleNotification(context)
+        val typeMessage = intent?.getIntExtra(AlarmNotificationManager.TYPE_MSG_KEY, 0) ?: 0
+        createSimpleNotification(context, typeMessage)
     }
 
-    private fun createSimpleNotification(context: Context) {
+    private fun createSimpleNotification(context: Context, typeMessage: Int) {
         val intent = Intent(context, MainActivity::class.java).apply {
             flags =
                 Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK // Este flag impide que se abra dos veces la app
@@ -26,14 +27,37 @@ class AlarmNotification : BroadcastReceiver() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) PendingIntent.FLAG_IMMUTABLE else 0
         val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, flag)
 
+
+        val titleText = when (typeMessage) {
+            1 -> "¡Empieza la carrera!"
+            2 -> "¡Solo falta una hora!"
+            3 -> "¡Se acerca el momento!"
+            else -> "Tienes una nueva notificación"
+        }
+
+
+        val contentText = when (typeMessage) {
+            1 -> "¡Calienta que sales!"
+            2 -> "¡Vete calentando!"
+            3 -> "Falta poco para la carrera"
+            else -> "Accede a la aplicación"
+        }
+
+        val bigText = when (typeMessage) {
+            1 -> "Está por comenzar la carrera, ten todo listo y preparado"
+            2 -> "Vete calentando que dentro de poco tiempo empieza"
+            3 -> "Falta poco para la carrera. Revisa el horario de tu carrera para no despistarte"
+            else -> "Accede a la aplicación para saber cuándo es tu próxima carrera"
+        }
+
         val notification =
             NotificationCompat.Builder(context, AlarmNotificationManager.MY_CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher) // Icono del mensaje
-                .setContentTitle("¡Empieza la carrera!") // Titulo del mensaje
-                .setContentText("¡Calienta que sales!") // Texto sin ampliar
+                .setContentTitle(titleText) // Titulo del mensaje
+                .setContentText(contentText) // Texto sin ampliar
                 .setStyle(
                     NotificationCompat.BigTextStyle() // Texto tras ampliar
-                        .bigText("Está por comenzar la carrera, ten todo listo y preparado")
+                        .bigText(bigText)
                 )
                 .setContentIntent(pendingIntent)
                 .setPriority(NotificationCompat.PRIORITY_HIGH) // Prioridad alta para heads-up notification
