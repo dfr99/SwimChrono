@@ -11,13 +11,13 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.zxing.integration.android.IntentIntegrator
+import es.udc.apm.swimchrono.BaseActivity
 import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.services.ApiService
 import es.udc.apm.swimchrono.services.ApiServiceCallback
@@ -30,7 +30,7 @@ import kotlinx.coroutines.tasks.await
 import java.util.concurrent.TimeUnit
 
 
-class TimerActivity : AppCompatActivity() {
+class TimerActivity : BaseActivity() {
 
     private var apiService = ApiService()
     private var isRunning = false
@@ -51,6 +51,9 @@ class TimerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_timer)
+
+        initQRScanner()
+
 
         tournamentId = intent.getIntExtra("TOURNAMENT_ID", -1)
         raceId = intent.getIntExtra("RACE_ID", -1)
@@ -110,20 +113,22 @@ class TimerActivity : AppCompatActivity() {
         apiService = ApiService()
         apiService.onCreate()
 
+        if (swimmerUID != null) {
+            // Obtener los datos del usuario y actualizar la fila de la tabla
+            apiService.getUserData(swimmerUID, object : ApiServiceCallback {
+                override fun onDataReceived(response: Any?) {
+                    (response as? Map<*, *>)?.let {
+                        val name = it["nombre"] as? String ?: "Unknown"
+                        val surname = it["apellido"] as? String ?: "Unknown"
+                        val dni = it["DNI"] as? String ?: "Unknown"
 
-        // Obtener los datos del usuario y actualizar la fila de la tabla
-        apiService.getUserData(swimmerUID!!, object : ApiServiceCallback {
-            override fun onDataReceived(response: Any?) {
-                (response as? Map<*, *>)?.let {
-                    val name = it["nombre"] as? String ?: "Unknown"
-                    val surname = it["apellido"] as? String ?: "Unknown"
-                    val dni = it["DNI"] as? String ?: "Unknown"
-
-                    swimmerText.text = "$name $surname"
-                    dniText.text = dni
+                        swimmerText.text = "$name $surname"
+                        dniText.text = dni
+                    }
                 }
-            }
-        })
+            })
+        }
+
 
         val buttonExit = findViewById<ImageView>(R.id.ivBackButton)
         val chronometer = findViewById<TextView>(R.id.chronometer)
@@ -231,7 +236,9 @@ class TimerActivity : AppCompatActivity() {
                             val millis = timeElapsed % 1000
 
                             val result = String.format("%02d:%02d:%03d", minutes, seconds, millis)
-                            addTimeToFirebase(swimmerUID, result)
+                            if (swimmerUID != null) {
+                                addTimeToFirebase(swimmerUID, result)
+                            }
 
                         } catch (_: Exception) {
                         }
@@ -259,7 +266,6 @@ class TimerActivity : AppCompatActivity() {
 
         }
 
-        initQRScanner()
     }
 
     private suspend fun addTimeToFirebase(uid: String, newTime: String) {
