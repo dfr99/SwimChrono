@@ -58,11 +58,6 @@ class ProfileFragment : Fragment() {
             val intentMyQR = Intent(requireContext(), ProfileMyQRActivity::class.java)
             startActivity(intentMyQR)
         }
-        binding.buttonNotifications.setOnClickListener {
-            val intentNotifications =
-                Intent(requireContext(), ProfileNotificationsActivity::class.java)
-            startActivity(intentNotifications)
-        }
         binding.buttonProfileSettings.setOnClickListener {
             val intentSettings = Intent(requireContext(), ProfileSettingsActivity::class.java)
             startActivity(intentSettings)

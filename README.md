@@ -26,22 +26,16 @@ NFC y Bluetooth para una mayor comodidad y eficiencia en el registro de tiempos.
 pruebas dentro de las competiciones de manera automática. Es la funcionalidad
 principal de la aplicación.
 
-- **Gestión de entidades:** Permite crear y administrar piscinas, ligas,
-torneos, clubes, nadadores y entrenadores, facilitando la organización de
-competiciones de natación.
+- **Gestión de entidades:** Permite consultar torneos, clubes, nadadores y entrenadores, facilitando la organización de competiciones de natación.
 
-- **Roles de acceso:** Asigna roles como administrador, organizador,
+- **Roles de acceso:** Existen roles como administrador,
 cronometrador, entrenador, nadador o espectador a las diferentes entidades para
 garantizar una gestión adecuada y segura.
 
-- **Exportación e importación de datos:** Posibilidad de exportar e importar
-datos de tiempos en formatos Excel o CSV, facilitando el intercambio de
-información con otros sistemas o herramientas.
-
-- **Integración NFC, QR y Bluetooth:** Reconocimiento de nadadores,
+- ~~**Integración NFC, QR y Bluetooth:** Reconocimiento de nadadores,
 entrenadores y cronometradores mediante tecnología NFC y/o QR, así como la
 posibilidad de conexión con "touchpads" para la automatización del registro de
-tiempos, gracias a la integración con Bluetooth.
+tiempos, gracias a la integración con Bluetooth.~~
 
 - **Interfaz intuitiva:** Diseño sencillo e intuitivo que permite registrar las
 vueltas totales y segmentos parciales de cada nadador en tiempo real,
@@ -54,26 +48,26 @@ seguidores de la natación.
 ## Contribución *"Grupo 11"*
 
 - CEO ([Alejandro Rodríguez Vaquero](mailto:a.vaquero@udc.es))
-	- Director ejecutivo
-    - Coordinación y representación de grupo (Entregas por email semanales)
-    - Gestión de ciclo de vida
-    - Testing
-    - Documentación
-    - Arquitectura general e integración de submódulos
+  - Director ejecutivo
+  - Coordinación y representación de grupo (Entregas por email semanales)
+  - Gestión de ciclo de vida
+  - Testing
+  - Documentación
+  - Arquitectura general e integración de submódulos
 
 - COO ([David Fraga Rodríguez](mailto:david.fraga.rodriguez@udc.es))
-	- Responsable de operaciones
-    - Arquitectura
-    - Validación funcional
+  - Responsable de operaciones
+  - Arquitectura
+  - Validación funcional
 
-- CTO ([Pedro Mauricio Echeverry](mailto:pedro.echeverry@udc.es))
-    - Responsable de tecnologías no-Android
-    - Uso de sensores y hardware embebido
-    - Geolocalización y posicionamiento
-    - Papel de CEO en caso
+- ~~CTO ([Pedro Mauricio Echeverry](mailto:pedro.echeverry@udc.es))~~
+  - ~~Responsable de tecnologías no-Android~~
+  - ~~Uso de sensores y hardware embebido~~
+  - ~~Geolocalización y posicionamiento~~
+  - ~~Papel de CEO en caso~~
 
 - CXO ([Adrián García Vázquez](mailto:adrian.gvazquez@udc.es))
-	- Responsable de experiencia de usuario
-    - Usabilidad
-    - Experiencia de usuario
-    - Funcionalidades sociales
+  - Responsable de experiencia de usuario
+  - Usabilidad
+  - Experiencia de usuario
+  - Funcionalidades sociales

@@ -19,10 +19,8 @@ Estas son las actividades utilizadas para configurar los datos del usuario:
 
 - Pantalla de _Información personal_
 - Pantalla de _Mi QR_
-- Pantalla de _Notificaciones_
 - Pantalla de _Configuración_
-
-<!-- Cronómetro... para más adelante XD-->
+- Pantalla de _Cronómetro_
 
 ## Fragmentos
 
@@ -65,9 +63,17 @@ La aplicación obtendrá datos de Firebase Realtime Database, aquí es donde ten
 
 ### Implementación del Servicio
 
-Se implementará un servicio llamado APIService, que nos permitirá comunicarnos con Firebase y todas sus funcionalidades. Una vez que el servicio ApiService reciba los datos de nadadores, los procesará según sea necesario. Por ejemplo, si se recibe una lista de nadadores en respuesta a una solicitud GET, el servicio puede procesar estos datos y enviarlos de vuelta al fragmento solicitante para su visualización en la interfaz de usuario.
+Se implementará un servicio llamado APIService, que nos permitirá comunicarnos con Firebase y todas sus funcionalidades. Una vez que el servicio ApiService reciba los datos de nadadores, los procesará según sea necesario.
 
 Este enfoque permite separar las operaciones de red de la lógica de la interfaz de usuario, lo que hace que el código sea más modular y fácil de mantener.
+
+Se han implementado las siguientes funcionalidades:
+
+- Autenticación: Conexión con FireBase Auth
+- ObtenerUsuarios
+- ObtenerTorneos
+- IsUserMember: Saber si un usuario pertenece a un Club.
+- ObtenerClubs
 
 A continuación se muestra la primera implementación del servicio dn la aplicación. Se muestra la llamada getTournaments() que es la encargada de obtener la lista de todos los torneos. También se puede ver la implementación del login de la aplicación.
 
@@ -135,5 +141,14 @@ class ApiService : Service() {
 
 }
 ```
+
+## Corutinas
+
+En primera instancia hemos intentado utiliza el cronómetro que nos proporciona de forma nativa Android, pero para nuestro caso de uso requeríamos una precisión de milisegundos.
+
+Al no servirnos hemos optado por hacer nosotros mismos la gestión del cronómetro mediante una corrutina y un handler. Esto nos permite obtener una precisión de milisegundos y poder bloquear el móvil o incluso coger llamadas con el cronómetro corriendo en segundo plano.
+
+También se han utilizado estas corrutinas junto con callbacks para la gestión de llamadas a la Api de servicios. Esto nos permite que la aplicación no se quede esperando respuesta y no de una sensación pobre de navegación al usuario.
+
 <!-- Variables -->
 [backstack]: https://developer.android.com/reference/androidx/fragment/app/FragmentTransaction#addToBackStack(java.lang.String)
