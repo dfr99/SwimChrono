@@ -128,7 +128,7 @@ Los siguientes QR's son para que un árbitro los utilice para guardar los tiempo
 
 - Swimmer2:
 
-    ![Swimmer1](../images/user-guide/swimmer1.png)
+    ![Swimmer1](../images/user-guide/swimmer2.png)
 
 ### 4. Demás apartados
 

@@ -90,6 +90,7 @@ markdown_extensions:
 nav:
     - Inicio: index.md
     - Guía de usuario: guide/user-guide.md
+    - Lean canvas: lean-canvas/lean-canvas.md
     - Contribuciones: contributing/index.md
     - Público Objetivo: target.md
     - Estudio de mercado: market-study.md
@@ -106,4 +107,5 @@ nav:
           - Firebase: integrations/firebase.md
           - QR (Zxing): integrations/zxing-qr.md
           - Bluetooth: integrations/bluetooth.md
+          - Integraciones Descartadas: integrations/unimplemented.md
     - Usabilidad y UX: ux/index.md
