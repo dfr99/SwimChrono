@@ -264,6 +264,7 @@ class TimerActivity : BaseActivity() {
 
         }
 
+        initQRScanner()
     }
 
     private suspend fun addTimeToFirebase(uid: String, newTime: String) {
