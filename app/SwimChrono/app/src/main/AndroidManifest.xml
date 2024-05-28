@@ -29,9 +29,6 @@
             android:name=".ui.profile.ProfileMyQRActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.profile.ProfileNotificationsActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.profile.ProfileInfoActivity"
             android:exported="false" />
         <activity
@@ -41,19 +38,21 @@
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="portrait"
             tools:replace="screenOrientation" />
+
         <service android:name=".services.ApiService" />
 
         <!-- Activar el Receiver -->
-        <receiver android:name=".notifications.AlarmNotification"
-            android:enabled="true"/>
-
+        <receiver
+            android:name=".notifications.AlarmNotification"
+            android:enabled="true" />
 
         <!-- BootReceiver -->
-        <receiver android:name=".notifications.BootReceiver"
+        <receiver
+            android:name=".notifications.BootReceiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
     </application>
@@ -62,13 +61,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- Permisos necesarios de notificacion -->
-    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
-    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 
     <!-- Permiso para reiniciar las notificaciones cuando se apague el dispositivo -->
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
-
-
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
 
 </manifest>

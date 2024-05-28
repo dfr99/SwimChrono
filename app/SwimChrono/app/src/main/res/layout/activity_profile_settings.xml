@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            android:text="@string/languaje"
+            android:text="@string/language"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
@@ -57,17 +57,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="@string/english"
                 android:textSize="16sp" />
 
             <RadioButton
                 android:id="@+id/radioButtonSpanish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/espanol"
                 android:textSize="16sp" />
 
         </RadioGroup>
+
+
     </LinearLayout>
 
 </LinearLayout>

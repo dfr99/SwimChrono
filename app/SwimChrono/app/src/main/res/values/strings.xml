@@ -54,7 +54,7 @@
     <string name="want_to_save_the_current_time">Want to save the current time?</string>
     <string name="_00_00_000" translatable="false">00:00:000</string>
     <string name="swimmer">Swimmer</string>
-    <string name="languaje">Languaje</string>
-    <string name="english">English</string>
-    <string name="espanol">Español</string>
+    <string name="language">Language</string>
+    <string name="english">english</string>
+    <string name="espanol">español</string>
 </resources>

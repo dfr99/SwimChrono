@@ -5,12 +5,12 @@ import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import es.udc.apm.swimchrono.BaseActivity
 import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.services.ApiService
 import es.udc.apm.swimchrono.services.ApiServiceCallback
 
-class ProfileInfoActivity : AppCompatActivity() {
+class ProfileInfoActivity : BaseActivity() {
 
     private var apiService = ApiService()
 

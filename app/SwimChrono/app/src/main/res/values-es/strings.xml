@@ -53,7 +53,7 @@
     <string name="want_to_reset_the_timer">¿Quiéres reinciar el cronómetro?</string>
     <string name="want_to_save_the_current_time">¿Quiéres guardar el tiempo?</string>
     <string name="swimmer">Nadador</string>
-    <string name="languaje">Idioma</string>
-    <string name="english">English</string>
-    <string name="espanol">Español</string>
+    <string name="language">Idioma</string>
+    <string name="english">english</string>
+    <string name="espanol">español</string>
 </resources>
