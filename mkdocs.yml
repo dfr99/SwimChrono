@@ -101,8 +101,9 @@ nav:
                 - Implementación: development/wireframes-implementation.md
     - Componentes: components/index.md
     - Integraciones:
-          - Bluetooth: integrations/bluetooth.md
           - Almacenamiento: integrations/storage.md
+          - Notificaciones: integrations/notifications.md
           - Firebase: integrations/firebase.md
           - QR (Zxing): integrations/zxing-qr.md
+          - Bluetooth: integrations/bluetooth.md
     - Usabilidad y UX: ux/index.md

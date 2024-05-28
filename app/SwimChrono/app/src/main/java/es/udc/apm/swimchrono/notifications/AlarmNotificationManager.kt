@@ -33,12 +33,6 @@ class AlarmNotificationManager(val context: Context) {
     fun createNotification(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int) {
         val sharedPreferences: SharedPreferences =
             context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        //val year = 2024
-        //val month = Calendar.MAY
-        //val day = 22
-        //val hour = 0
-        //val minute = 20
-        //val second = 0
 
         with(sharedPreferences.edit()) {
             putInt(YEAR_KEY, year)
