@@ -200,7 +200,6 @@ class TimerActivity : AppCompatActivity() {
 
         saveButton.setOnClickListener {
 
-
             Toast.makeText(this, swimmerUID, Toast.LENGTH_SHORT).show()
 
             stopChronometer()
@@ -334,9 +333,7 @@ class TimerActivity : AppCompatActivity() {
                         val currentTime = System.currentTimeMillis()
                         timeElapsed = currentTime - startTime
                         val hms = String.format(
-                            //"%02d:%02d:%02d", // Horas:Minutos:Segundos
                             "%02d:%02d", // Minutos:Segundos
-                            //TimeUnit.MILLISECONDS.toHours(timeElapsed),
                             TimeUnit.MILLISECONDS.toMinutes(timeElapsed) % TimeUnit.HOURS.toMinutes(
                                 1
                             ),
@@ -351,8 +348,6 @@ class TimerActivity : AppCompatActivity() {
                 }
             }
 
-            //chronometer.base = SystemClock.elapsedRealtime()
-            //chronometer.start()
             // Iniciar el Handler
             handler.post(runnable)
         }
@@ -360,7 +355,6 @@ class TimerActivity : AppCompatActivity() {
 
     private fun stopChronometer() {
         if (isRunning) {
-            //chronometer.stop()
             // Detener el Handler
             handler.removeCallbacks(runnable)
         }

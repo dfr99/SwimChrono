@@ -31,7 +31,7 @@ class BootReceiver : BroadcastReceiver() {
         val second = sharedPreferences.getInt(AlarmNotificationManager.SECOND_KEY, 0)
 
         if (year == 0 && month == 0 && day == 0 && hour == 0 && minute == 0 && second == 0) {
-            // Si no se encuentran valores en SharedPreferences, no hacer nada
+            // Si no se encuentran valores en SharedPreferences, no se hace nada
             return
         }
 
