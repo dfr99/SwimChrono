@@ -1,5 +1,6 @@
 package es.udc.apm.swimchrono.notifications
 
+import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.NotificationChannel
 import android.app.PendingIntent
@@ -22,7 +23,6 @@ class AlarmNotificationManager(val context: Context) {
         const val HOUR_KEY = "hour"
         const val MINUTE_KEY = "minute"
         const val SECOND_KEY = "second"
-        const val NOTIFICATION_ID = 1
     }
 
     init {
@@ -30,6 +30,7 @@ class AlarmNotificationManager(val context: Context) {
     }
 
     // Método para crear una notificación
+    @SuppressLint("ScheduleExactAlarm")
     fun createNotification(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int) {
         val sharedPreferences: SharedPreferences =
             context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
@@ -45,9 +46,10 @@ class AlarmNotificationManager(val context: Context) {
         }
 
         val intent = Intent(context, AlarmNotification::class.java)
+        val id = System.currentTimeMillis().toInt()
         val pendingIntent = PendingIntent.getBroadcast(
             context,
-            NOTIFICATION_ID,
+            id,
             intent,
             PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
         )
