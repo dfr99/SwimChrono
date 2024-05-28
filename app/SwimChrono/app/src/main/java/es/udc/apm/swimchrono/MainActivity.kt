@@ -3,19 +3,33 @@ package es.udc.apm.swimchrono
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import es.udc.apm.swimchrono.databinding.ActivityMainBinding
+import es.udc.apm.swimchrono.util.LocaleUtil
 import es.udc.apm.swimchrono.util.Logger
+import es.udc.apm.swimchrono.util.Storage
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     private var tag: String = this.javaClass.name
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+
+    public override val storage: Storage by lazy {
+        Storage(this)
+    }
+
+    override fun attachBaseContext(newBase: Context) {
+        super.attachBaseContext(
+            LocaleUtil.getLocalizedContext(
+                newBase,
+                Storage(newBase).getPreferredLocale()
+            )
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

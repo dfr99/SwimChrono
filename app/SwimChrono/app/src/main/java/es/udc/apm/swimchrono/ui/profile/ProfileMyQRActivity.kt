@@ -6,14 +6,14 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
+import es.udc.apm.swimchrono.BaseActivity
 import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.services.ApiService
 import es.udc.apm.swimchrono.services.ApiServiceCallback
 
-class ProfileMyQRActivity : AppCompatActivity() {
+class ProfileMyQRActivity : BaseActivity() {
 
 
     private var apiService = ApiService()
