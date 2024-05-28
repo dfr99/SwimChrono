@@ -29,7 +29,7 @@ class AlarmNotificationManager(val context: Context) {
         createChannel()
     }
 
-    // Método para crear una notificación sin parámetros
+    // Método para crear una notificación
     fun createNotification(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int) {
         val sharedPreferences: SharedPreferences =
             context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
