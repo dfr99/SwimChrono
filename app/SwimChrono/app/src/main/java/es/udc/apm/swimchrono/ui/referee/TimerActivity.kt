@@ -11,13 +11,13 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.zxing.integration.android.IntentIntegrator
+import es.udc.apm.swimchrono.BaseActivity
 import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.services.ApiService
 import es.udc.apm.swimchrono.services.ApiServiceCallback
@@ -30,7 +30,7 @@ import kotlinx.coroutines.tasks.await
 import java.util.concurrent.TimeUnit
 
 
-class TimerActivity : AppCompatActivity() {
+class TimerActivity : BaseActivity() {
 
     private var apiService = ApiService()
     private var isRunning = false
@@ -50,7 +50,17 @@ class TimerActivity : AppCompatActivity() {
     @OptIn(DelicateCoroutinesApi::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+        initQRScanner()
+
+        database = FirebaseDatabase.getInstance().reference
+        apiService = ApiService()
+        apiService.onCreate()
+
+
         setContentView(R.layout.activity_timer)
+
 
         tournamentId = intent.getIntExtra("TOURNAMENT_ID", -1)
         raceId = intent.getIntExtra("RACE_ID", -1)
@@ -62,11 +72,6 @@ class TimerActivity : AppCompatActivity() {
             Logger.debug("TimerActivity", "No Tournament ID or Race ID received")
         }
 
-        val sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE)
-
-        val swimmerUID = sharedPreferences.getString("swimmerUID", null)
-
-        database = FirebaseDatabase.getInstance().reference
 
         val categoryText = findViewById<TextView>(R.id.category)
         val distanceText = findViewById<TextView>(R.id.distance)
@@ -107,23 +112,7 @@ class TimerActivity : AppCompatActivity() {
                 // Manejar el error
             }
         })
-        apiService = ApiService()
-        apiService.onCreate()
 
-
-        // Obtener los datos del usuario y actualizar la fila de la tabla
-        apiService.getUserData(swimmerUID!!, object : ApiServiceCallback {
-            override fun onDataReceived(response: Any?) {
-                (response as? Map<*, *>)?.let {
-                    val name = it["nombre"] as? String ?: "Unknown"
-                    val surname = it["apellido"] as? String ?: "Unknown"
-                    val dni = it["DNI"] as? String ?: "Unknown"
-
-                    swimmerText.text = "$name $surname"
-                    dniText.text = dni
-                }
-            }
-        })
 
         val buttonExit = findViewById<ImageView>(R.id.ivBackButton)
         val chronometer = findViewById<TextView>(R.id.chronometer)
@@ -197,10 +186,7 @@ class TimerActivity : AppCompatActivity() {
             }
 
         }
-
         saveButton.setOnClickListener {
-
-            Toast.makeText(this, swimmerUID, Toast.LENGTH_SHORT).show()
 
             stopChronometer()
             startStopButton.text = getString(R.string.start)
@@ -219,7 +205,24 @@ class TimerActivity : AppCompatActivity() {
                 0
             )
 
+            val sharedPreferences = getSharedPreferences("user_data", MODE_PRIVATE)
 
+            val swimmerUID = sharedPreferences.getString("swimmerUID", null)
+            if (swimmerUID != null) {
+                // Obtener los datos del usuario y actualizar la fila de la tabla
+                apiService.getUserData(swimmerUID, object : ApiServiceCallback {
+                    override fun onDataReceived(response: Any?) {
+                        (response as? Map<*, *>)?.let {
+                            val name = it["nombre"] as? String ?: "Unknown"
+                            val surname = it["apellido"] as? String ?: "Unknown"
+                            val dni = it["DNI"] as? String ?: "Unknown"
+
+                            swimmerText.text = "$name $surname"
+                            dniText.text = dni
+                        }
+                    }
+                })
+            }
             val builder = AlertDialog.Builder(this)
 
             val positiveButtonClick: (DialogInterface, Int) -> Unit =
@@ -231,7 +234,9 @@ class TimerActivity : AppCompatActivity() {
                             val millis = timeElapsed % 1000
 
                             val result = String.format("%02d:%02d:%03d", minutes, seconds, millis)
-                            addTimeToFirebase(swimmerUID, result)
+                            if (swimmerUID != null) {
+                                addTimeToFirebase(swimmerUID, result)
+                            }
 
                         } catch (_: Exception) {
                         }
@@ -259,7 +264,6 @@ class TimerActivity : AppCompatActivity() {
 
         }
 
-        initQRScanner()
     }
 
     private suspend fun addTimeToFirebase(uid: String, newTime: String) {
@@ -363,7 +367,7 @@ class TimerActivity : AppCompatActivity() {
 
     // Scan QR functions
     private fun initQRScanner() {
-        val integrator = IntentIntegrator(this)
+        val integrator = IntentIntegrator(this@TimerActivity)
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE) // Establecer el tipo de codigo de barras
         integrator.setPrompt("Acerque la cámara al código QR")
         integrator.setTorchEnabled(false) // Encender flash
@@ -371,7 +375,7 @@ class TimerActivity : AppCompatActivity() {
         integrator.initiateScan()
     }
 
-    fun extractUID(input: String): String? {
+    fun extractUID(input: String): String {
         // Definimos el prefijo esperado
         val prefix = "UID: "
 
@@ -380,7 +384,7 @@ class TimerActivity : AppCompatActivity() {
             // Extraemos el UID usando substring
             input.substring(prefix.length).trim { it <= ' ' }
         } else {
-            null
+            ""
         }
     }
 
@@ -399,18 +403,12 @@ class TimerActivity : AppCompatActivity() {
         // Check valid QR
         val uid = extractUID(content)
 
-        if (uid != null) {
-            val sharedPreferences =
-                getSharedPreferences("user_data", Context.MODE_PRIVATE)
+        val sharedPreferences =
+            getSharedPreferences("user_data", Context.MODE_PRIVATE)
 
-            val editor = sharedPreferences.edit()
-            editor.putString("swimmerUID", uid)
-            editor.apply()
-
-        } else {
-            Toast.makeText(this, "Please scan a valid QR", Toast.LENGTH_SHORT).show()
-            finish()
-        }
+        val editor = sharedPreferences.edit()
+        editor.putString("swimmerUID", uid)
+        editor.apply()
 
     }
 }
