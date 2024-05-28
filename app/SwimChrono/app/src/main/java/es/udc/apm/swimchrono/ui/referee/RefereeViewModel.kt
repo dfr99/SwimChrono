@@ -1,4 +1,4 @@
-package es.udc.apm.swimchrono.ui.club
+package es.udc.apm.swimchrono.ui.referee
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

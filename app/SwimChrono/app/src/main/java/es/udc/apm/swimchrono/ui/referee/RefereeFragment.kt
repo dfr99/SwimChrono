@@ -10,7 +10,6 @@ import androidx.fragment.app.viewModels
 import es.udc.apm.swimchrono.R
 import es.udc.apm.swimchrono.databinding.FragmentRefereeBinding
 import es.udc.apm.swimchrono.services.ApiService
-import es.udc.apm.swimchrono.ui.club.RefereeViewModel
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
