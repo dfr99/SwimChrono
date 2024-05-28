@@ -133,7 +133,7 @@ class DashboardFragment : Fragment(), OnTournamentItemClickListener {
         val formattedDate = dateFormat.format(calendar.time)
 
         // Crear notificación en la hora exacta recibida
-        alarmNotificationManager.createNotification(year, month, day, hour, minute, second)
+        alarmNotificationManager.createNotification(year, month, day, hour, minute, second, 1)
         Logger.debug(this.javaClass.name, "Notification created for: $formattedDate")
 
         // Crear Calendar para una hora antes
@@ -147,7 +147,8 @@ class DashboardFragment : Fragment(), OnTournamentItemClickListener {
             oneHourBefore.get(Calendar.DAY_OF_MONTH),
             oneHourBefore.get(Calendar.HOUR_OF_DAY),
             oneHourBefore.get(Calendar.MINUTE),
-            oneHourBefore.get(Calendar.SECOND)
+            oneHourBefore.get(Calendar.SECOND),
+            2
         )
         Logger.debug(this.javaClass.name, "Notification created for: $formattedDateOneHourBefore")
 
@@ -162,7 +163,8 @@ class DashboardFragment : Fragment(), OnTournamentItemClickListener {
             oneDayBefore.get(Calendar.DAY_OF_MONTH),
             oneDayBefore.get(Calendar.HOUR_OF_DAY),
             oneDayBefore.get(Calendar.MINUTE),
-            oneDayBefore.get(Calendar.SECOND)
+            oneDayBefore.get(Calendar.SECOND),
+            3
         )
         Logger.debug(this.javaClass.name, "Notification created for: $formattedDateOneDayBefore")
 

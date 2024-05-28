@@ -1,6 +1,8 @@
 # Notificaciones
 
-En la aplicación se implementa un sistema de notificaciones para informar del usuario sobre cuando inicia la carrera en donde se apunta. Se crean notificaciones un día antes, una hora antes y cuando comienza la carrera.
+En la aplicación se implementa un sistema de notificaciones para informar del usuario sobre cuando inicia la carrera en donde se apunta. Se crean notificaciones un día antes, una hora antes y cuando comienza la carrera. Cada uno tendrá su tipo de mensaje diferente.
+
+Para poder manejar las notificaciones **es importante habilitar las notificaciones desde la confguración de aplicaciones del dispositivo Android**.
 
 Para manejar el uso de las notificaciones se crean las siguientes clases:
 

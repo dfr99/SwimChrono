@@ -3,7 +3,7 @@ En la aplicación se usan varias integraciones que ofrece Firebase. En concreto 
 
 ## FirebaseAuth
 
-Gracias a esta integración podemos tener un gestor de cuentas de usuario, que nos permite tener un mayor control sobre quien se puede loguear sobre la aplicación. También se podrá loguear uno mediante el sistema Sign-In de Google
+Gracias a esta integración podemos tener un gestor de cuentas de usuario, que nos permite tener un mayor control sobre quien se puede loguear sobre la aplicación. También se podrá loguear uno mediante el sistema Sign-In de Google.
 
 ## Firebase Realtime Database
 

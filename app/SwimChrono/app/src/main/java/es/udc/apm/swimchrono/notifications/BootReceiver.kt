@@ -54,7 +54,12 @@ class BootReceiver : BroadcastReceiver() {
         }
 
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val notificationIntent = Intent(context, AlarmNotification::class.java)
+
+        // Crea un mensaje para que observe cuando es su próxima carrera
+        val notificationIntent = Intent(context, AlarmNotification::class.java).apply {
+            putExtra(AlarmNotificationManager.TYPE_MSG_KEY, 4)
+        }
+
         val id = System.currentTimeMillis().toInt()
         val pendingIntent = PendingIntent.getBroadcast(
             context,

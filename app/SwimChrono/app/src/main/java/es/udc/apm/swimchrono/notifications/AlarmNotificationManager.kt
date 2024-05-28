@@ -23,6 +23,7 @@ class AlarmNotificationManager(val context: Context) {
         const val HOUR_KEY = "hour"
         const val MINUTE_KEY = "minute"
         const val SECOND_KEY = "second"
+        const val TYPE_MSG_KEY = "type_message"
     }
 
     init {
@@ -31,7 +32,7 @@ class AlarmNotificationManager(val context: Context) {
 
     // Método para crear una notificación
     @SuppressLint("ScheduleExactAlarm")
-    fun createNotification(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int) {
+    fun createNotification(year: Int, month: Int, day: Int, hour: Int, minute: Int, second: Int, type_message: Int) {
         val sharedPreferences: SharedPreferences =
             context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
@@ -45,7 +46,11 @@ class AlarmNotificationManager(val context: Context) {
             apply()
         }
 
-        val intent = Intent(context, AlarmNotification::class.java)
+        // Añadir al Intent el tipo de mensaje
+        val intent = Intent(context, AlarmNotification::class.java).apply {
+            putExtra(TYPE_MSG_KEY, type_message)
+        }
+
         val id = System.currentTimeMillis().toInt()
         val pendingIntent = PendingIntent.getBroadcast(
             context,
