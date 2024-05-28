@@ -31,7 +31,7 @@ class AlarmNotification : BroadcastReceiver() {
         val titleText = when (typeMessage) {
             1 -> "¡Empieza la carrera!"
             2 -> "¡Solo falta una hora!"
-            3 -> "Mañana es el gran día"
+            3 -> "¡Se acerca el momento!"
             else -> "Tienes una nueva notificación"
         }
 
@@ -39,14 +39,14 @@ class AlarmNotification : BroadcastReceiver() {
         val contentText = when (typeMessage) {
             1 -> "¡Calienta que sales!"
             2 -> "¡Vete calentando!"
-            3 -> "¡Estate preparado para mañana!"
+            3 -> "Falta poco para la carrera"
             else -> "Accede a la aplicación"
         }
 
         val bigText = when (typeMessage) {
             1 -> "Está por comenzar la carrera, ten todo listo y preparado"
             2 -> "Vete calentando que dentro de poco tiempo empieza"
-            3 -> "¡Estate preparado para mañana! Prepara todo lo necesario y no olvides de cargar el dispositivo"
+            3 -> "Falta poco para la carrera. Revisa el horario de tu carrera para no despistarte"
             else -> "Accede a la aplicación para saber cuándo es tu próxima carrera"
         }
 
